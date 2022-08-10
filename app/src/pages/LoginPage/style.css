@@ -1,0 +1,24 @@
+.MainSection {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "left right";
+  background-color: aqua;
+}
+
+.card-login {
+    grid-area: left;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.img-login {
+    grid-area: right;
+    display: flex;
+    flex-direction: column;
+}
+
+.CR {
+    width: 10rem;
+}
