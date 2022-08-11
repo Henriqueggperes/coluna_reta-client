@@ -1,0 +1,56 @@
+.backoficce-header{
+    display: flex;
+    justify-content: space-between;
+    height: 5vh;
+    box-sizing: border-box;
+    width: 100vw;
+    background: linear-gradient(90deg, rgba(243, 248, 251, 0.18) 0%, #7A89FD 95.11%);
+    border: 2.5px solid;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0 ;
+    border-image: linear-gradient(270deg, rgba(243,248,251,0.48110831234256923) 40%, rgba(122,137,253,1) 98%) 1;
+}
+
+.header_logo-container{
+    box-sizing: border-box;
+    display: flex;
+    padding: .5rem;
+    align-items: baseline;
+    height: 100%;
+    width: 15%;
+}
+
+.header-logo{
+    margin-left: .5rem;
+    height: 1.5rem;
+    width: 3.5rem;
+}
+
+.header_logo-span{
+    margin-left: .5rem;
+    font-size: 1.2rem;
+    color: #2B0548;
+}
+
+.header_user_card-container{
+    display: flex;
+    justify-content: center;
+
+    align-items: center;
+    height: 100%;
+    width: 10%;
+}
+
+.header_user_card-image{
+    background-color: aqua;
+    border-radius: 100%;
+    height: 2.5rem;
+    width: 2.5rem; 
+}
+.header_user_card_exit-icon{
+    margin-left: .5rem;
+    fill: black;
+    height: 1.5rem;
+    width: 1.5rem;
+}
