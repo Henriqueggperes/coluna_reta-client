@@ -8,28 +8,6 @@ export const LoginPage = () => {
     <section className="background">
       <section className="MainSection">
         <section className="left-side">
-          <div className="card-login">
-            <form>
-              <h1>BEM VINDO!</h1>
-              
-              <div className="single-input">
-                <input required className="input" type="email" name="email" id="email" />
-                <label htmlFor="email">E-mail</label>
-              </div>
-              
-              <div className="single-input">
-                <input required className="input" type="password" name="password" id="password" />
-                <label htmlFor="password">Password</label>
-              </div>
-
-              <button type="submit">ENTRAR</button>
-            </form>
-          </div>
-        </section>
-
-        <div className="between" />
-
-        <section className="right-side">
           <div className="logo">
             <img
               src={Logo}
@@ -38,6 +16,38 @@ export const LoginPage = () => {
             />
             <span> Backoffice</span>
           </div>
+
+          <div className="card-login">
+            <form>
+              <h1>BEM VINDO!</h1>
+              <div className="single-input">
+                <input
+                  required
+                  className="input"
+                  type="email"
+                  name="email"
+                  id="email"
+                />
+                <label htmlFor="email">E-mail</label>
+              </div>
+              <div className="single-input">
+                <input
+                  required
+                  className="input"
+                  type="password"
+                  name="password"
+                  id="password"
+                />
+                <label htmlFor="password">Password</label>
+              </div>
+              <button type="submit">ENTRAR</button>
+            </form>
+          </div>
+        </section>
+
+        <div className="between" />
+
+        <section className="right-side">
           <img
             src={LoginImg}
             className="LoginImg"
