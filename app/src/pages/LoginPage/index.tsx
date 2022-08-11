@@ -10,7 +10,7 @@ export const LoginPage = () => {
         <section className="left-side">
           <div className="card-login">
             <form>
-              <h1>Bem vindo!</h1>
+              <h1>BEM VINDO!</h1>
               
               <div className="single-input">
                 <input required className="input" type="email" name="email" id="email" />
@@ -22,10 +22,12 @@ export const LoginPage = () => {
                 <label htmlFor="password">Password</label>
               </div>
 
-              <button type="submit">Entrar</button>
+              <button type="submit">ENTRAR</button>
             </form>
           </div>
         </section>
+
+        <div className="between" />
 
         <section className="right-side">
           <div className="logo">
