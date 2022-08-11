@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
 
-html,body, #root{
+html,body{
   margin: 0;
   width: 100vw;
   height: 100vh;
+  
   padding: 0;
   outline: 0;
   box-sizing: border-box;
