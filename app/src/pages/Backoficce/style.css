@@ -1,5 +1,16 @@
-.backoficce-main-container {
+.backoficce_main-container{
   height: 100vh;
   width: 100vw;
   background-color: #F3F8FB;
+}
+
+.backoficce_content-container{
+  display: flex;
+  height: 95vh;
+  width: 100vw;
+}
+
+.backoficce-content{
+  height: 100%;
+  width: 88%;
 }
