@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import LoginImg from "../../assets/img/login_char.svg";
 import Logo from "../../assets/icons/cr_logo.png";
+import { LoginInterface } from "../../types/types";
 import "./style.css";
 
 export const LoginPage = () => {
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChangesValues = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValues((values: LoginInterface) => ({
+      ...values,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
+  console.log(values);
+    
   return (
     <section className="background">
       <section className="MainSection">
@@ -18,7 +33,7 @@ export const LoginPage = () => {
           </div>
 
           <div className="card-login">
-            <form>
+            <form >
               <h1>BEM VINDO!</h1>
               <div className="single-input">
                 <input
@@ -27,6 +42,7 @@ export const LoginPage = () => {
                   type="email"
                   name="email"
                   id="email"
+                  onChange={handleChangesValues}
                 />
                 <label htmlFor="email">E-mail</label>
               </div>
@@ -37,6 +53,7 @@ export const LoginPage = () => {
                   type="password"
                   name="password"
                   id="password"
+                  onChange={handleChangesValues}
                 />
                 <label htmlFor="password">Password</label>
               </div>
