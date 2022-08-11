@@ -1,24 +1,151 @@
+body {
+    background-color: rgba(124, 139, 254, 1);
+}
+
+.background{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .MainSection {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas: "left right";
-  background-color: aqua;
+    width: 55rem;
+    height: 33rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 1rem;
+}
+
+.left-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .card-login {
-    grid-area: left;
-    width: 100%;
+    background-color: rgba(219, 227, 238, 1);
+    width: 18rem;
+    height: 21rem;
+    border-radius: 1rem;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4rem;
+    margin-left: 2.5rem;
 }
 
-.img-login {
-    grid-area: right;
+.card-login form h1 {
+    font-size: 2rem;
+    margin-bottom: 1.7rem;
+}
+
+form {
+    width: 100%;
+    max-width: 14rem;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+div.single-input {
+    position: relative;
+    width: 100%;
+    margin: 20px 0;
+}
+
+div.single-input label {
+    position: absolute;
+    font-size: 1rem;
+    left: 0;
+    bottom: 7px;
+    color: #6d6d6e;
+    cursor: text;
+    transition: 0.5s ease-in-out;
+    font-family: Prompt;
+    font-size: 1rem;
+}
+
+div.single-input .input {
+    width: 100%;
+    padding: 5px;
+    color: #6d6d6e;
+    border: 0;
+    border-bottom: 2px solid #6d6d6e;
+    background: none;
+    outline: 0;
+    font-family: Prompt;
+}
+
+div.single-input .input:focus,
+div.single-input .input:valid {
+    border-bottom: 2px solid #1c36c5;
+}
+
+div.single-input .input:focus ~ label,
+div.single-input .input:valid ~ label{
+    transform: translateY(-1.4rem);
+    font-size: .8rem;
+    color: #2A3577;
+}
+
+form h1 {
+    width: 100%;
+    text-align: center;
+    color: #2A3577;
+    font-family: Prompt;
+    font-size: 1rem;
+}
+
+.right-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    position: absolute;
+    top: 9.5rem;
+    left: 37rem;
 }
 
 .CR {
-    width: 10rem;
+    width: 6rem;
+}
+
+.LoginImg {
+    width: 30rem;
+    margin-top: 4rem;
+    border-left: #2A3577;
+}
+
+div span {
+    font-size: 2.4rem;
+    font-family: Prompt;
+}
+
+form button {
+    margin-top: 1.6rem;
+    margin-bottom: 3rem;
+    width: 8rem;
+    padding: .3rem;
+    background-color: #2A3577;
+    color: #ffff;
+    font-family: Prompt;
+    font-size: 1.3rem;
+    border-radius: .8rem;
+    cursor: pointer;
+    transition: all .4s ease-in-out;
+    border: 0;
+}
+
+form button:hover {
+    background-color: #566ce9;
+    color: #ffff;
 }
