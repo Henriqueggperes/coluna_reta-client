@@ -4,9 +4,10 @@ import "./App.css";
 
 function App() {
   return (
-  <BrowserRouter>
-    <Router />
-  </BrowserRouter>
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
   );
+}
 
 export default App;

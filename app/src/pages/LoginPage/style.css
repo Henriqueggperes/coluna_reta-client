@@ -29,6 +29,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 .card-login {
@@ -120,10 +121,15 @@ form h1 {
 }
 
 .logo {
-  position: absolute;
-  top: 9.5rem;
-  left: 37rem;
+  width: 100%;
+  margin-top: -2rem;
+  margin-bottom: -2rem;
 }
+
+.logo img {
+  margin-left: 3rem;
+}
+
 
 .CR {
   width: 6rem;
@@ -172,9 +178,11 @@ form button:hover {
 }
 
 .between {
-  position: absolute;
+  margin-top: 4rem;
+  margin-left: 3rem;
+  /* position: absolute;
   left: 44.3rem;
-  top: 14rem;
+  top: 14rem; */
   height: 23rem;
   border-width: 2px;
   border-style: solid;
