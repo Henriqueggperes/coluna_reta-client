@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
 
-html,body{
+html,body, #root{
   margin: 0;
   width: 100vw;
   height: 100vh;
