@@ -8,5 +8,5 @@ function App() {
     <Router />
   </BrowserRouter>
   );
-
-export default App;
+}
+export default App
