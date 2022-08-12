@@ -1,32 +1,57 @@
-.navbar-container{
-    height: 100%;
-    width: 12%;
-    box-shadow: 0px 0px 5px 0px #000000;
+.navbar-container {
+  height: 100%;
+  width: 12%;
+  box-shadow: 0px 0px 5px 0px #000000;
 }
-.nav-active{
-    display: flex;
-    justify-content: end;
-    box-shadow: 0px 0px 10px 0px #000000;
-    height: 5%;
-    width: 100%;
-
-}
-
-.navbar_active-icon{
-    height: 100%;
-    width: 30%;
+.nav-active {
+  display: flex;
+  justify-content: end;
+  box-shadow: 0px 0px 10px 0px #000000;
+  height: 5%;
+  width: 100%;
 }
 
-.nav-item{
-    margin: 1rem;
+.navbar_active-icon {
+  height: 100%;
+  width: 30%;
 }
 
-.nav-icon{
-    height: 2rem;
-    width: 2rem;
-    margin-right: .5rem;
+.nav_item {
+  display: flex;
+  margin: 1rem;
+  cursor: pointer;
+}
+.Alunos,
+.Dashboard,
+.User,
+.Admin
+ {
+  background: linear-gradient(
+    270deg,
+    rgba(101, 119, 247, 0.38) 0%,
+    rgba(101, 119, 247, 0.152) 95.45%
+  );
 }
 
-.nav-span{
-    font-size: 1.2rem;
+.nav-icon {
+  height: 2rem;
+  width: 2rem;
+  margin-right: 0.5rem;
+}
+
+.nav-span {
+  display: flex;
+  color: #000000;
+  width: 80%;
+  font-size: 1.2rem;
+}
+
+.navbar_admin{
+    border-top: solid 1px #2B0548;
+}
+
+.navbar_admin-span{
+    margin-top: .5rem;
+    color: #2B0548;
+
 }

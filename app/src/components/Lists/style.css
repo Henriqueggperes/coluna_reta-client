@@ -1,0 +1,97 @@
+.students_list_component-container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+.students_list_search_filter-container{
+    display: flex;
+    box-sizing: border-box;
+    padding: 2rem 0 0 4rem;
+    height: 10%;
+    width: 100%;
+}
+.students_search-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    height: 3.5rem;
+    width: 3.5rem;
+    box-shadow: 0px 4px 4px 
+    rgba(0, 0, 0, 0.25), 0px 4px 4px 
+    rgba(0, 0, 0, 0.25), 0px 4px 4px 
+    rgba(0, 0, 0, 0.25);
+}
+.students_search_button-image{
+    height: 2rem;
+    width: 2rem;
+}
+
+.students_search-input{
+    height: 100%;
+    width: 20%;
+    margin-left: .5rem;
+    border-style: none;
+    padding: 0;
+    border-bottom: solid 1px #909090;
+    background: none;
+    outline: none;
+    font-size: 1rem;
+    font-family: 'Prompt', sans-serif;;
+}
+.students_search_institution_filter_button-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 10%;
+}
+.students_search_institution_filter-button{
+    display: flex;
+    justify-content: space-around;
+    height: 50%;
+    width: 90%;
+    box-shadow: 0px 4px 4px 
+    rgba(0, 0, 0, 0.25), 0px 4px 4px 
+    rgba(0, 0, 0, 0.25), 0px 4px 4px 
+    rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    border-radius: .2rem;
+    background-color: #E0DFDF;
+}
+
+.institution_filter-icon{
+    height: 2rem;
+    width: 2rem;
+}
+
+.students_list-container{
+    display: flex ;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    width: 100%;
+}
+
+.students-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    width: 90%;
+    box-shadow: 0px 4px 4px 
+    rgba(0, 0, 0, 0.25), 0px 4px 4px 
+    rgba(0, 0, 0, 0.25), 0px 4px 4px 
+    rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+}
+
+.students_list-pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+    width: 100% ;
+}
