@@ -2,6 +2,9 @@ import './style.css'
 import Header from '../../components/Header'
 import Navbar from '../../components/Navbar'
 import Home from '../../components/Home'
+import Alunos from '../../components/StudentsList'
+
+
 
 const Backoficce = () => {
   return (
@@ -10,7 +13,7 @@ const Backoficce = () => {
          <section className='backoficce_content-container'>
            <Navbar/>
            <section className='backoficce-content'>
-             <Home/>
+               <Alunos></Alunos>
            </section>
          </section>
       </main>
