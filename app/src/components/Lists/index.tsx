@@ -2,12 +2,11 @@ import "./style.css";
 import magnifier from "./../../assets/icons/search_icon.svg";
 import filter from "./../../assets/icons/filter_icon.svg";
 import { Students } from "../../mocks/Students/students.mocks";
+import StudentsCards from "../StudentsCards";
 
-const Lists = (props:{}) => {
+const Lists = (props:{navOption:any}) => {
 
   const studentsList = {...Students}
-
-  console.log(studentsList)
 
   return (
     <section className="students_list_component-container">
@@ -28,9 +27,7 @@ const Lists = (props:{}) => {
       </div>
       <section className="students_list-container">
         <section className="students-list">
-          <section className="students_list_cards-container">
-            
-          </section>
+          <StudentsCards></StudentsCards>
           <div className="students_list-pagination">PAGINAÇÃO</div>
         </section>
       </section>
