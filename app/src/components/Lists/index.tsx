@@ -2,7 +2,13 @@ import "./style.css";
 import magnifier from "./../../assets/icons/search_icon.svg";
 import filter from "./../../assets/icons/filter_icon.svg";
 import { Students } from "../../mocks/Students/students.mocks";
-const Lists = () => {
+
+const Lists = (props:{}) => {
+
+  const studentsList = {...Students}
+
+  console.log(studentsList)
+
   return (
     <section className="students_list_component-container">
       <div className="students_list_search_filter-container">
@@ -23,26 +29,7 @@ const Lists = () => {
       <section className="students_list-container">
         <section className="students-list">
           <section className="students_list_cards-container">
-            {Students.map((item) => (
-              <div className="CardInstituicoes">
-                <img src={magnifier} alt="" />
-
-                <div className="CardInfo">
-                  <p>
-                    <b>Nome:</b> E.M Rui Barbosa
-                  </p>
-                  <p className="card_info-adress">
-                    <b>Estado:</b> SP
-                  </p>
-                  <p>
-                    <b>Cidade:</b> São Paulo 
-                  </p>
-                  <p>
-                    <b>CEP:</b> XXXXX-XX
-                  </p>
-                </div>
-              </div>
-            ))}
+            
           </section>
           <div className="students_list-pagination">PAGINAÇÃO</div>
         </section>

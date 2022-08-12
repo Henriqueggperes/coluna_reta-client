@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import "./style.css";
+
 import user_profile from "./../../assets/icons/user_icon.svg";
 import dashboard_icon from "./../../assets/icons/dashboard_icon.svg";
 import students_icon from "./../../assets/icons/students_icon.svg";
 import list_icon from "./../../assets/icons/list_icon.svg";
+import gear_icon from "./../../assets/icons/gear_icon.svg";
 
 const Navbar = (props: { navOptionSelected: any }) => {
   const [option, setOption] = useState("");
 
+  const admin = true;
+
   props.navOptionSelected(option);
 
-  const handleOption = (event: any)=>{ 
-    setOption(event.target.id)
-  }
+  const handleOption = (event: any) => {
+    setOption(event.target.id);
+    console.log(event.target.id);
+  };
 
   return (
     <aside className="navbar-container">
@@ -23,19 +28,19 @@ const Navbar = (props: { navOptionSelected: any }) => {
         className={`navbar_dashboard nav_item ${
           option == "User" ? option : ""
         }`}
-        onClick = {handleOption}
+        onClick={handleOption}
       >
         <img className="nav-icon" src={user_profile} />
         <span id="User" className="navbar-user_profile nav-span">
           User
         </span>
       </div>
-      
+
       <div
         className={`navbar_students nav_item ${
           option == "Alunos" ? option : ""
         }`}
-        onClick = {handleOption}
+        onClick={handleOption}
       >
         <img className="navbar-students nav-icon" src={students_icon} />
         <span id="Alunos" className="navbar-students nav-span">
@@ -47,13 +52,26 @@ const Navbar = (props: { navOptionSelected: any }) => {
         className={`navbar_dashboard nav_item ${
           option == "Dashboard" ? option : ""
         }`}
-        onClick = {handleOption}
+        onClick={handleOption}
       >
         <img className="navbar-dashboard nav-icon" src={dashboard_icon} />
         <span id="Dashboard" className="navbar-dashboard nav-span">
           Dashboard
         </span>
       </div>
+      {admin ? 
+       (
+        <div
+          className={`navbar_admin nav_item ${option == "Admin" ? option : ""}`}
+          onClick={handleOption}
+        >
+          <img className="navbar_admin-icon nav-icon" src={gear_icon} />
+          <span id="Admin" className="navbar_admin-span nav-span">
+            Admin
+          </span>
+        </div>
+        ) : 
+      ( "" )}
     </aside>
   );
 };
