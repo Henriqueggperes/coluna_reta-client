@@ -1,8 +1,8 @@
 import "./style.css";
 import magnifier from "./../../assets/icons/search_icon.svg";
 import filter from "./../../assets/icons/filter_icon.svg";
-import { Students } from "./../../mocks/Students/students.mocks";
-const Alunos = () => {
+import { Students } from "../../mocks/Students/students.mocks";
+const Lists = () => {
   return (
     <section className="students_list_component-container">
       <div className="students_list_search_filter-container">
@@ -32,10 +32,10 @@ const Alunos = () => {
                     <b>Nome:</b> E.M Rui Barbosa
                   </p>
                   <p className="card_info-adress">
-                    <b>Estado:</b> SP 
+                    <b>Estado:</b> SP
                   </p>
                   <p>
-                    <b>Cidade:</b> São Paulo
+                    <b>Cidade:</b> São Paulo 
                   </p>
                   <p>
                     <b>CEP:</b> XXXXX-XX
@@ -51,4 +51,4 @@ const Alunos = () => {
   );
 };
 
-export default Alunos;
+export default Lists;
