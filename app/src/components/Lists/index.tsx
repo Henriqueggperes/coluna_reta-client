@@ -27,7 +27,9 @@ const Lists = (props:{navOption:any}) => {
       </div>
       <section className="students_list-container">
         <section className="students-list">
-          <StudentsCards></StudentsCards>
+
+            <StudentsCards></StudentsCards>
+          
           <div className="students_list-pagination">PAGINAÇÃO</div>
         </section>
       </section>
