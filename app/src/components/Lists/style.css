@@ -1,4 +1,4 @@
-.students_list_component-container{
+.student_list_component-container{
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -140,3 +140,4 @@
     margin: 0;
     height: 2rem;
 } 
+
