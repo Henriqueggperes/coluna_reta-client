@@ -23,7 +23,9 @@
 }
 .Alunos,
 .Dashboard,
-.User {
+.User,
+.Admin
+ {
   background: linear-gradient(
     270deg,
     rgba(101, 119, 247, 0.38) 0%,
@@ -42,4 +44,14 @@
   color: #000000;
   width: 80%;
   font-size: 1.2rem;
+}
+
+.navbar_admin{
+    border-top: solid 1px #2B0548;
+}
+
+.navbar_admin-span{
+    margin-top: .5rem;
+    color: #2B0548;
+
 }
