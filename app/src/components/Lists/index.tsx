@@ -9,7 +9,7 @@ const Lists = (props:{navOption:any}) => {
   const studentsList = {...Students}
 
   return (
-    <section className="students_list_component-container">
+    <section className="component-container">
       <div className="students_list_search_filter-container">
         <div className="students_search-button">
           <img className="students_search_button-image" src={magnifier}></img>
