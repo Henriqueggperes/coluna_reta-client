@@ -1,4 +1,4 @@
-.students_list_component-container{
+.student_list_component-container{
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -95,3 +95,41 @@
     height: 10%;
     width: 100% ;
 }
+
+.CardInstituicoes {
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    padding: .5rem;
+    gap: 1rem;
+    background-color: rgb(255, 255, 255);
+    border-radius: 1rem;
+    border: solid 1px;
+    height: 8rem;
+    width: 22rem;
+}
+
+.CardInstituicoes  > img {
+    width: 30%;
+    height: 100%;
+    margin-bottom: 1rem;
+}
+
+.CardInfo {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    justify-content: center;
+    margin-top: 1.5rem;
+    line-height: .01rem;
+    font-family: Prompt;
+    font-size: .9rem;
+    height: 100%;
+    width: 70%;
+}
+
+.CardInfo > p{
+    margin: 0;
+    height: 2rem;
+} 
+
