@@ -24,8 +24,7 @@
 .Alunos,
 .Dashboard,
 .User,
-.Admin
- {
+.Admin {
   background: linear-gradient(
     270deg,
     rgba(101, 119, 247, 0.38) 0%,
@@ -46,12 +45,25 @@
   font-size: 1.2rem;
 }
 
-.navbar_admin{
-    border-top: solid 1px #2B0548;
+.navbar_admin {
+  display: flex;
+  flex-direction: column;
+  border-top: solid 1px #2b0548;
 }
 
-.navbar_admin-span{
-    margin-top: .5rem;
-    color: #2B0548;
+.navbar_admin-span {
+  margin-top: 0.5rem;
+  color: #2b0548;
+}
+.navbar_admin-option {
+  display: flex;
+}
+.admin-dropdown{
+  display: none;
+}
 
+.navbar_admin:hover .admin-dropdown{
+  display: flex;
+  background-color: #D9D9D9;
+  flex-direction: column;
 }

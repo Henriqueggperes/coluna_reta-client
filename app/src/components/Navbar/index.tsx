@@ -59,19 +59,25 @@ const Navbar = (props: { navOptionSelected: any }) => {
           Dashboard
         </span>
       </div>
-      {admin ? 
-       (
+      {admin ? (
         <div
           className={`navbar_admin nav_item ${option == "Admin" ? option : ""}`}
-          onClick={handleOption}
         >
-          <img className="navbar_admin-icon nav-icon" src={gear_icon} />
-          <span id="Admin" className="navbar_admin-span nav-span">
-            Admin
-          </span>
+          <div className="navbar_admin-option">
+            <img className="navbar_admin-icon nav-icon" src={gear_icon} />
+            <span id="Admin" className="navbar_admin-span nav-span">
+              Admin
+            </span>
+          </div>
+          <div className="admin-dropdown">
+            <span className="admin_dropdown-item">Ger. Usuários</span>
+            <span className="admin_dropdown-item">Ger. Alunos</span>
+            <span className="admin_dropdown-item">Ger. Instituições</span>
+          </div>
         </div>
-        ) : 
-      ( "" )}
+      ) : (
+        ""
+      )}
     </aside>
   );
 };
