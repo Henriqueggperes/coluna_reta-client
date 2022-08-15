@@ -5,10 +5,9 @@ import Backoficce from "./pages/Backoficce";
 
 function App() {
   return (
-    // <BrowserRouter>
-    //   <Router />
-    // </BrowserRouter>
-    <Backoficce></Backoficce>
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
   );
 }
 
