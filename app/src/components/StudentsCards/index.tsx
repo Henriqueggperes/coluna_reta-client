@@ -14,10 +14,10 @@ const StudentsCards = (props:{searchStudents:any}) => {
           <img src={students_icon} alt="" />
           <div className="CardInfo">
             <div className="student_card_info-name student-info">
-              <label>Nome:</label> <span>{item.name}</span>
+              <label className="student-name label">Nome:</label> <span>{`${item.name.split(' ')[0]} ${item.name.split(' ')[1]}`}</span>
             </div>
             <div className="student_card_info-institution student-info">
-              <label>Instituição:</label> <span> </span>{item.institution}
+              <label className="student-institution label">Instituição:</label> <span >{item.institution}</span>
             </div> 
           </div>
         </div>
@@ -27,10 +27,10 @@ const StudentsCards = (props:{searchStudents:any}) => {
           <img src={students_icon} alt="" />
           <div className="CardInfo">
             <div className="student_card_info-name student-info">
-              <label>Nome:</label> <span>{item.name}</span>
+              <label className="student-name label">Nome:</label> <span>{`${item.name.split(' ')[0]} ${item.name.split(' ')[1]}`}</span>
             </div>
             <div className="student_card_info-institution student-info">
-              <label>Instituição:</label> <span> </span>{item.institution}
+              <label className="student-institution label" >Instituição:</label> <span>{item.institution} </span>
             </div> 
           </div>
         </div>
