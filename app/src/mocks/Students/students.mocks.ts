@@ -22,7 +22,7 @@ export const Students = [
   },
   {
     id: 4,
-    name: "Wanderson Lindo",
+    name: "Roberto Almeida Lima de Paula",
     birthDate: "14/08/2001",
     number: 19823834,
     institution: "ali",
