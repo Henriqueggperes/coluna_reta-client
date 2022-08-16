@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import style from "./style.css";
 import "./style.css";
-
 import magnifier from "./../../assets/icons/search_icon.svg";
 import filter from "./../../assets/icons/filter_icon.svg";
 import arrow from "./../../assets/icons/back_arrow_icon.svg";
+import filterArrowIcon from "./../../assets/icons/filter_arrow_icon.svg"
 
 import StudentsCards from "../StudentsCards";
 
@@ -23,6 +24,7 @@ interface studentObj {
   institution: string;
 }
 
+
 const Lists = (props: { navOption: any }) => {
   const [searchValue, setSearchValue] = useState<sValueObj>({
     search: "",
@@ -35,17 +37,20 @@ const Lists = (props: { navOption: any }) => {
     number: 0,
     institution: "",
   });
-
+   
   const [searchedStudents, setSearchedStudents] = useState<studentObj[]>([]);
 
   const [filterActive, setFilterActive] = useState<string>("");
+
+  const [filterContainerActive, setFilterContainerActive] = useState<string>("");
+
+  const [selectedInst, setSelectedInst] = useState<string>("");
 
   const handleChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue({
       ...searchValue,
       [event.target.name]: event.target.value,
     });
-    console.log(event.target.value);
   };
 
   const handleSearch = () => {
@@ -58,19 +63,26 @@ const Lists = (props: { navOption: any }) => {
     setSearchedStudents(filter);
   };
 
-  const onClickFilter = ()=>{
-    if(filterActive == 'active'){
-      setFilterActive('')
+  const onClickFilter = () => {
+    if (filterActive == "active") {
+      setFilterActive("");
+    } else {
+      setFilterActive("active");
+      setFilterContainerActive("active");
     }
-    else{
-      setFilterActive('active')
-    }
-  }
+
+  };
+
+  const handleFilter = (event: React.BaseSyntheticEvent) => {
+    console.log(event.target.innerText);
+    setSelectedInst(event.target.innerText);
+    setFilterActive("");
+  };
 
   const handleClearSearch = () => {
     setSearchedStudents([]);
   };
-  console.log(searchedStudents);
+
 
   return (
     <section className="component-container">
@@ -90,16 +102,29 @@ const Lists = (props: { navOption: any }) => {
         ></input>
         <div className="students_search_institution_filter_button-container">
           <div
-            className={`students_search_institution_filter-button ${filterActive}`}
+            className={`students_search_institution_filter-button`}
             onClick={onClickFilter}
           >
-            <img className="filter-icon" src={filter}></img>
+            {selectedInst && filterContainerActive == "active" ? (
+              <span className="filter-institution">{selectedInst}</span>
+            ) : (
+              <img className="filter-icon" src={filter}></img>
+            )}
+            <img src={filterArrowIcon} className={`filter-arrow__icon-${filterActive}`}></img>
           </div>
           <div className={`filter-dropdown__container-${filterActive}`}>
-            <div className="filter-dropdown__item">la</div>
-            <div className="filter-dropdown__item">aqui</div>
-            <div className="filter-dropdown__item">acola</div>
-            <div className="filter-dropdown__item">ali</div>
+            <div className="filter-dropdown__item" onClick={handleFilter}>
+              la
+            </div>
+            <div className="filter-dropdown__item" onClick={handleFilter}>
+              aqui
+            </div>
+            <div className="filter-dropdown__item" onClick={handleFilter}>
+              acola
+            </div>
+            <div className="filter-dropdown__item" onClick={handleFilter}>
+              ali
+            </div>
           </div>
         </div>
       </div>
