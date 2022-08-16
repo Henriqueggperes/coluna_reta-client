@@ -23,8 +23,8 @@ const Navbar = (props: { navOptionSelected: any }) => {
     <aside className="navbar-container">
       {/* <div className="nav-active">
     <img className="navbar_active-icon " src={list_icon} />
-    </div> */}
-      <div
+    </div>  TRECHO PARA ADAPTAÇÃO DA NAVBAR PARA RESPONSIVIDADE */} 
+      {/* <div
         className={`navbar_dashboard nav_item ${
           option == "User" ? option : ""
         }`}
@@ -34,7 +34,7 @@ const Navbar = (props: { navOptionSelected: any }) => {
         <span id="User" className="navbar-user_profile nav-span">
           User
         </span>
-      </div>
+      </div> */}
 
       <div
         className={`navbar_students nav_item ${
@@ -48,7 +48,7 @@ const Navbar = (props: { navOptionSelected: any }) => {
         </span>
       </div>
 
-      <div
+      {/* <div
         className={`navbar_dashboard nav_item ${
           option == "Dashboard" ? option : ""
         }`}
@@ -58,7 +58,7 @@ const Navbar = (props: { navOptionSelected: any }) => {
         <span id="Dashboard" className="navbar-dashboard nav-span">
           Dashboard
         </span>
-      </div>
+      </div> */}
       {admin ? (
         <div
           className={`navbar_admin nav_item ${option == "Admin" ? option : ""}`}

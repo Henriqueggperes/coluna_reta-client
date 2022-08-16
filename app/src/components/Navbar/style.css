@@ -25,6 +25,7 @@
 .Dashboard,
 .User,
 .Admin {
+  border-radius: .2rem;
   background: linear-gradient(
     270deg,
     rgba(101, 119, 247, 0.38) 0%,

@@ -55,17 +55,30 @@
   display: flex;
   position: absolute;
   top:10%;
+  width: 10rem;
   z-index: 1;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   margin-left: .5rem;
-  height: fit-content;
-  width: fit-content;
+  height: 2rem;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25),
     0px 4px 4px rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
   border-radius: 0.2rem;
   cursor: pointer;
+}
+
+.filter-arrow__icon-active{
+  height: 1rem;
+  width: 1rem;
+  transform: rotate(180deg);
+  transition: all 0.3s;
+}
+
+.filter-arrow__icon-{
+  height: 1rem;
+  width: 1rem;
+  transition: all 0.3s;
 }
 
 .filter-icon {
@@ -75,17 +88,27 @@
 .filter-dropdown__container-{
     display: none;
 }
+.filter-dropdown__item:hover{
+  background-color: #676666;
+  cursor: pointer;
+}
 .filter-dropdown__container-active{
     position: relative;
     background-color: #c5c5c5;
     top: 82%;
-    overflow: auto;
     z-index: 0;
     left: 5%;
 }
 
 .active,.filter-dropdown__container-active{
     width:10rem;
+    overflow: auto;
+}
+
+
+.filter-institution{
+ margin-left: 1rem ;
+
 }
 
 .students_list-container {
