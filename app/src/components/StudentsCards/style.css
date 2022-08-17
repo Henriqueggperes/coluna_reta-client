@@ -12,11 +12,19 @@
   width: 20rem;
 }
 
-.StudentsCard > img {
-  width: 30%;
+ .student-icon{
+  width: 100%;
   height: 100%;
   margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all 0.4s;
 }
+
+.student-icon:hover{
+   transform: scale(1.1);
+}
+
+
 
 .CardInfo {
   display: flex;
@@ -40,7 +48,19 @@
 }
 
 .label{
+  height: 20%;
   font-size: 1.2rem;
   font-weight: bold;
 }
 
+.span{
+  height: 30%;
+  font-size: 1rem;
+}
+
+.chosen-student__link{
+  height: 100%;
+  width: 30%;
+  text-decoration: none;
+  color: black;
+}
