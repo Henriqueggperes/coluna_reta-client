@@ -29,11 +29,11 @@ export const LoginPage = () => {
               className="CR"
               alt="Ilustração do logo Coluna Reta"
             />
-            <span> Backoffice</span>
+            <span className="login-heading__span"> Backoffice</span>
           </div>
 
           <div className="card-login">
-            <form >
+            <form className="login__form" >
               <h1>BEM VINDO!</h1>
               <div className="single-input">
                 <input
