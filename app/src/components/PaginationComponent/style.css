@@ -1,0 +1,94 @@
+.item {
+    width: 500px;
+    padding: 1em;
+    margin: 1em;
+    border: 1px solid aliceblue;
+    background-color: rgba(240, 248, 255, 0.384);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .paginationMainComp {
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  
+  .previous {
+    color: rgb(83, 83, 83);
+    width: 2rem;
+    height: 2rem;
+    background-color: #6F81FF;
+    border-radius: 1rem;
+    transition: all 0.3s;
+    margin-top: 1rem;
+  }
+  
+  .previous:hover {
+    color: #fff;
+    background-color: #485df8;
+  }
+  
+  .next {
+    transform: rotate(180deg);
+    color: rgb(83, 83, 83);
+    width: 2rem;
+    height: 2rem;
+    background-color: #6F81FF;
+    border-radius: 1rem;
+    transition: all 0.3s;
+    margin-top: 1rem;
+  }
+  
+  .next:hover {
+    color: #fff;
+    background-color: #485df8;
+  }
+  
+  .paginationComp {
+    width: 28%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .paginationButton {
+    width: 2.09rem;
+    max-width: 100%;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    color: #6F81FF;
+    padding: 0.8rem;
+    font-size: 1rem;
+    background: none;
+    transition: all 0.3s;
+  }
+  
+  .paginationButton:hover {
+    background-color: #6F81FF;
+    color: #fff;
+    border-radius: 1rem;
+  }
+  
+  .paginationButton:focus {
+    outline: none;
+    background-color: #485df8;
+    border-radius: 1rem;
+    color: aliceblue;
+  }
+  
+  .cards-item {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+  

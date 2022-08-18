@@ -4,11 +4,13 @@ import "./style.css";
 import magnifier from "./../../assets/icons/search_icon.svg";
 import filter from "./../../assets/icons/filter_icon.svg";
 import arrow from "./../../assets/icons/back_arrow_icon.svg";
-import filterArrowIcon from "./../../assets/icons/filter_arrow_icon.svg"
+import filterArrowIcon from "./../../assets/icons/filter_arrow_icon.svg";
 
 import StudentsCards from "../StudentsCards";
 
+import { CgChevronLeft } from "react-icons/cg";
 import { Students } from "../../mocks/Students/students.mocks";
+import PaginationComponent from "../PaginationComponent";
 
 //**COLOCAR AS INTERFACES NA PASTA TYPES DEPOIS**
 
@@ -24,7 +26,6 @@ interface studentObj {
   institution: string;
 }
 
-
 const Lists = (props: { navOption: any }) => {
   const [searchValue, setSearchValue] = useState<sValueObj>({
     search: "",
@@ -37,14 +38,35 @@ const Lists = (props: { navOption: any }) => {
     number: 0,
     institution: "",
   });
-   
+
   const [searchedStudents, setSearchedStudents] = useState<studentObj[]>([]);
 
   const [filterActive, setFilterActive] = useState<string>("");
 
-  const [filterContainerActive, setFilterContainerActive] = useState<string>("");
+  const [filterContainerActive, setFilterContainerActive] =
+    useState<string>("");
 
   const [selectedInst, setSelectedInst] = useState<string>("");
+
+  const [itens, setItens] = useState([]);
+  const [itensPerPage, setItensPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const pages = Math.ceil(itens.length / itensPerPage);
+  const startIndex = currentPage * itensPerPage;
+  const endIndex = startIndex + itensPerPage;
+  const currentItens = itens.slice(startIndex, endIndex);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await fetch("https://jsonplaceholder.typicode.com/todos")
+        .then((res) => res.json())
+        .then((data) => data);
+
+      setItens(result);
+    };
+    fetchData();
+  }, []);
 
   const handleChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue({
@@ -70,7 +92,6 @@ const Lists = (props: { navOption: any }) => {
       setFilterActive("active");
       setFilterContainerActive("active");
     }
-
   };
 
   const handleFilter = (event: React.BaseSyntheticEvent) => {
@@ -83,6 +104,21 @@ const Lists = (props: { navOption: any }) => {
     setSearchedStudents([]);
   };
 
+  const NextPage = () => {
+    if(currentPage + 1 > pages - 1) {
+      console.log('Página indisponivel');
+    } else {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const PreviousPage = () => {
+    if(currentPage - 1 < 0) {
+      console.log('Página indisponivel');
+    } else {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
   return (
     <section className="component-container">
@@ -111,7 +147,10 @@ const Lists = (props: { navOption: any }) => {
             ) : (
               <img className="filter-icon" src={filter}></img>
             )}
-            <img src={filterArrowIcon} className={`filter-arrow__icon-${filterActive}`}></img>
+            <img
+              src={filterArrowIcon}
+              className={`filter-arrow__icon-${filterActive}`}
+            ></img>
           </div>
           <div className={`filter-dropdown__container-${filterActive}`}>
             <div className="filter-dropdown__item" onClick={handleFilter}>
@@ -148,7 +187,15 @@ const Lists = (props: { navOption: any }) => {
           <section className="students_list_cards-container">
             <StudentsCards searchStudents={searchedStudents} />
           </section>
-          <div className="students_list-pagination">PAGINAÇÃO</div>
+
+          <div className="paginationMainComp">
+            <CgChevronLeft className="previous" onClick={PreviousPage} />
+            <PaginationComponent
+              pages={pages}
+              setCurrentPage={setCurrentPage}
+            />
+            <CgChevronLeft className="next" onClick={NextPage} />
+          </div>
         </section>
       </section>
     </section>
