@@ -2,13 +2,21 @@ import React, { useState } from "react";
 import LoginImg from "../../assets/img/login_char.svg";
 import Logo from "../../assets/icons/cr_logo.png";
 import { LoginInterface } from "../../types/types";
+import loginService from "../../services/auth";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./style.css";
+import { useNavigate } from "react-router-dom";
+import { setMaxListeners } from "events";
+
 
 export const LoginPage = () => {
   const [values, setValues] = useState({
     email: "",
-    password: "",
+    passwordHash: "",
   });
+ 
+  const navigate = useNavigate()
 
   const handleChangesValues = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues((values: LoginInterface) => ({
@@ -17,8 +25,24 @@ export const LoginPage = () => {
     }));
   };
 
-  console.log(values);
-    
+ const handleAuthLogin = async (event: React.FormEvent<HTMLFormElement>)=>{
+  event.preventDefault()
+  const response = await loginService.login(values);
+  const jwt = response.data.token;
+  
+  if (!jwt) {
+    toast.error(response.data.message,{
+      position: toast.POSITION.TOP_RIGHT,
+      className:"toast-class",
+      closeButton: false,
+      delay: 5000,
+    })
+  } else {
+    localStorage.setItem('jwt', jwt);
+    navigate('/backoficce');
+  }
+ }
+
   return (
     <section className="background">
       <section className="MainSection">
@@ -33,7 +57,7 @@ export const LoginPage = () => {
           </div>
 
           <div className="card-login">
-            <form className="login__form" >
+            <form onSubmit={handleAuthLogin} className="login__form" >
               <h1>BEM VINDO!</h1>
               <div className="single-input">
                 <input
@@ -51,13 +75,24 @@ export const LoginPage = () => {
                   required
                   className="input"
                   type="password"
-                  name="password"
+                  name="passwordHash"
                   id="password"
                   onChange={handleChangesValues}
                 />
                 <label htmlFor="password">Password</label>
               </div>
               <button type="submit">ENTRAR</button>
+              <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                />
             </form>
           </div>
         </section>
