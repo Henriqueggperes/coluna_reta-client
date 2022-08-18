@@ -8,8 +8,12 @@ const Student = () => {
   
   const [isModalOpen,setIsModalOpen] = useState<boolean>(false)
   
-  const handleModalOpen = ()=>{
-    setIsModalOpen(!isModalOpen)
+  
+  const handleCloseModal = ()=>{
+    setIsModalOpen(false)
+  }
+  const handleOpenModal = ()=>{
+    setIsModalOpen(true)
   }
 
   return (
@@ -120,14 +124,14 @@ const Student = () => {
               </div>
             </div>
             <div className="student-schedule-button--container">
-              <button onClick={handleModalOpen} className="student-schedule--button">
+              <button onClick={handleOpenModal} className="student-schedule--button">
                 AGENDAR CONSULTA
               </button>
             </div>
           </div>
         </section>
       </main>
-      {isModalOpen?<AppointmentModal/>:""}
+      {isModalOpen?<AppointmentModal closeModal={handleCloseModal}/>:""}
     </>
   );
 };
