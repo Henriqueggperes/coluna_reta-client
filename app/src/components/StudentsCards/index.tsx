@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Students } from "../../mocks/Students/students.mocks";
 import students_icon from "./../../assets/icons/students_icon.svg";
 import "./style.css";
+import studentsService from "../../services/studentsService";
 
 //A PROP searchedStudents É DO TIPO: studentObj[]
 const StudentsCards = (props: { searchStudents: any }) => {
+
+  const [students,setStudents] = useState()
+
   return (
     <>
       {props.searchStudents.length != 0
