@@ -24,3 +24,7 @@ html,body, #root{
   background: linear-gradient(270deg, #6F81FF 0%, rgba(124, 139, 254, 0.65) 100%);
   border-radius: 2px;
 }
+
+.toast-class{
+  height: 5rem;
+}
