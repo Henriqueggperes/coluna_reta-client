@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import style from "./style.css";
 import "./style.css";
+import { ToastContainer, toast } from "react-toastify";
 import magnifier from "./../../assets/icons/search_icon.svg";
 import filter from "./../../assets/icons/filter_icon.svg";
 import arrow from "./../../assets/icons/back_arrow_icon.svg";
@@ -53,14 +54,17 @@ const Lists = (props: { navOption: any }) => {
     });
   };
 
-  const handleSearch = () => {
-    const filter: studentObj[] = Students.filter((student) => {
-      if (student.name.includes(searchValue.search)) {
-        return student;
-      }
-      // TARTATIVA DE ERRO AQUI: ELSE{ALUNO NÃO ENCONTRADO}
-    });
-    setSearchedStudents(filter);
+  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
+    if(searchValue.search){
+      event.preventDefault()
+      const filter: studentObj[] = Students.filter((student) => {
+        if (student.name.includes(searchValue.search)) {
+          return student;
+        }
+         // TARTATIVA DE ERRO AQUI: ELSE{ALUNO NÃO ENCONTRADO}
+      });
+      setSearchedStudents(filter);
+    }
   };
 
   const onClickFilter = () => {
@@ -86,15 +90,16 @@ const Lists = (props: { navOption: any }) => {
 
   return (
     <section className="component-container">
-      <div className="students_list_search_filter-container">
-        <div className="students_search-button">
+      <form onSubmit={handleSearch} className="students_list_search_filter-container">
+        
+        <button className="students_search-button">
           <img
             className="students_search_button-image"
             src={magnifier}
-            onClick={handleSearch}
           ></img>
-        </div>
+        </button>
         <input
+          required
           className="students_search-input"
           placeholder="Pesquisar aluno"
           onChange={handleChanges}
@@ -128,7 +133,7 @@ const Lists = (props: { navOption: any }) => {
             </div>
           </div>
         </div>
-      </div>
+      </form>
       <section className="students_list-container">
         <section className="option-list">
           {searchedStudents.length > 0 ? (
