@@ -19,7 +19,13 @@
     align-items: baseline;
     height: 100%;
     width: 15%;
+    transition: all 0.5s;
 }
+
+.header_logo-container:hover{
+    transform: scale(1.1);
+}
+
 
 .header-logo{
     margin-left: .5rem;
@@ -53,4 +59,8 @@
     fill: black;
     height: 1.5rem;
     width: 1.5rem;
+}
+
+.backoficce-link{
+    text-decoration: none;
 }

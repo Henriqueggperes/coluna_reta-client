@@ -1,4 +1,4 @@
-body {
+.background {
   background: rgb(124, 139, 254);
   background: linear-gradient(
     90deg,
@@ -54,7 +54,7 @@ body {
   margin-bottom: 1.7rem;
 }
 
-form {
+.login__form {
   width: 100%;
   max-width: 14rem;
   display: flex;
@@ -105,7 +105,7 @@ div.single-input .input:valid ~ label {
   color: #2a3577;
 }
 
-form h1 {
+.login__form h1 {
   width: 100%;
   text-align: center;
   color: #2a3577;
@@ -140,13 +140,13 @@ form h1 {
   margin-top: 4rem;
 }
 
-div span {
+.login-heading__span {
   font-size: 2.4rem;
   font-family: Prompt;
   color: #2a3577;
 }
 
-form button {
+.login__form button {
   margin-top: 1.6rem;
   margin-bottom: 3rem;
   width: 8rem;
@@ -162,11 +162,11 @@ form button {
   font-size: 1.3rem;
   border-radius: 0.8rem;
   cursor: pointer;
-  transition: 0.4s ease-in-out;
+  transition:all 0.4s ;
   border: 0;
 }
 
-form button:hover {
+.login__form button:hover {
   background: rgb(124, 139, 254);
   background: linear-gradient(
     286deg,

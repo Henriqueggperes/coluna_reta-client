@@ -6,13 +6,16 @@ import teacher_char from "./../../assets/img/home_teacher_char.svg";
 const Home = () => {
   return (
     <main className="home-content-container">
-      <h1 className="home_welcome-heading">Olá, UserName.</h1>
-      <p className="home_welcome_parag-1 parag">
-        Bem vindo ao <span className="parag-styled"> CR Backoficce!</span>
-      </p>
-      <p className="home_welcome_parag-2 parag">
-        Onde escolas e seus alunos se conectam com uma vida saudável.
-      </p>
+      <section className="welcome-text__container">
+        <h1 className="home_welcome-heading">Olá, UserName.</h1>
+        <p className="home_welcome_parag-1 parag">
+          Bem vindo ao <span className="parag-styled"> CR Backoficce!</span>
+        </p>
+        <p className="home_welcome_parag-2 parag">
+          Onde escolas e seus alunos se conectam com uma vida saudável.
+        </p>
+      </section>
+
       <section className="home_welcome_images-container">
         <div className="home_welcome_thesis_char char-container">
           <img

@@ -100,6 +100,7 @@ const Lists = (props: { navOption: any }) => {
           onChange={handleChanges}
           name="search"
         ></input>
+
         <div className="students_search_institution_filter_button-container">
           <div
             className={`students_search_institution_filter-button`}
@@ -129,7 +130,7 @@ const Lists = (props: { navOption: any }) => {
         </div>
       </div>
       <section className="students_list-container">
-        <section className="students-list">
+        <section className="option-list">
           {searchedStudents.length > 0 ? (
             <div
               className="all-list-elements__option"

@@ -1,0 +1,144 @@
+.chosen-student-main__container {
+  height: 100vh;
+  width: 100vw;
+}
+.unique-student-card__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 95vh;
+  width: 100vw;
+}
+
+.chosen-student-info--container {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  width: 80%;
+  justify-content: space-between;
+  border-radius: 1rem;
+  background: linear-gradient(213.28deg, #eaf3ffeb 2.43%, rgba(219, 227, 238, 0.615) 95.17%);;
+  border-top: 1px solid rgba(0, 0, 0, 0.209) ;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.35), 0px 4px 4px rgba(0, 0, 0, 0.339),
+  0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.chosen-student-heading{
+    display: flex;
+    height: 10%;
+    align-items: center;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.084), 0px 4px 4px rgba(0, 0, 0, 0.107),
+  0px 4px 4px rgba(0, 0, 0, 0.083);
+    justify-content: space-evenly;
+}
+
+.heding-student--name, .heding-student--institution{
+    display: flex;
+    justify-content: center;
+    color: #2A3577 ;
+    font-size: 2rem;
+    font-weight: 700;
+    align-items: center;
+    height: 70%;
+    width: 50%;
+}
+
+.heding-student--name{
+    border-right: 1px solid #0000003f;
+}
+
+.chosen-student--info{
+  display: flex;
+  height: 80%;
+}
+
+.chosen-student--history{
+    height: 100%;
+    width: 50%;
+}
+
+.history--heading{
+    height: 10%;
+    width: 50%;
+    border-image: linear-gradient(270deg, rgba(243, 248, 251, 0.549) 40%, rgba(122,137,253,1) 98%) 1;
+    margin-left: .5rem;
+    border-bottom: 3px solid;
+}
+
+.history--content{
+    height: 90%;
+    width: 100%;
+    border-right: 1px solid;
+    word-break: break-all;
+    overflow: auto;
+    box-sizing: border-box;
+    padding: 1rem;
+}
+
+.aditional-student-info--container{
+    padding: 1rem 0 0 1rem;
+    box-sizing: border-box;
+    font-size: 1.5rem;
+    height: 100%;
+    width: 50%;
+}
+
+.aditional-info-container--heading{
+  margin: 0;
+  height: 10%;
+  width: 70%;
+  border-bottom: 1px solid;
+  font-size: 1.5rem;
+}
+
+.adtional-info--container{
+  height: 25%;
+  margin-top:1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.aditional-info--label{
+    font-weight: 500;
+}
+
+.student-schedule-button--container{
+    display: flex;
+    justify-content: end;
+    height: 10%;
+    width: 100%;
+}
+.student-schedule--button {
+  height: 70%;
+  width: 20%;
+  cursor: pointer;
+  border-radius: .5rem;
+  outline: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #fff;
+  background: linear-gradient(270deg, #6F81FF 0%, rgba(124, 139, 254, 0.65) 100%);
+  transition: all 0.4s;
+}
+
+.student-schedule--button:hover{
+  transform: scale(1.1);
+}
+
+.doctor-char-image--container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+  width: 100%;
+}
+.doctor-char--image{
+  height: 100%;
+  width: 100%;
+}
+
+.modal{
+  filter: blur(5px);
+}
