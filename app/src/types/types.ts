@@ -3,6 +3,16 @@ export interface LoginInterface {
   passwordHash: string;
 }
 
+export interface userObj {
+  created_at: string;
+  deleted: boolean;
+  email: string;
+  id: number;
+  name: string;
+  role: string;
+  updated_at: string;
+}
+
 export interface sValueObj {
   search: string;
 }
