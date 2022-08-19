@@ -7,7 +7,14 @@ const studentsService = {
         return response
     })
     .catch((error)=>{
-        // toast.error(error.response.message);
+        return error.response
+    }),
+    getStudentByID:(id:number)=>api.get(`student/${id}`)
+    .then((response)=>{
+        return response
+    })
+    .catch((error)=>{
+        return error.response
     })
 }
 
