@@ -7,7 +7,7 @@ import studentsService from "../../services/studentsService";
 import { studentObj } from "../../types/types";
 
 //A PROP searchedStudents É DO TIPO: studentObj[]
-const StudentsCards = (props: { searchStudents: studentObj[], StudentData: studentObj[]}) => {
+const StudentsCards = (props: { searchStudents: studentObj[], StudentData: studentObj[], currentStudents: studentObj[]}) => {
 
   return (
     <>
@@ -33,7 +33,7 @@ const StudentsCards = (props: { searchStudents: studentObj[], StudentData: stude
                 </div>
               </div>
           ))
-        : props.StudentData.map((student: studentObj) => (
+        : props.currentStudents.map((student: studentObj) => (
             <div className="StudentsCard" key={student.id}>
                <Link className="chosen-student__link" to={`/backoffice-student/${student.id}`}>
                 <img className="student-icon" src={students_icon} alt="" />
@@ -47,7 +47,7 @@ const StudentsCards = (props: { searchStudents: studentObj[], StudentData: stude
                 </div>
                 <div className="student_card_info-institution student-info">
                   <label className="student-institution label">
-                    Instituição:
+                    Telefone:
                   </label>{" "}
                   <span className="student-institution span">{student.phone} </span>
                 </div>

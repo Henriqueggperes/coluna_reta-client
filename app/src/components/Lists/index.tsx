@@ -32,13 +32,13 @@ const Lists = (props: { navOption: any }) => {
   const [selectedInst, setSelectedInst] = useState<string>("");
 
   const [studentsInfo, setStudentsInfo] = useState<studentObj[]>([]);
-  const [studentsPerPage, setStudentsPerPage] = useState(10);
+  const [studentsPerPage, setStudentsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(0);
 
   const pages = Math.ceil(studentsInfo.length / studentsPerPage);
   const startIndex = currentPage * studentsPerPage;
   const endIndex = startIndex + studentsPerPage;
-  const currentItens = studentsInfo.slice(startIndex, endIndex);
+  const currentStudents = studentsInfo.slice(startIndex, endIndex);
 
   const navigate = useNavigate();
   const jwt = localStorage.getItem("jwt");
@@ -108,6 +108,8 @@ const Lists = (props: { navOption: any }) => {
       } else {
         setCurrentPage(currentPage + 1);
       }
+
+      
     };
 
     const PreviousPage = () => {
@@ -183,7 +185,7 @@ const Lists = (props: { navOption: any }) => {
               ""
             )}
             <section className="students_list_cards-container">
-              <StudentsCards StudentData={studentsInfo} searchStudents={searchedStudents} />
+              <StudentsCards StudentData={studentsInfo} searchStudents={searchedStudents} currentStudents={currentStudents} />
             </section>
 
             <div className="paginationMainComp">

@@ -45,9 +45,11 @@ const Backoficce = () => {
   const getCurrentOption = (option: string) => {
     setCurrentOption(option);
   };
+  
   useEffect(() => {
     getLoggedUser();
   }, []);
+
   return (
     <main className="backoficce_main-container">
       <Header loggedUser={userLogged} />
