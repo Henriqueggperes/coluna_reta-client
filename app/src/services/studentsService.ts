@@ -10,9 +10,7 @@ const studentsService = {
         return error.response
     }),
     getStudentByID:(id:number)=>api.get(`student/${id}`)
-    .then((response)=>{
-        return response
-    })
+    .then((response)=>  response)
     .catch((error)=>{
         return error.response
     })

@@ -31,9 +31,8 @@ const Student = () => {
 
   const getStudent = async ()=>{
     const id = Number(params.id)
-    const response:studentObj = await studentsService.getStudentByID(id)
-    console.log(response);
-    // setStudent(studentResp);
+    const response = await studentsService.getStudentByID(id)
+    setStudent(response.data);
   }
 
   const getLoggedUser = async () => {
@@ -159,11 +158,11 @@ const Student = () => {
                   <label htmlFor="" className="aditional-info--label">
                     Nscto.:
                   </label>
-                  <span className="adtional--info">{student?.birthDate}</span>
+                  <span className="adtional--info">{student?.birth_date}</span>
                   <label htmlFor="" className="aditional-info--label">
                     Telefone:
                   </label>
-                  <span className="adtional--info">{student?.number}</span>
+                  <span className="adtional--info">{student?.phone}</span>
                 </div>
                 <div className="doctor-char-image--container">
                   <img

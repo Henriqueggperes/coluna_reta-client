@@ -35,7 +35,7 @@ const StudentsCards = (props: { searchStudents: studentObj[], StudentData: stude
           ))
         : props.StudentData.map((student: studentObj) => (
             <div className="StudentsCard" key={student.id}>
-               <Link className="chosen-student__link" to={`/backoficce-student/${student.id}`}>
+               <Link className="chosen-student__link" to={`/backoffice-student/${student.id}`}>
                 <img className="student-icon" src={students_icon} alt="" />
                 </Link> 
               <div className="CardInfo">
