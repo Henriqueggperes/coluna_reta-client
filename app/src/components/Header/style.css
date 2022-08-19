@@ -56,9 +56,15 @@
 }
 .header_user_card_exit-icon{
     margin-left: .5rem;
-    fill: black;
+    cursor: pointer;
     height: 1.5rem;
     width: 1.5rem;
+    transition: all 0.4s;
+}
+
+.header_user_card_exit-icon:hover{
+    background-color: rgba(208, 135, 135, 0.803);
+    transform: scale(1.1);
 }
 
 .backoficce-link{

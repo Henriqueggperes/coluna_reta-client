@@ -1,11 +1,61 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Header";
 import "./style.css";
 import doctor from "./../../assets/img/doctor_char.svg";
 import AppointmentModal from "../AppointmentModal";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { studentObj, userObj } from "../../types/types";
+import loginService from "../../services/auth";
+import studentsService from "../../services/studentsService";
 
 const Student = () => {
   
+  const jwt = localStorage.getItem("jwt");
+  const navigate = useNavigate();
+  const params = useParams();
+  
+
+  const [student,setStudent] = useState<studentObj>();
+
+
+  const [userLogged, setUserLogged] = useState<userObj>({
+    created_at: "",
+    deleted: false,
+    email: "",
+    id: 0,
+    name: "",
+    role: "",
+    updated_at: "",
+  });
+
+  const getStudent = async ()=>{
+    const id = Number(params.id)
+    const response = await studentsService.getStudentByID(id)
+    setStudent(response.data);
+  }
+
+  const getLoggedUser = async () => {
+    const user = await loginService.loggedUser();
+    setUserLogged(user.data.user);
+  };
+
+  useEffect(() => {
+    getLoggedUser();
+    getStudent();
+  }, []);
+
+  useEffect(() => {
+    if (!jwt) {
+      toast.error("Realize o login antes de acessar o backoffice", {
+        position: toast.POSITION.TOP_RIGHT,
+        className: "toast-class",
+        closeButton: false,
+      });
+      navigate("/");
+    }
+  });
+
   const [isModalOpen,setIsModalOpen] = useState<boolean>(false)
   
   
@@ -20,13 +70,13 @@ const Student = () => {
     <>
       {/* <Navbar navOptionSelected={getCurrentOption}></Navbar> */}
       <main className={isModalOpen?'chosen-student-main__container modal':'chosen-student-main__container'}>
-        <Header></Header>
+        <Header loggedUser={userLogged} ></Header>
         <section className="unique-student-card__container">
           <div className="chosen-student-info--container">
             <div className="chosen-student-heading">
-              <span className="heding-student--name">NOME DO ZÉ</span>
+              <span className="heding-student--name">{student?.name}</span>
               <span className="heding-student--institution">
-                INSTITUIÇÃO DO ZÉ
+                {student?.institution}
               </span>
             </div>
             <div className="chosen-student--info">
@@ -108,11 +158,11 @@ const Student = () => {
                   <label htmlFor="" className="aditional-info--label">
                     Nscto.:
                   </label>
-                  <span className="adtional--info">******</span>
+                  <span className="adtional--info">{student?.birth_date}</span>
                   <label htmlFor="" className="aditional-info--label">
                     Telefone:
                   </label>
-                  <span className="adtional--info">******</span>
+                  <span className="adtional--info">{student?.phone}</span>
                 </div>
                 <div className="doctor-char-image--container">
                   <img
