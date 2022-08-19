@@ -3,7 +3,7 @@ import LoginImg from "../../assets/img/login_char.svg";
 import Logo from "../../assets/icons/cr_logo.png";
 import { LoginInterface } from "../../types/types";
 import loginService from "../../services/auth";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import "./style.css";
 import { useNavigate } from "react-router-dom";
@@ -39,7 +39,7 @@ export const LoginPage = () => {
     })
   } else {
     localStorage.setItem('jwt', jwt);
-    navigate('/backoficce');
+    navigate('/backoffice');
   }
  }
 

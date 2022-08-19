@@ -34,7 +34,7 @@ const Backoficce = () => {
            navOptionSelected = {getCurrentOption}
            />
            <section className='backoficce-content'>
-             {currentOption? <Lists navOption={currentOption}/>: <Home/>}
+             {currentOption ? <Lists navOption={currentOption}/> : <Home/>}
            </section>
          </section>
       </main>
