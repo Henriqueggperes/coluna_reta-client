@@ -1,6 +1,6 @@
 export enum RoutePath {
     LOGIN = "/",
-    BACKOFICCE = "/backoficce",
+    BACKOFICCE = "/backoffice",
     HOMEADMIN = "/backoficce-admin",
     STUDENT = "/backoficce-student/:id"
 }
