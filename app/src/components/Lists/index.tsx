@@ -32,7 +32,9 @@ const Lists = (props: { navOption: any }) => {
   const [selectedInst, setSelectedInst] = useState<string>("");
 
   const [studentsInfo, setStudentsInfo] = useState<studentObj[]>([]);
+
   const [studentsPerPage, setStudentsPerPage] = useState(5);
+  
   const [currentPage, setCurrentPage] = useState(0);
 
   const pages = Math.ceil(studentsInfo.length / studentsPerPage);

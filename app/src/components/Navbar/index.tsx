@@ -7,10 +7,10 @@ import students_icon from "./../../assets/icons/students_icon.svg";
 import list_icon from "./../../assets/icons/list_icon.svg";
 import gear_icon from "./../../assets/icons/gear_icon.svg";
 
-const Navbar = (props: { navOptionSelected: any }) => {
+const Navbar = (props: { navOptionSelected: Function, userRole:string}) => {
   const [option, setOption] = useState("");
 
-  const admin = true;
+ 
 
   props.navOptionSelected(option);
 
@@ -24,18 +24,7 @@ const Navbar = (props: { navOptionSelected: any }) => {
       {/* <div className="nav-active">
     <img className="navbar_active-icon " src={list_icon} />
     </div>  TRECHO PARA ADAPTAÇÃO DA NAVBAR PARA RESPONSIVIDADE */} 
-      {/* <div
-        className={`navbar_dashboard nav_item ${
-          option == "User" ? option : ""
-        }`}
-        onClick={handleOption}
-      >
-        <img className="nav-icon" src={user_profile} />
-        <span id="User" className="navbar-user_profile nav-span">
-          User
-        </span>
-      </div> */}
-
+      
       <div
         className={`navbar_students nav_item ${
           option == "Alunos" ? option : ""
@@ -59,7 +48,7 @@ const Navbar = (props: { navOptionSelected: any }) => {
           Dashboard
         </span>
       </div> */}
-      {admin ? (
+      {props.userRole == 'ADMIN' ? (
         <div
           className={`navbar_admin nav_item ${option == "Admin" ? option : ""}`}
         >
@@ -70,7 +59,7 @@ const Navbar = (props: { navOptionSelected: any }) => {
             </span>
           </div>
           <div className="admin-dropdown">
-            <span className="admin_dropdown-item">Ger. Usuários</span>
+            <span className="admin_dropdown-item" id="Ger.Usuários" onClick={handleOption}>Ger. Usuários</span>
             <span className="admin_dropdown-item">Ger. Alunos</span>
             <span className="admin_dropdown-item">Ger. Instituições</span>
           </div>
