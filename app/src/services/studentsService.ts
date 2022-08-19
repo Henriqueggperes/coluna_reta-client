@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 import api from "./api";
 
 const studentsService = {
-    getAllStudents:()=>api.get('student/a')
+    getAllStudents:()=>api.get('student/all')
     .then((response)=>{
         return response
     })
@@ -16,6 +16,7 @@ const studentsService = {
     .catch((error)=>{
         return error.response
     })
+
 }
 
 export default studentsService;
