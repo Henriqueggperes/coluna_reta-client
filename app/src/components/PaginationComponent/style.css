@@ -16,6 +16,7 @@
     align-items: center;
     justify-content: center;
     margin-top: 1rem;
+    gap: .5rem;
   }
   
   .previous {
@@ -57,8 +58,8 @@
   }
   
   .paginationButton {
-    width: 2.09rem;
     max-width: 100%;
+    width: 2rem;
     height: 2rem;
     display: flex;
     align-items: center;
@@ -71,6 +72,22 @@
     transition: all 0.3s;
   }
   
+.paginationButton-active{
+  max-width: 100%;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  color: #6F81FF;
+  padding: 0.8rem;
+  font-size: 1rem;
+  background: none;
+  transition: all 0.3s;
+  background-color: #485df8;
+}
+
   .paginationButton:hover {
     background-color: #6F81FF;
     color: #fff;
