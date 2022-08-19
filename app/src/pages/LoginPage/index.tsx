@@ -35,7 +35,6 @@ export const LoginPage = () => {
       position: toast.POSITION.TOP_RIGHT,
       className:"toast-class",
       closeButton: false,
-      delay: 5000,
     })
   } else {
     localStorage.setItem('jwt', jwt);

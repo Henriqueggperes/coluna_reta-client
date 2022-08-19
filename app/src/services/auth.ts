@@ -9,5 +9,13 @@ const loginService = {
       .post("auth/sign-in-user", values)
       .then((response: any) => response)
       .catch((error: any) => error.response),
+
+   loggedUser: ()=> api.get('auth/user-logged')
+   .then((response)=>{
+     return response;
+   })
+   .catch((error)=>{
+     return error.response
+   })
 };
 export default loginService;
