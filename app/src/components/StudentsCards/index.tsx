@@ -4,11 +4,10 @@ import { Students } from "../../mocks/Students/students.mocks";
 import students_icon from "./../../assets/icons/students_icon.svg";
 import "./style.css";
 import studentsService from "../../services/studentsService";
+import { studentObj } from "../../types/types";
 
 //A PROP searchedStudents É DO TIPO: studentObj[]
-const StudentsCards = (props: { searchStudents: any }) => {
-
-  const [students,setStudents] = useState()
+const StudentsCards = (props: { searchStudents: studentObj[], StudentData: studentObj[]}) => {
 
   return (
     <>
@@ -34,23 +33,23 @@ const StudentsCards = (props: { searchStudents: any }) => {
                 </div>
               </div>
           ))
-        : Students.map((item) => (
-            <div className="StudentsCard" key={item.id}>
-               <Link className="chosen-student__link" to={`/backoficce-student/${item.id}`}>
+        : props.StudentData.map((student: studentObj) => (
+            <div className="StudentsCard" key={student.id}>
+               <Link className="chosen-student__link" to={`/backoficce-student/${student.id}`}>
                 <img className="student-icon" src={students_icon} alt="" />
                 </Link> 
               <div className="CardInfo">
                 <div className="student_card_info-name student-info">
                   <label className="student-name label">Nome:</label>{" "}
-                  <span className="student-name span">{`${item.name.split(" ")[0]} ${
-                    item.name.split(" ")[1]
+                  <span className="student-name span">{`${student.name.split(" ")[0]} ${
+                    student.name.split(" ")[1]
                   }`}</span>
                 </div>
                 <div className="student_card_info-institution student-info">
                   <label className="student-institution label">
                     Instituição:
                   </label>{" "}
-                  <span className="student-institution span">{item.institution} </span>
+                  <span className="student-institution span">{student.phone} </span>
                 </div>
               </div>
             </div>
