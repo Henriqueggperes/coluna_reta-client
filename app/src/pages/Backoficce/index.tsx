@@ -58,7 +58,7 @@ const Backoficce = () => {
       <section className="backoficce_content-container">
         <Navbar userRole={role} navOptionSelected={getCurrentOption} />
         <section className="backoficce-content">
-          {currentOption ? <Lists navOption={currentOption} /> : <Home loggedUser={userLogged} />}
+          {currentOption ? <Lists userRole={role} navOption={currentOption} /> : <Home loggedUser={userLogged} />}
         </section>
       </section>
     </main>

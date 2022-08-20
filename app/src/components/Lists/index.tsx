@@ -12,13 +12,16 @@ import filterArrowIcon from "./../../assets/icons/filter_arrow_icon.svg";
 import StudentsCards from "../StudentsCards";
 import PaginationComponent from "../PaginationComponent";
 import "./style.css";
+import UsersCard from "../UsersCards";
+import ListIcon from "../ListIcon";
+import InstCards from "../InstCards";
 
 //**COLOCAR AS INTERFACES NA PASTA TYPES DEPOIS**
 interface sValueObj {
   search: string;
 }
 
-const Lists = (props: { navOption: any }) => {
+const Lists = (props: {userRole:string, navOption: string }) => {
   const [searchValue, setSearchValue] = useState<sValueObj>({
     search: "",
   });
@@ -172,6 +175,7 @@ const Lists = (props: { navOption: any }) => {
         </form>
         <section className="students_list-container">
           <section className="option-list">
+            {props.userRole == 'ADMIN'?<ListIcon navOption={props.navOption}/>:""}
             {searchedStudents.length > 0 ? (
               <div
                 className="all-list-elements__option"
@@ -186,8 +190,15 @@ const Lists = (props: { navOption: any }) => {
             ) : (
               ""
             )}
-            <section className="students_list_cards-container">
-              <StudentsCards StudentData={studentsInfo} searchStudents={searchedStudents} currentStudents={currentStudents} />
+
+            <section className="list_cards-container">
+              {props.navOption=='Alunos'? <StudentsCards currentStudents={currentStudents} StudentData={studentsInfo} searchStudents={searchedStudents} />
+              :
+              props.navOption=='Ger.Usuários'? <UsersCard/>
+              :
+              props.navOption=='Ger.Instituições'? <InstCards/>:
+              ""
+              }
             </section>
 
             <div className="paginationMainComp">
