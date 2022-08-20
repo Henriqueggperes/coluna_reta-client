@@ -3,15 +3,15 @@ import api from "./api";
 
 const studentsService = {
     getAllStudents:()=>api.get('student/all')
-    .then((response)=>{
+    .then((response: any)=>{
         return response
     })
-    .catch((error)=>{
+    .catch((error: any)=>{
         return error.response
     }),
     getStudentByID:(id:number)=>api.get(`student/${id}`)
-    .then((response)=>  response)
-    .catch((error)=>{
+    .then((response: any)=>  response)
+    .catch((error: any)=>{
         return error.response
     })
 

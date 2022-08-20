@@ -4,6 +4,8 @@ import { CgChevronLeft } from "react-icons/cg";
 import { Students } from "../../mocks/Students/students.mocks";
 import { ToastContainer, toast } from "react-toastify";
 import { studentObj } from "../../types/types";
+import { instObj } from '../../types/types';
+import institutionService from '../../services/institutionService';
 import studentsService from "../../services/studentsService";
 import magnifier from "./../../assets/icons/search_icon.svg";
 import filter from "./../../assets/icons/filter_icon.svg";
@@ -21,7 +23,7 @@ interface sValueObj {
   search: string;
 }
 
-const Lists = (props: {userRole:string, navOption: string }) => {
+const Lists = (props: { userRole: string; navOption: string }) => {
   const [searchValue, setSearchValue] = useState<sValueObj>({
     search: "",
   });
@@ -30,14 +32,17 @@ const Lists = (props: {userRole:string, navOption: string }) => {
 
   const [filterActive, setFilterActive] = useState<string>("");
 
-  const [filterContainerActive, setFilterContainerActive] = useState<string>("");
+  const [filterContainerActive, setFilterContainerActive] =
+    useState<string>("");
 
   const [selectedInst, setSelectedInst] = useState<string>("");
 
   const [studentsInfo, setStudentsInfo] = useState<studentObj[]>([]);
 
   const [studentsPerPage, setStudentsPerPage] = useState(5);
-  
+
+  const [InstInfo, setInstInfo] = useState<instObj[]>([]);
+
   const [currentPage, setCurrentPage] = useState(0);
 
   const pages = Math.ceil(studentsInfo.length / studentsPerPage);
@@ -49,7 +54,11 @@ const Lists = (props: {userRole:string, navOption: string }) => {
   const jwt = localStorage.getItem("jwt");
 
   useEffect(() => {
-    StudentData();
+    if (props.navOption == "Alunos") {
+      StudentData();
+    } else if(props.navOption == 'Ger.Instituições') {
+      InstData();
+    }
   }, []);
 
   const StudentData = async () => {
@@ -64,155 +73,169 @@ const Lists = (props: {userRole:string, navOption: string }) => {
     } else {
       const response = await studentsService.getAllStudents();
       setStudentsInfo(response.data.data);
-      console.log(response.data.data);
     }
   };
 
-    const handleChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setSearchValue({
-        ...searchValue,
-        [event.target.name]: event.target.value,
-      });
-    };
 
-    const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
-      // if (searchValue.search) {
-      //   event.preventDefault();
-      //   const filter: studentObj[] = studentsInfo.filter((student) => {
-      //     if (student.name.includes(searchValue.search)) {
-      //       return student;
-      //     }
-      //     // TARTATIVA DE ERRO AQUI: ELSE{ALUNO NÃO ENCONTRADO}
-      //   });
-      //   setSearchedStudents(filter);
-      // }
-    };
+  const InstData = async () => {
+    const response = await institutionService.getAllInstitutions();
+    setInstInfo(response.data.data);
+    console.log(response.data.data);
+  }
 
-    const onClickFilter = () => {
-      if (filterActive == "active") {
-        setFilterActive("");
-      } else {
-        setFilterActive("active");
-        setFilterContainerActive("active");
-      }
-    };
+  const handleChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue({
+      ...searchValue,
+      [event.target.name]: event.target.value,
+    });
+  };
 
-    const handleFilter = (event: React.BaseSyntheticEvent) => {
-      console.log(event.target.innerText);
-      setSelectedInst(event.target.innerText);
+  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
+    // if (searchValue.search) {
+    //   event.preventDefault();
+    //   const filter: studentObj[] = studentsInfo.filter((student) => {
+    //     if (student.name.includes(searchValue.search)) {
+    //       return student;
+    //     }
+    //     // TARTATIVA DE ERRO AQUI: ELSE{ALUNO NÃO ENCONTRADO}
+    //   });
+    //   setSearchedStudents(filter);
+    // }
+  };
+
+  const onClickFilter = () => {
+    if (filterActive == "active") {
       setFilterActive("");
-    };
+    } else {
+      setFilterActive("active");
+      setFilterContainerActive("active");
+    }
+  };
 
-    const handleClearSearch = () => {
-      setSearchedStudents([]);
-    };
+  const handleFilter = (event: React.BaseSyntheticEvent) => {
+    console.log(event.target.innerText);
+    setSelectedInst(event.target.innerText);
+    setFilterActive("");
+  };
 
-    const NextPage = () => {
-      if (currentPage + 1 > pages - 1) {
-        console.log("Página indisponivel");
-      } else {
-        setCurrentPage(currentPage + 1);
-      }
+  const handleClearSearch = () => {
+    setSearchedStudents([]);
+  };
 
-      
-    };
+  const NextPage = () => {
+    if (currentPage + 1 > pages - 1) {
+      console.log("Página indisponivel");
+    } else {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
-    const PreviousPage = () => {
-      if (currentPage - 1 < 0) {
-        console.log("Página indisponivel");
-      } else {
-        setCurrentPage(currentPage - 1);
-      }
-    };
+  const PreviousPage = () => {
+    if (currentPage - 1 < 0) {
+      console.log("Página indisponivel");
+    } else {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
-    return (
-      <section className="component-container">
-        <form
-          onSubmit={handleSearch}
-          className="students_list_search_filter-container"
-        >
-          <button className="students_search-button">
-            <img className="students_search_button-image" src={magnifier}></img>
-          </button>
-          <input
-            required
-            className="students_search-input"
-            placeholder="Pesquisar aluno"
-            onChange={handleChanges}
-            name="search"
-          ></input>
+  return (
+    <section className="component-container">
+      <form
+        onSubmit={handleSearch}
+        className="students_list_search_filter-container"
+      >
+        <button className="students_search-button">
+          <img className="students_search_button-image" src={magnifier}></img>
+        </button>
+        <input
+          required
+          className="students_search-input"
+          placeholder="Pesquisar aluno"
+          onChange={handleChanges}
+          name="search"
+        ></input>
 
-          <div className="students_search_institution_filter_button-container">
-            <div
-              className={`students_search_institution_filter-button`}
-              onClick={onClickFilter}
-            >
-              {selectedInst && filterContainerActive == "active" ? (
-                <span className="filter-institution">{selectedInst}</span>
-              ) : (
-                <img className="filter-icon" src={filter}></img>
-              )}
-              <img
-                src={filterArrowIcon}
-                className={`filter-arrow__icon-${filterActive}`}
-              ></img>
+        <div className="students_search_institution_filter_button-container">
+          <div
+            className={`students_search_institution_filter-button`}
+            onClick={onClickFilter}
+          >
+            {selectedInst && filterContainerActive == "active" ? (
+              <span className="filter-institution">{selectedInst}</span>
+            ) : (
+              <img className="filter-icon" src={filter}></img>
+            )}
+            <img
+              src={filterArrowIcon}
+              className={`filter-arrow__icon-${filterActive}`}
+            ></img>
+          </div>
+          <div className={`filter-dropdown__container-${filterActive}`}>
+            <div className="filter-dropdown__item" onClick={handleFilter}>
+              la
             </div>
-            <div className={`filter-dropdown__container-${filterActive}`}>
-              <div className="filter-dropdown__item" onClick={handleFilter}>
-                la
-              </div>
-              <div className="filter-dropdown__item" onClick={handleFilter}>
-                aqui
-              </div>
-              <div className="filter-dropdown__item" onClick={handleFilter}>
-                acola
-              </div>
-              <div className="filter-dropdown__item" onClick={handleFilter}>
-                ali
-              </div>
+            <div className="filter-dropdown__item" onClick={handleFilter}>
+              aqui
+            </div>
+            <div className="filter-dropdown__item" onClick={handleFilter}>
+              acola
+            </div>
+            <div className="filter-dropdown__item" onClick={handleFilter}>
+              ali
             </div>
           </div>
-        </form>
-        <section className="students_list-container">
-          <section className="option-list">
-            {props.userRole == 'ADMIN'?<ListIcon navOption={props.navOption}/>:""}
-            {searchedStudents.length > 0 ? (
-              <div
-                className="all-list-elements__option"
-                onClick={handleClearSearch}
-              >
-                <img
-                  className="back-arrow__image"
-                  src={arrow}
-                  alt="Seta preta com detalhe roxo para retornar á lista principal"
-                />
-              </div>
+        </div>
+      </form>
+      <section className="students_list-container">
+        <section className="option-list">
+          {props.userRole == "ADMIN" ? (
+            <ListIcon navOption={props.navOption} />
+          ) : (
+            ""
+          )}
+          {searchedStudents.length > 0 ? (
+            <div
+              className="all-list-elements__option"
+              onClick={handleClearSearch}
+            >
+              <img
+                className="back-arrow__image"
+                src={arrow}
+                alt="Seta preta com detalhe roxo para retornar á lista principal"
+              />
+            </div>
+          ) : (
+            ""
+          )}
+
+          <section className="list_cards-container">
+            {props.navOption == "Alunos" ? (
+              <StudentsCards
+                currentStudents={currentStudents}
+                StudentData={studentsInfo}
+                searchStudents={searchedStudents}
+              />
+            ) : props.navOption == "Ger.Usuários" ? (
+              <UsersCard />
+            ) : props.navOption == "Ger.Instituições" ? (
+              <InstCards InstData={InstInfo}/>
             ) : (
               ""
             )}
-
-            <section className="list_cards-container">
-              {props.navOption=='Alunos'? <StudentsCards currentStudents={currentStudents} StudentData={studentsInfo} searchStudents={searchedStudents} />
-              :
-              props.navOption=='Ger.Usuários'? <UsersCard/>
-              :
-              props.navOption=='Ger.Instituições'? <InstCards/>:
-              ""
-              }
-            </section>
-
-            <div className="paginationMainComp">
-              <CgChevronLeft className="previous" onClick={PreviousPage} />
-              <PaginationComponent
-                pages={pages}
-                setCurrentPage={setCurrentPage}
-              />
-              <CgChevronLeft className="next" onClick={NextPage} />
-            </div>
           </section>
+
+          <div className="paginationMainComp">
+            <CgChevronLeft className="previous" onClick={PreviousPage} />
+            <PaginationComponent
+              pages={pages}
+              setCurrentPage={setCurrentPage}
+            />
+            <CgChevronLeft className="next" onClick={NextPage} />
+          </div>
         </section>
       </section>
-    );
+    </section>
+  );
 };
 
 export default Lists;

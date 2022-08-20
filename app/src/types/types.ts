@@ -18,9 +18,15 @@ export interface sValueObj {
 }
 
 export interface studentObj {
-  id: number; //**  MUDAR PARA STRING DEPOIS ( VAI RECEBER UM ID HASH ) **
+  id: number;
   name: string;
   birth_date: string;
   phone: number;
   institution: string;
+}
+
+export interface instObj {
+  name: string;
+  phone_number: string;
+  address_id: number;
 }
