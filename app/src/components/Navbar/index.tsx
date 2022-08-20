@@ -60,8 +60,7 @@ const Navbar = (props: { navOptionSelected: Function, userRole:string}) => {
           </div>
           <div className="admin-dropdown">
             <span className="admin_dropdown-item" id="Ger.Usuários" onClick={handleOption}>Ger. Usuários</span>
-            <span className="admin_dropdown-item">Ger. Alunos</span>
-            <span className="admin_dropdown-item">Ger. Instituições</span>
+            <span className="admin_dropdown-item" id="Ger.Instituições" onClick={handleOption}>Ger. Instituições</span>
           </div>
         </div>
       ) : (
