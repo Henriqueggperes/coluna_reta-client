@@ -36,7 +36,7 @@
   font-family: Prompt;
   font-size: 0.9rem;
   height: 100%;
-  width: 70%;
+  width: 60%;
 }
 
 .student-info{
@@ -47,6 +47,27 @@
   font-size: 1rem;
 }
 
+.trash-can-icon--container{
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: flex-end;
+  height: 90%;
+  width:20%;
+}
+
+.trash-can-icon{
+  height: 45%;
+  width: 70%;
+  transition: all 0.4s;
+  cursor: pointer;
+}
+
+.trash-can-icon:hover{
+  transform: scale(1.2);
+  color: red;
+}
+
 .label{
   height: 20%;
   font-size: 1.2rem;
@@ -54,8 +75,8 @@
 }
 
 .span{
-  height: 30%;
-  font-size: 1rem;
+  height: 35%;
+  font-size: .95rem;
 }
 
 .chosen-student__link{
