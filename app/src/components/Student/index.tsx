@@ -76,7 +76,7 @@ const Student = () => {
             <div className="chosen-student-heading">
               <span className="heding-student--name">{student?.name}</span>
               <span className="heding-student--institution">
-                {student?.institution}
+                {student?.institution_id}
               </span>
             </div>
             <div className="chosen-student--info">
@@ -163,13 +163,14 @@ const Student = () => {
                     Telefone:
                   </label>
                   <span className="adtional--info">{student?.phone}</span>
-                </div>
-                <div className="doctor-char-image--container">
-                  <img
-                    className="doctor-char--image"
-                    src={doctor}
-                    alt="Imagem de um desenho ilustrativo de um doutor saindo de um celular"
-                  />
+                  <label htmlFor="" className="aditional-info--label">
+                    Inscrito em :
+                  </label>
+                  <span className="adtional--info">{student?.created_at}</span>
+                  <label htmlFor="" className="aditional-info--label">
+                    Atualizado em :
+                  </label>
+                  <span className="adtional--info">{student?.updated_at}</span>
                 </div>
               </div>
             </div>

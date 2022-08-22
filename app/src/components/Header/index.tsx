@@ -22,6 +22,7 @@ const Header = (props:{loggedUser:userObj,}) => {
   }
  
   return (
+    <>
     <header className="backoficce-header">
       <Link className="backoficce-link" to={"/backoffice"}>
         <div className="header_logo-container">
@@ -29,7 +30,7 @@ const Header = (props:{loggedUser:userObj,}) => {
             src={logo}
             alt="Logo roxo do Coluna Reta Backoficce"
             className="header-logo"
-          />
+            />
           <span className="header_logo-span">Backoffice</span>
         </div>
       </Link>
@@ -41,8 +42,9 @@ const Header = (props:{loggedUser:userObj,}) => {
           className="header_user_card_exit-icon"
           onClick={logOutUser}
         />
-      </div>
+      </div>    
     </header>
+   </>
   );
 };
 

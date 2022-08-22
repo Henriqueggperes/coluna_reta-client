@@ -93,7 +93,8 @@
 }
 
 .adtional-info--container{
-  height: 25%;
+  height: 15%;
+  font-size: 1.2rem;
   margin-top:1rem;
   display: flex;
   flex-direction: column;
@@ -101,7 +102,7 @@
 
 
 .aditional-info--label{
-    font-weight: 500;
+    font-weight: bold;
 }
 
 .student-schedule-button--container{
@@ -119,6 +120,7 @@
   border: none;
   font-size: 1.5rem;
   color: #fff;
+  margin-right: 1rem;
   background: linear-gradient(270deg, #6F81FF 0%, rgba(124, 139, 254, 0.65) 100%);
   transition: all 0.4s;
 }
@@ -130,8 +132,7 @@
 .doctor-char-image--container{
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 70%;
+  height: 30%;
   width: 100%;
 }
 .doctor-char--image{
