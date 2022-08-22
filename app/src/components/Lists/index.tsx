@@ -4,6 +4,7 @@ import { CgChevronLeft } from "react-icons/cg";
 import { Students } from "../../mocks/Students/students.mocks";
 import { ToastContainer, toast } from "react-toastify";
 import { studentObj, sValueObj, userObj } from "../../types/types";
+import institutionService from "../../services/institutionService";
 import studentsService from "../../services/studentsService";
 import magnifier from "./../../assets/icons/search_icon.svg";
 import filter from "./../../assets/icons/filter_icon.svg";
@@ -25,11 +26,12 @@ const Lists = (props: { userRole: string; navOption: string }) => {
       StudentData();
     } else if (props.navOption == "Ger.Usuários") {
       userData();
+    } else if (props.navOption == "Ger.Instituições") {
+      InstData();
     }
   }, [props.navOption]);
 
   const [searchedStudents, setSearchedStudents] = useState<studentObj[]>([]);
-
   const [searchValue, setSearchValue] = useState<sValueObj>({
     search: "",
   });
@@ -37,6 +39,8 @@ const Lists = (props: { userRole: string; navOption: string }) => {
   const [usersInfo, setUsersInfo] = useState<userObj[]>([]);
 
   const [filterActive, setFilterActive] = useState<string>("");
+
+  const [searchedStudents, setSearchedStudents] = useState<studentObj[]>([]);
 
   const [filterContainerActive, setFilterContainerActive] =
     useState<string>("");
@@ -47,12 +51,26 @@ const Lists = (props: { userRole: string; navOption: string }) => {
 
   const [studentsPerPage, setStudentsPerPage] = useState(5);
 
+  const [itensPerPage, setItensPerPage] = useState(5);
+
   const [currentPage, setCurrentPage] = useState(0);
 
-  const pages = Math.ceil(studentsInfo.length / studentsPerPage);
-  const startIndex = currentPage * studentsPerPage;
-  const endIndex = startIndex + studentsPerPage;
+  //PAGINAÇÃO INSTITUIÇÕES//
+  const [InstInfo, setInstInfo] = useState<instObj[]>([]);
+  const pagesInst = Math.ceil(InstInfo.length / itensPerPage);
+  const startIndexInst = currentPage * itensPerPage;
+  const endIndexInst = startIndexInst + itensPerPage;
+  const currentInst = InstInfo.slice(startIndexInst, endIndexInst);
+  //PAGINAÇÃO INSTITUIÇÕES//
+
+  
+  //PAGINAÇÃO ESTUDANTES//
+  const [studentsInfo, setStudentsInfo] = useState<studentObj[]>([]);
+  const pages = Math.ceil(studentsInfo.length / itensPerPage);
+  const startIndex = currentPage * itensPerPage;
+  const endIndex = startIndex + itensPerPage;
   const currentStudents = studentsInfo.slice(startIndex, endIndex);
+  //PAGINAÇÃO ESTUDANTES//
 
   const userData = async () => {
     const response = await userService.getAllUsers();
@@ -66,6 +84,9 @@ const Lists = (props: { userRole: string; navOption: string }) => {
     }
   };
 
+  const navigate = useNavigate();
+  const jwt = localStorage.getItem("jwt");
+
   const StudentData = async () => {
     const response = await studentsService.getAllStudents();
     setStudentsInfo(response.data.data);
@@ -78,12 +99,19 @@ const Lists = (props: { userRole: string; navOption: string }) => {
     }
   };
 
+  const InstData = async () => {
+    const response = await institutionService.getAllInstitutions();
+    setInstInfo(response.data.data);
+    console.log(response.data.data);
+  };
+
   const handleChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue({
       ...searchValue,
       [event.target.name]: event.target.value,
     });
   };
+
 
   const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -110,23 +138,28 @@ const Lists = (props: { userRole: string; navOption: string }) => {
   };
 
   const NextPage = () => {
-    if (currentPage + 1 > pages - 1) {
-      console.log("Página indisponivel");
-    } else {
-      setCurrentPage(currentPage + 1);
+    if (props.navOption == "Alunos") {
+      if (currentPage + 1 > pages - 1) {
+        console.log("Página indisponivel");
+      } else {
+        setCurrentPage(currentPage + 1);
+      }
     }
   };
 
   const PreviousPage = () => {
-    if (currentPage - 1 < 0) {
-      console.log("Página indisponivel");
-    } else {
-      setCurrentPage(currentPage - 1);
+    if (props.navOption == "Alunos") {
+      if (currentPage - 1 < 0) {
+        console.log("Página indisponivel");
+      } else {
+        setCurrentPage(currentPage - 1);
+      }
     }
   };
 
   return (
     <section className="component-container">
+
       {props.navOption == "Alunos" ? (
         <form
           onSubmit={handleSearch}
@@ -144,33 +177,71 @@ const Lists = (props: { userRole: string; navOption: string }) => {
           ></input>
 
           <div className="students_search_institution_filter_button-container">
-            <div
-              className={`students_search_institution_filter-button`}
-              onClick={onClickFilter}
-            >
-              {selectedInst && filterContainerActive == "active" ? (
-                <span className="filter-institution">{selectedInst}</span>
-              ) : (
-                <img className="filter-icon" src={filter}></img>
-              )}
-              <img
-                src={filterArrowIcon}
-                className={`filter-arrow__icon-${filterActive}`}
-              ></img>
+
+      <form
+        onSubmit={handleSearch}
+        className="students_list_search_filter-container"
+      >
+        <button className="students_search-button">
+          <img className="students_search_button-image" src={magnifier}></img>
+        </button>
+        <input
+          required
+          className="students_search-input"
+          placeholder="Pesquisar aluno"
+          onChange={handleChanges}
+          name="search"
+        ></input>
+
+        <div className="students_search_institution_filter_button-container">
+          <div
+            className={`students_search_institution_filter-button`}
+            onClick={onClickFilter}
+          >
+            {selectedInst && filterContainerActive == "active" ? (
+              <span className="filter-institution">{selectedInst}</span>
+            ) : (
+              <img className="filter-icon" src={filter}></img>
+            )}
+            <img
+              src={filterArrowIcon}
+              className={`filter-arrow__icon-${filterActive}`}
+            ></img>
+          </div>
+          <div className={`filter-dropdown__container-${filterActive}`}>
+            <div className="filter-dropdown__item" onClick={handleFilter}>
+              la
             </div>
-            <div className={`filter-dropdown__container-${filterActive}`}>
-              <div className="filter-dropdown__item" onClick={handleFilter}>
-                la
-              </div>
-              <div className="filter-dropdown__item" onClick={handleFilter}>
-                aqui
-              </div>
-              <div className="filter-dropdown__item" onClick={handleFilter}>
-                acola
-              </div>
-              <div className="filter-dropdown__item" onClick={handleFilter}>
-                ali
-              </div>
+            <div className="filter-dropdown__item" onClick={handleFilter}>
+              aqui
+            </div>
+            <div className="filter-dropdown__item" onClick={handleFilter}>
+              acola
+            </div>
+            <div className="filter-dropdown__item" onClick={handleFilter}>
+              ali
+            </div>
+          </div>
+        </div>
+      </form>
+      <section className="students_list-container">
+        <section className="option-list">
+          {props.userRole == "ADMIN" ? (
+            <ListIcon navOption={props.navOption} />
+          ) : (
+            ""
+          )}
+          {searchedStudents.length > 0 ? (
+
+            <div
+              className="all-list-elements__option"
+              onClick={handleClearSearch}
+            >
+              <img
+                className="back-arrow__image"
+                src={arrow}
+                alt="Seta preta com detalhe roxo para retornar á lista principal"
+              />
             </div>
           </div>
         </form>
@@ -211,24 +282,23 @@ const Lists = (props: { userRole: string; navOption: string }) => {
             ) : props.navOption == "Ger.Usuários" ? (
               <UsersCard userData={usersInfo} />
             ) : props.navOption == "Ger.Instituições" ? (
-              <InstCards />
+              <InstCards InstData={InstInfo} currentInst={currentInst} /> 
             ) : (
               ""
             )}
           </section>
-
           {searchedStudents.length > 0 ?(
             ""
           ) : (
-            <div className="paginationMainComp">
-              <CgChevronLeft className="previous" onClick={PreviousPage} />
-              <PaginationComponent
-                pages={pages}
-                setCurrentPage={setCurrentPage}
-              />
-              <CgChevronLeft className="next" onClick={NextPage} />
-            </div>
-          )}
+          <div className="paginationMainComp">
+            <CgChevronLeft className="previous" onClick={PreviousPage} />
+            <PaginationComponent
+              pages={props.navOption == "Alunos" ? pages : pagesInst}
+              setCurrentPage={setCurrentPage}
+            />
+            <CgChevronLeft className="next" onClick={NextPage} />
+          </div>
+
         </section>
       </section>
     </section>

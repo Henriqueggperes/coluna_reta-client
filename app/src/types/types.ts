@@ -38,3 +38,9 @@ export interface institutionObj {
   updated_at: string;
   deleted: boolean;
 }
+
+export interface instObj {
+  name: string;
+  phone_number: string;
+  address_id: number;
+}
