@@ -1,35 +1,32 @@
-import React, { useState } from 'react'
-import { instObj } from '../../types/types';
+import React, { useState } from "react";
+import { instObj } from "../../types/types";
+import { Link } from "react-router-dom";
 import { FaRegBuilding } from "react-icons/fa";
 import InstIcon from "../../assets/icons/Insticon.svg";
+import "./style.css";
 
-const InstCards = (props: {InstData: instObj[]}) => {
-
-  
-
+const InstCards = (props: { InstData: instObj[], currentInst: instObj[] }) => {
   return (
     <>
       {props.InstData.map((institution: instObj) => (
-            <div className="StudentsCard" key={institution.name}>
-               {/* <Link className="chosen-student__link" to={`/backoffice-student/${student.id}`}> */}
-                <img className="student-icon" src={InstIcon} alt="" />
-                {/* </Link>  */}
-              <div className="CardInfo">
-                <div className="student_card_info-name student-info">
-                  <label className="student-name label">Instituição:</label>{" "}
-                  <span className="student-name span">{`${institution.name.split(" ")[0]} ${
-                    institution.name.split(" ")[1]
-                  }`}</span>
-                </div>
-                <div className="student_card_info-institution student-info">
-                  <label className="student-institution label">
-                    Telefone:
-                  </label>{" "}
-                  <span className="student-institution span">{institution.phone_number} </span>
-                </div>
-              </div>
+        <div className="InstCard" key={institution.name}>
+          <img className="inst-icon" src={InstIcon} alt="" />
+          <div className="InstInfo">
+            <div className="inst_card_info-name inst-info">
+              <label className="inst-name label">Instituição:</label>{" "}
+              <span className="inst-name span">{`${
+                institution.name.split(" ")[0]
+              } ${institution.name.split(" ")[1]}`}</span>
             </div>
-          ))}
+            <div className="inst-info">
+              <label className="label">Telefone:</label>{" "}
+              <span className="span">
+                {institution.phone_number}{" "}
+              </span>
+            </div>
+          </div>
+        </div>
+      ))}
     </>
   );
 };

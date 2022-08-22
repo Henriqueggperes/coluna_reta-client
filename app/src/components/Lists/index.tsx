@@ -4,8 +4,8 @@ import { CgChevronLeft } from "react-icons/cg";
 import { Students } from "../../mocks/Students/students.mocks";
 import { ToastContainer, toast } from "react-toastify";
 import { studentObj } from "../../types/types";
-import { instObj } from '../../types/types';
-import institutionService from '../../services/institutionService';
+import { instObj } from "../../types/types";
+import institutionService from "../../services/institutionService";
 import studentsService from "../../services/studentsService";
 import magnifier from "./../../assets/icons/search_icon.svg";
 import filter from "./../../assets/icons/filter_icon.svg";
@@ -29,26 +29,31 @@ const Lists = (props: { userRole: string; navOption: string }) => {
   });
 
   const [searchedStudents, setSearchedStudents] = useState<studentObj[]>([]);
-
   const [filterActive, setFilterActive] = useState<string>("");
-
   const [filterContainerActive, setFilterContainerActive] =
     useState<string>("");
 
   const [selectedInst, setSelectedInst] = useState<string>("");
 
-  const [studentsInfo, setStudentsInfo] = useState<studentObj[]>([]);
-
-  const [studentsPerPage, setStudentsPerPage] = useState(5);
-
-  const [InstInfo, setInstInfo] = useState<instObj[]>([]);
-
+  const [itensPerPage, setItensPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(0);
 
-  const pages = Math.ceil(studentsInfo.length / studentsPerPage);
-  const startIndex = currentPage * studentsPerPage;
-  const endIndex = startIndex + studentsPerPage;
+  //PAGINAÇÃO INSTITUIÇÕES//
+  const [InstInfo, setInstInfo] = useState<instObj[]>([]);
+  const pagesInst = Math.ceil(InstInfo.length / itensPerPage);
+  const startIndexInst = currentPage * itensPerPage;
+  const endIndexInst = startIndexInst + itensPerPage;
+  const currentInst = InstInfo.slice(startIndexInst, endIndexInst);
+  //PAGINAÇÃO INSTITUIÇÕES//
+
+  
+  //PAGINAÇÃO ESTUDANTES//
+  const [studentsInfo, setStudentsInfo] = useState<studentObj[]>([]);
+  const pages = Math.ceil(studentsInfo.length / itensPerPage);
+  const startIndex = currentPage * itensPerPage;
+  const endIndex = startIndex + itensPerPage;
   const currentStudents = studentsInfo.slice(startIndex, endIndex);
+  //PAGINAÇÃO ESTUDANTES//
 
   const navigate = useNavigate();
   const jwt = localStorage.getItem("jwt");
@@ -56,10 +61,10 @@ const Lists = (props: { userRole: string; navOption: string }) => {
   useEffect(() => {
     if (props.navOption == "Alunos") {
       StudentData();
-    } else if(props.navOption == 'Ger.Instituições') {
+    } else if (props.navOption == "Ger.Instituições") {
       InstData();
     }
-  }, []);
+  }, [props.navOption]);
 
   const StudentData = async () => {
     if (!jwt) {
@@ -76,12 +81,11 @@ const Lists = (props: { userRole: string; navOption: string }) => {
     }
   };
 
-
   const InstData = async () => {
     const response = await institutionService.getAllInstitutions();
     setInstInfo(response.data.data);
     console.log(response.data.data);
-  }
+  };
 
   const handleChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue({
@@ -123,18 +127,22 @@ const Lists = (props: { userRole: string; navOption: string }) => {
   };
 
   const NextPage = () => {
-    if (currentPage + 1 > pages - 1) {
-      console.log("Página indisponivel");
-    } else {
-      setCurrentPage(currentPage + 1);
+    if (props.navOption == "Alunos") {
+      if (currentPage + 1 > pages - 1) {
+        console.log("Página indisponivel");
+      } else {
+        setCurrentPage(currentPage + 1);
+      }
     }
   };
 
   const PreviousPage = () => {
-    if (currentPage - 1 < 0) {
-      console.log("Página indisponivel");
-    } else {
-      setCurrentPage(currentPage - 1);
+    if (props.navOption == "Alunos") {
+      if (currentPage - 1 < 0) {
+        console.log("Página indisponivel");
+      } else {
+        setCurrentPage(currentPage - 1);
+      }
     }
   };
 
@@ -218,7 +226,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
             ) : props.navOption == "Ger.Usuários" ? (
               <UsersCard />
             ) : props.navOption == "Ger.Instituições" ? (
-              <InstCards InstData={InstInfo}/>
+              <InstCards InstData={InstInfo} currentInst={currentInst} />
             ) : (
               ""
             )}
@@ -227,7 +235,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
           <div className="paginationMainComp">
             <CgChevronLeft className="previous" onClick={PreviousPage} />
             <PaginationComponent
-              pages={pages}
+              pages={props.navOption == "Alunos" ? pages : pagesInst}
               setCurrentPage={setCurrentPage}
             />
             <CgChevronLeft className="next" onClick={NextPage} />
