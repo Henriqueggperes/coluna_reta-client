@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { CgChevronLeft } from "react-icons/cg";
 import { Students } from "../../mocks/Students/students.mocks";
 import { ToastContainer, toast } from "react-toastify";
-import { studentObj } from "../../types/types";
+import { studentObj, sValueObj, userObj } from "../../types/types";
 import studentsService from "../../services/studentsService";
 import magnifier from "./../../assets/icons/search_icon.svg";
 import filter from "./../../assets/icons/filter_icon.svg";
@@ -15,29 +15,38 @@ import "./style.css";
 import UsersCard from "../UsersCards";
 import ListIcon from "../ListIcon";
 import InstCards from "../InstCards";
+import userService from "../../services/userService";
 
 //**COLOCAR AS INTERFACES NA PASTA TYPES DEPOIS**
-interface sValueObj {
-  search: string;
-}
 
-const Lists = (props: {userRole:string, navOption: string }) => {
+const Lists = (props: { userRole: string; navOption: string }) => {
+  useEffect(() => {
+    if (props.navOption == "Alunos") {
+      StudentData();
+    } else if (props.navOption == "Ger.Usuários") {
+      userData();
+    }
+  }, [props.navOption]);
+
+  const [searchedStudents, setSearchedStudents] = useState<studentObj[]>([]);
+
   const [searchValue, setSearchValue] = useState<sValueObj>({
     search: "",
   });
 
-  const [searchedStudents, setSearchedStudents] = useState<studentObj[]>([]);
+  const [usersInfo, setUsersInfo] = useState<userObj[]>([]);
 
   const [filterActive, setFilterActive] = useState<string>("");
 
-  const [filterContainerActive, setFilterContainerActive] = useState<string>("");
+  const [filterContainerActive, setFilterContainerActive] =
+    useState<string>("");
 
   const [selectedInst, setSelectedInst] = useState<string>("");
 
   const [studentsInfo, setStudentsInfo] = useState<studentObj[]>([]);
 
   const [studentsPerPage, setStudentsPerPage] = useState(5);
-  
+
   const [currentPage, setCurrentPage] = useState(0);
 
   const pages = Math.ceil(studentsInfo.length / studentsPerPage);
@@ -45,88 +54,80 @@ const Lists = (props: {userRole:string, navOption: string }) => {
   const endIndex = startIndex + studentsPerPage;
   const currentStudents = studentsInfo.slice(startIndex, endIndex);
 
-  const navigate = useNavigate();
-  const jwt = localStorage.getItem("jwt");
-
-  useEffect(() => {
-    StudentData();
-  }, []);
-
-  const StudentData = async () => {
-    if (!jwt) {
-      toast.error("Erro! Faça login antes de consultar essa informação", {
-        position: toast.POSITION.TOP_RIGHT,
+  const userData = async () => {
+    const response = await userService.getAllUsers();
+    setUsersInfo(response.data.data);
+    if (response.data.message) {
+      toast.error(response.data.message, {
+        position: "top-right",
         className: "toast-class",
         closeButton: false,
-        delay: 5000,
       });
-      navigate("/");
-    } else {
-      const response = await studentsService.getAllStudents();
-      setStudentsInfo(response.data.data);
-      console.log(response.data.data);
     }
   };
 
-    const handleChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setSearchValue({
-        ...searchValue,
-        [event.target.name]: event.target.value,
+  const StudentData = async () => {
+    const response = await studentsService.getAllStudents();
+    setStudentsInfo(response.data.data);
+    if (response.data.message) {
+      toast.error(response.data.message, {
+        position: "top-right",
+        className: "toast-class",
+        closeButton: false,
       });
-    };
+    }
+  };
 
-    const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
-      // if (searchValue.search) {
-      //   event.preventDefault();
-      //   const filter: studentObj[] = studentsInfo.filter((student) => {
-      //     if (student.name.includes(searchValue.search)) {
-      //       return student;
-      //     }
-      //     // TARTATIVA DE ERRO AQUI: ELSE{ALUNO NÃO ENCONTRADO}
-      //   });
-      //   setSearchedStudents(filter);
-      // }
-    };
+  const handleChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue({
+      ...searchValue,
+      [event.target.name]: event.target.value,
+    });
+  };
 
-    const onClickFilter = () => {
-      if (filterActive == "active") {
-        setFilterActive("");
-      } else {
-        setFilterActive("active");
-        setFilterContainerActive("active");
-      }
-    };
+  const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const response = await studentsService.searchStudent(searchValue);
+    setSearchedStudents(response.data.data);
+  };
 
-    const handleFilter = (event: React.BaseSyntheticEvent) => {
-      console.log(event.target.innerText);
-      setSelectedInst(event.target.innerText);
+  const onClickFilter = () => {
+    if (filterActive == "active") {
       setFilterActive("");
-    };
+    } else {
+      setFilterActive("active");
+      setFilterContainerActive("active");
+    }
+  };
 
-    const handleClearSearch = () => {
-      setSearchedStudents([]);
-    };
+  const handleFilter = (event: React.BaseSyntheticEvent) => {
+    setSelectedInst(event.target.innerText);
+    setFilterActive("");
+  };
 
-    const NextPage = () => {
-      if (currentPage + 1 > pages - 1) {
-        console.log("Página indisponivel");
-      } else {
-        setCurrentPage(currentPage + 1);
-      }
+  const handleClearSearch = () => {
+    setSearchedStudents([]);
+  };
 
-      
-    };
+  const NextPage = () => {
+    if (currentPage + 1 > pages - 1) {
+      console.log("Página indisponivel");
+    } else {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
-    const PreviousPage = () => {
-      if (currentPage - 1 < 0) {
-        console.log("Página indisponivel");
-      } else {
-        setCurrentPage(currentPage - 1);
-      }
-    };
+  const PreviousPage = () => {
+    if (currentPage - 1 < 0) {
+      console.log("Página indisponivel");
+    } else {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
-    return (
-      <section className="component-container">
+  return (
+    <section className="component-container">
+      {props.navOption == "Alunos" ? (
         <form
           onSubmit={handleSearch}
           className="students_list_search_filter-container"
@@ -173,34 +174,52 @@ const Lists = (props: {userRole:string, navOption: string }) => {
             </div>
           </div>
         </form>
-        <section className="students_list-container">
-          <section className="option-list">
-            {props.userRole == 'ADMIN'?<ListIcon navOption={props.navOption}/>:""}
-            {searchedStudents.length > 0 ? (
-              <div
-                className="all-list-elements__option"
-                onClick={handleClearSearch}
-              >
-                <img
-                  className="back-arrow__image"
-                  src={arrow}
-                  alt="Seta preta com detalhe roxo para retornar á lista principal"
-                />
-              </div>
+      ) : (
+        ""
+      )}
+      <section className="students_list-container">
+        <section className="option-list">
+          {props.userRole == "ADMIN" ? (
+            <ListIcon navOption={props.navOption} />
+          ) : (
+            ""
+          )}
+          {searchedStudents.length > 0 ? (
+            <div
+              className="all-list-elements__option"
+              onClick={handleClearSearch}
+            >
+              <img
+                className="back-arrow__image"
+                src={arrow}
+                alt="Seta preta com detalhe roxo para retornar á lista principal"
+              />
+            </div>
+          ) : (
+            ""
+          )}
+
+          <section className="list_cards-container">
+            {props.navOption == "Alunos" ? (
+              <StudentsCards
+                navOption={props.navOption}
+                currentStudents={currentStudents}
+                StudentData={studentsInfo}
+                searchStudents={searchedStudents}
+                userRole = {props.userRole}
+              />
+            ) : props.navOption == "Ger.Usuários" ? (
+              <UsersCard userData={usersInfo} />
+            ) : props.navOption == "Ger.Instituições" ? (
+              <InstCards />
             ) : (
               ""
             )}
+          </section>
 
-            <section className="list_cards-container">
-              {props.navOption=='Alunos'? <StudentsCards currentStudents={currentStudents} StudentData={studentsInfo} searchStudents={searchedStudents} />
-              :
-              props.navOption=='Ger.Usuários'? <UsersCard/>
-              :
-              props.navOption=='Ger.Instituições'? <InstCards/>:
-              ""
-              }
-            </section>
-
+          {searchedStudents.length > 0 ?(
+            ""
+          ) : (
             <div className="paginationMainComp">
               <CgChevronLeft className="previous" onClick={PreviousPage} />
               <PaginationComponent
@@ -209,10 +228,11 @@ const Lists = (props: {userRole:string, navOption: string }) => {
               />
               <CgChevronLeft className="next" onClick={NextPage} />
             </div>
-          </section>
+          )}
         </section>
       </section>
-    );
+    </section>
+  );
 };
 
 export default Lists;

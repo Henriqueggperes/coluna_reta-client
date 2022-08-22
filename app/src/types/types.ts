@@ -3,6 +3,10 @@ export interface LoginInterface {
   passwordHash: string;
 }
 
+export interface sValueObj {
+  search: string;
+}
+
 export interface userObj {
   created_at: string;
   deleted: boolean;
@@ -13,14 +17,24 @@ export interface userObj {
   updated_at: string;
 }
 
-export interface sValueObj {
-  search: string;
-}
-
 export interface studentObj {
-  id: number; //**  MUDAR PARA STRING DEPOIS ( VAI RECEBER UM ID HASH ) **
+  id: number;
   name: string;
   birth_date: string;
-  phone: number;
-  institution: string;
+  phone: string;
+  institution_id: number;
+  address_id: number;
+  created_at: string;
+  updated_at: string;
+  deleted: boolean;
+}
+
+export interface institutionObj {
+  id: number;
+  name: string;
+  phone_number: string;
+  address_id: number;
+  created_at: string;
+  updated_at: string;
+  deleted: boolean;
 }
