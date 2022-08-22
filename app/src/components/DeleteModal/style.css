@@ -1,0 +1,85 @@
+.delete-modal--container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.163);
+}
+
+.delete--modal{
+    display: flex;
+    box-sizing: border-box;
+    padding: 1rem;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 30%;
+    width: 20%;
+    background:linear-gradient(213.28deg, #eaf3ffe1 2.43%, rgb(219, 227, 238) 95.17%);;
+    border-radius: .5rem;
+}
+
+.delete-modal-heading--container{
+    display: flex;
+    height: 70%;
+    width: 100%;
+}
+
+.delete-modal-heading--info{
+    width: 100%;
+}
+
+.delete-modal--heading{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    color: #2A3577;
+    border-bottom: 1px solid;
+}
+
+.delete-modal-close--icon{
+    height: 5%;
+}
+
+.delete-modal--span{
+    font-size: 1.1rem;
+}
+
+.element--highlight{
+    color: #2b0549;
+    font-weight: bold;
+}
+
+.delete-modal-buttons--container{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 20%;
+    width: 100%;
+}
+
+.delete-modal--button{
+    height: 100%;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    border-radius: .5rem;
+    width: 45%;
+    background-color: rgba(200, 199, 199, 0.51);
+    transition: all 0.4s;
+}
+
+
+.confirm:hover{
+    background-color: rgb(249, 69, 69);
+    color: #ffff;
+}
+
+.deny:hover{
+    color: #ffff;
+    background: linear-gradient(270deg, #6F81FF 0%, rgba(124, 139, 254, 0.65) 100%);
+}

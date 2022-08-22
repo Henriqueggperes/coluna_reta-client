@@ -2,8 +2,6 @@ import "./style.css";
 import close from "./../../assets/icons/close_icon.svg";
 
 const AppointmentModal = (props:{closeModal:any}) => {
-  
-  
    return (
     <section className="appointment-modal--container">
       <form className="appointment-modal-form">
