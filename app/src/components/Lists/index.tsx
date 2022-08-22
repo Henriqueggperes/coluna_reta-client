@@ -224,7 +224,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
                 searchStudents={searchedStudents}
               />
             ) : props.navOption == "Ger.Usuários" ? (
-              <UsersCard />
+              <UsersCard />    
             ) : props.navOption == "Ger.Instituições" ? (
               <InstCards InstData={InstInfo} currentInst={currentInst} />
             ) : (
