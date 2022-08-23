@@ -9,7 +9,7 @@ import "./style.css";
 const InstCards = (props: { InstData: institutionObj[] }) => {
   return (
     <>
-      {props.InstData.map((institution: instObj) => (
+      {props.InstData.map((institution: institutionObj) => (
         <div className="InstCard" key={institution.name}>
           <img className="inst-icon" src={InstIcon} alt="" />
           <div className="InstInfo">
