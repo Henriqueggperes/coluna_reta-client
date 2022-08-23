@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { instObj } from "../../types/types";
+import { institutionObj } from "../../types/types";
 import { Link } from "react-router-dom";
 import { FaRegBuilding } from "react-icons/fa";
 import InstIcon from "../../assets/icons/Insticon.svg";
 import "./style.css";
 
-const InstCards = (props: { InstData: instObj[], currentInst: instObj[] }) => {
+//currentInst: instObj[] 
+const InstCards = (props: { InstData: institutionObj[] }) => {
   return (
     <>
       {props.InstData.map((institution: instObj) => (
