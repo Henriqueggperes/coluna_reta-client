@@ -1,0 +1,227 @@
+.users-modal--container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    height: 100vh;
+    width: 100vw;
+    position:absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.163);
+}
+
+.users-modal--form{
+    display: flex;
+    height: 45%;
+    width: 30%;
+    border-radius: .5rem;
+    box-sizing: border-box;
+    padding: .5rem;
+    flex-direction: column;
+    background: linear-gradient(
+    213.28deg,
+    #eaf3ffe1 2.43%,
+    rgb(219, 227, 238) 95.17%
+  );
+}
+
+
+.users-modal-form--header{
+    display: flex;
+    justify-content: space-between;
+    height: 10%;
+    width: 100%;
+}
+
+.users-modal-form--heading{
+    width: 80%;
+    margin: 0;
+    font-size: 1.5rem;
+    border-bottom: 2px solid;
+    color: #2a3577;
+}
+
+.user-modal-form-close--icon{
+    cursor: pointer;
+    height: 100%;
+    width: 9%;
+    transition: all 0.4s;
+}
+
+.user-modal-form-close--icon:hover{
+   transform: scale(1.1);
+   background-color: rgba(255, 0, 0, 0.519);
+}
+
+.user-form-content--container{
+    height: 90%;
+    box-sizing: border-box;
+    padding: .5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.user-form-inputs--container{
+    height: 70%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+}
+
+.user-form-input-label--container{
+    display: flex;
+    height: 20%;
+    flex-direction: column-reverse;
+    width: 100%;
+}
+
+.users-modal-form--label{
+    font-size: 1rem;
+    z-index: 0;
+    color: rgb(114, 114, 114);
+    transform: translateY(.9rem);
+    transition: all 0.4s;
+    
+}
+.users-modal-form--input{
+    height: 50%;
+    z-index: 1;
+    width: 90%;
+    background:none;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid rgb(114, 114, 114);;
+    transition: all 0.4s;
+}
+
+.user-input--filter{
+    display: flex;
+    flex-direction: column-reverse;
+    height: 50%;
+    width: 100%;
+}
+
+.users-modal-form--input:focus + .users-modal-form--label,
+.users-modal-form--input:valid + .users-modal-form--label{
+    color: #2a3577;
+    transform: translateY(-.2rem);
+}
+
+.users-modal-form--input:focus,
+.users-modal-form--input:valid{
+    border-color: #2a3577;
+}
+.create-user-button--container{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: 15%;
+    width: 100%;
+}
+
+.create-user--button{
+    height: 100%;
+    width: 40%;
+    font-size: 1.2rem;
+    color: rgb(177, 175, 175);
+    background: linear-gradient(270deg, #6F81FF 0%, rgba(124, 139, 254, 0.65) 100%);
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s;
+}
+
+.create-user--button:hover{
+    color:#fff;
+    font-weight: bold;
+    border-radius: .5rem;
+    transform:scale(1.1);
+}
+
+.user-input--filter{
+    width: 80%;
+}
+
+.user-institution-filter-arrow-icon--container{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    right: .9rem;
+    justify-content: center;
+    align-items: flex-start;
+    height: 50%;
+    width: 20%;
+}
+
+.user-institution-filter-arrow--icon{
+    height: 100%;
+    width: 10%;
+}
+
+.institution--container{
+    display: flex;
+    position: relative;
+    top: 1rem;
+    height: 20%;
+    flex-direction: row;
+    width: 100%;
+}
+
+.user-institution-filter-arrow--icon{
+    height: 1.5rem;
+    width: 1.5rem;
+    cursor: pointer;
+    transition: all 0.4s;
+}
+.user-institution-filter-arrow--icon-active{
+    height: 1.5rem;
+    width: 1.5rem;
+    transform: rotate(180deg);
+    cursor: pointer;
+    transition: all 0.4s;
+}
+.dropdown-content{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    left: -2.5rem;
+    border-radius: .5rem;
+    background-color: #fff;
+    overflow: auto;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25),
+    0px 4px 4px rgba(0, 0, 0, 0.25);
+    height: 5rem;
+    width: 10rem;
+    display: flex;
+
+}
+
+.user-institution-span{
+    cursor: pointer;
+}
+
+.user-institution-span:hover{
+    background-color: rgb(147, 147, 147);
+}
+
+.user-inst-pagination--container{
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: .5rem;
+    height: 2rem;
+    width: 5rem;
+    margin: 0;
+}
+
+.user-pagination--chevron{
+    cursor: pointer;
+    height: 1.5rem;
+    width: 4rem;
+}

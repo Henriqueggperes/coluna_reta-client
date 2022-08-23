@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { studentObj, userObj } from "../../types/types";
 import loginService from "../../services/auth";
 import studentsService from "../../services/studentsService";
+import StudentModal from "../StudentModal";
 
 const Student = () => {
   
@@ -16,7 +17,13 @@ const Student = () => {
   const params = useParams();
   
 
-  const [student,setStudent] = useState<studentObj>();
+  const [student,setStudent] = useState<studentObj>({
+    id:0,
+    name:'',
+    phone:'',
+    birth_date:"",
+    institution_id: 0,
+  });
 
 
   const [userLogged, setUserLogged] = useState<userObj>({
@@ -55,9 +62,15 @@ const Student = () => {
       navigate("/");
     }
   });
+  
+  const [isStudentModalOpen, setIsStudentModalOpen] = useState<boolean>(false)
 
   const [isModalOpen,setIsModalOpen] = useState<boolean>(false)
   
+
+  const handleStudentModal = ()=>{
+      setIsStudentModalOpen(!isStudentModalOpen)
+  }
   
   const handleCloseModal = ()=>{
     setIsModalOpen(false)
@@ -163,14 +176,6 @@ const Student = () => {
                     Telefone:
                   </label>
                   <span className="adtional--info">{student?.phone}</span>
-                  <label htmlFor="" className="aditional-info--label">
-                    Inscrito em :
-                  </label>
-                  <span className="adtional--info">{student?.created_at}</span>
-                  <label htmlFor="" className="aditional-info--label">
-                    Atualizado em :
-                  </label>
-                  <span className="adtional--info">{student?.updated_at}</span>
                 </div>
               </div>
             </div>
@@ -178,11 +183,15 @@ const Student = () => {
               <button onClick={handleOpenModal} className="student-schedule--button">
                 AGENDAR CONSULTA
               </button>
+              <button onClick={handleStudentModal} className="student-schedule--button">
+                ALTERAR INFORMAÇÕES
+              </button>
             </div>
           </div>
         </section>
       </main>
       {isModalOpen?<AppointmentModal closeModal={handleCloseModal}/>:""}
+      {isStudentModalOpen?<StudentModal type="EDIT" studentInfo={student} closeModal={handleStudentModal}/>:""}
     </>
   );
 };

@@ -42,8 +42,7 @@
 .student-info{
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  height: 50%;
+  height: 100%;
   font-size: 1rem;
 }
 
@@ -68,17 +67,15 @@
   color: red;
 }
 
-.label{
-  height: 20%;
+.student--label{
+  height: 50%;
   font-size: 1.2rem;
   font-weight: bold;
 }
-
-.span{
-  height: 35%;
-  font-size: .95rem;
+.student--span{
+  height: 50%;
+  font-size: 95%;
 }
-
 .chosen-student__link{
   height: 100%;
   width: 30%;

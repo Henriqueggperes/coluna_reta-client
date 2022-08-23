@@ -1,9 +1,13 @@
 import api from "./api";
 
 const institutionService = {
-  getAllInstitutions: () =>
+  getAllInstitutions: (page:number) =>
     api
-      .get("/institution/all")
+      .get("/institution/all", {
+        params: {
+          page
+        }
+      })
       .then((response: any) => response)
       .catch((error: any) => error.response),
 

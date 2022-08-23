@@ -1,6 +1,7 @@
 import "./style.css";
 import { institutionObj, studentObj, userObj } from "../../types/types";
 import studentsService from "../../services/studentsService";
+import { toast } from "react-toastify";
 
 const DeleteModal = (props: {
   navOption: string;
@@ -10,7 +11,13 @@ const DeleteModal = (props: {
   const deleteStudent = async (id:number) => {
     const response = await studentsService.deleteStudent(id);
     console.log(response)
-    props.closeModal();
+    if(response.data){
+      toast.success('Aluno apagado com sucesso')
+      props.closeModal();
+    }
+    else if(response.data.message){
+      toast.error(response.data.message)
+    }
   };
 
   const handleDelete = (id: number) => {

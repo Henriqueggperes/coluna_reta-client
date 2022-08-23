@@ -18,7 +18,8 @@ import ListIcon from "../ListIcon";
 import InstCards from "../InstCards";
 import userService from "../../services/userService";
 import institutionService from "../../services/institutionService";
-
+import StudentModal from "../StudentModal";
+import UsersModal from "../UsersModal";
 
 const Lists = (props: { userRole: string; navOption: string }) => {
   useEffect(() => {
@@ -37,7 +38,18 @@ const Lists = (props: { userRole: string; navOption: string }) => {
     search: "",
   });
 
-  const [usersInfo, setUsersInfo] = useState<userObj[]>([]);
+  const [usersInfo, setUsersInfo] = useState<userObj[]>([
+    {
+      created_at: "",
+      deleted: false,
+      email: "",
+      id: 0,
+      name: "",
+      role: "",
+      updated_at: "",
+      institution_id:0
+    },
+  ]);
 
   const [filterActive, setFilterActive] = useState<string>("");
 
@@ -46,13 +58,34 @@ const Lists = (props: { userRole: string; navOption: string }) => {
 
   const [selectedInst, setSelectedInst] = useState<string>("");
 
-  const [studentsInfo, setStudentsInfo] = useState<studentObj[]>([]);
+  const [studentsInfo, setStudentsInfo] = useState<studentObj[]>([
+    {
+      birth_date: "",
+      id: 0,
+      institution_id: 0,
+      phone: "",
+      name: "",
+    },
+  ]);
 
   const [studentsPerPage, setStudentsPerPage] = useState(5);
 
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const [InstInfo, setInstInfo] = useState<institutionObj[]>([]);
+  const [InstInfo, setInstInfo] = useState<institutionObj[]>([
+    {
+      address_id: 0,
+      created_at: "",
+      deleted: false,
+      id: 0,
+      name: "",
+      phone_number: "",
+      updated_at: "",
+    },
+  ]);
+
+  const [isModalOpen, setIsModalOpen] = useState<boolean>();
+
 
   const pages = Math.ceil(studentsInfo.length / studentsPerPage);
   const startIndex = currentPage * studentsPerPage;
@@ -72,7 +105,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
   };
 
   const StudentData = async () => {
-    const response = await studentsService.getAllStudents();
+    const response = await studentsService.getAllStudents(currentPage);
     setStudentsInfo(response.data.data);
     if (response.data.message) {
       toast.error(response.data.message, {
@@ -84,7 +117,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
   };
 
   const InstData = async () => {
-    const response = await institutionService.getAllInstitutions();
+    const response = await institutionService.getAllInstitutions(1);
     setInstInfo(response.data.data);
     console.log(response.data.data);
   };
@@ -94,6 +127,10 @@ const Lists = (props: { userRole: string; navOption: string }) => {
       ...searchValue,
       [event.target.name]: event.target.value,
     });
+  };
+
+  const handleModal = (event: any) => {
+    setIsModalOpen(!isModalOpen);
   };
 
   const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -191,7 +228,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
       <section className="students_list-container">
         <section className="option-list">
           {props.userRole == "ADMIN" ? (
-            <ListIcon navOption={props.navOption} />
+            <ListIcon handleModal={handleModal} navOption={props.navOption} />
           ) : (
             ""
           )}
@@ -217,7 +254,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
                 currentStudents={currentStudents}
                 StudentData={studentsInfo}
                 searchStudents={searchedStudents}
-                userRole = {props.userRole}
+                userRole={props.userRole}
               />
             ) : props.navOption == "Ger.Usuários" ? (
               <UsersCard userData={usersInfo} />
@@ -228,7 +265,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
             )}
           </section>
 
-          {searchedStudents.length > 0 ?(
+          {searchedStudents.length > 0 ? (
             ""
           ) : (
             <div className="paginationMainComp">
@@ -242,6 +279,17 @@ const Lists = (props: { userRole: string; navOption: string }) => {
           )}
         </section>
       </section>
+      {isModalOpen && props.navOption == "Alunos" ? (
+        <StudentModal
+          type="CREATE"
+          studentInfo={undefined}
+          closeModal={handleModal}
+        />
+      ) : isModalOpen && props.navOption=='Ger.Usuários'? (
+        <UsersModal closeModal={handleModal}/>
+      ) : (
+        ""
+      )}
     </section>
   );
 };
