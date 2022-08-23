@@ -4,6 +4,8 @@ const api = axios.create({
     baseURL: 'https://dev-coluna-reta-wandersondeve.koyeb.app/'
 });
 
+
+
 api.interceptors.request.use((config: any) => {
     try {
       const token = localStorage.getItem("jwt");

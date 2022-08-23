@@ -1,0 +1,116 @@
+.student-modal--container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.163);
+}
+
+.student-modal--form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  height: 40%;
+  width: 20%;
+  box-sizing: border-box;
+  padding: .7rem;
+  background: linear-gradient(
+    213.28deg,
+    #eaf3ffe1 2.43%,
+    rgb(219, 227, 238) 95.17%
+  );
+  border-radius: .5rem;
+}
+
+.student-modal-form--header {
+  display: flex;
+  justify-content: space-between;
+  height: 10%;
+  width: 100%;
+}
+
+.student-modal-form-inputs--container {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  justify-content: space-evenly;
+  padding: 1rem;
+  height: 80%;
+}
+
+.student-modal-form-send-button--container{
+    display: flex;
+    box-sizing: border-box;
+    padding-left: 1rem;
+    height: 10%;
+    width: 100%;
+}
+
+.inputs-labels--container{
+    display: flex;
+    flex-direction: column;
+}
+
+.student-modal-form--heading {
+  font-size: 1.5rem;
+  height: 100%;
+  width: 85%;
+  margin:0;
+  border-bottom: 1px solid;
+  color: #2a3577;
+
+}
+
+.student-modal-form--close-button {
+    height: 70%;
+    width: 5%;
+    transition: all 0.4s;
+    cursor: pointer;
+}
+
+.student-modal-form--close-button:hover{
+    transform: scale(1.2);
+    background-color: rgba(255, 0, 0, 0.519);
+}
+
+.input--label{
+    font-size: 1rem;
+    color:#6d6d6e;
+}
+
+.student-modal-form--input{
+    background: none;
+    font-size: 1rem;
+    z-index: 1;
+    height: 30%;
+    width: 80%;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #6d6d6e;
+    transition: all 0.4s;
+}
+
+.send--button{
+    height: 100%;
+    width: 45%;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background: linear-gradient(270deg, #6F81FF 0%, rgba(124, 139, 254, 0.65) 100%);
+    cursor: pointer;
+    color: #6d6d6e;
+    transition: all 0.4s;
+}
+
+.send--button:hover {
+    color: #FFFF;
+    transform: scale(1.2);
+    border-radius: .5rem;
+}
+
+
