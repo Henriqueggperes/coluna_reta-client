@@ -1,7 +1,11 @@
 import api from "./api";
 
 const userService = {
-   getAllUsers: ()=>api.get('user/all')
+   getAllUsers: (page:number)=>api.get('user/all',{
+      params:{
+         page
+      }
+   })
    .then((response)=>response)
    .catch((error)=>error.response)
 }

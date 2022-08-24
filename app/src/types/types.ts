@@ -48,3 +48,13 @@ export interface patchStudentObj{
   phone: string;
   institution_id: number;
 }
+
+export interface MetaType {
+  hasNextPage?: boolean;
+  hasPreviousPage?: boolean;
+  itemCount?: number;
+  orderByColumn?: string;
+  page: number;
+  pageCount: number;
+  take: number;
+}

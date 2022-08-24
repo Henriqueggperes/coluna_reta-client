@@ -10,7 +10,6 @@ import DeleteModal from "../DeleteModal";
 
 const StudentsCards = (props: {
   navOption: string;
-  StudentData: studentObj[];
   searchStudents: studentObj[];
   currentStudents: studentObj[];
   userRole: string;
