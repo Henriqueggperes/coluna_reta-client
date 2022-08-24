@@ -2,28 +2,58 @@ import "./style.css";
 import { institutionObj, studentObj, userObj } from "../../types/types";
 import studentsService from "../../services/studentsService";
 import { toast } from "react-toastify";
+import userService from "../../services/userService";
+import institutionService from "../../services/institutionService";
 
 const DeleteModal = (props: {
   navOption: string;
-  element: studentObj | userObj | institutionObj;
+  element: studentObj | userObj | institutionObj | undefined;
   closeModal: Function;
 }) => {
-  const deleteStudent = async (id:number) => {
-    const response = await studentsService.deleteStudent(id);
-    console.log(response)
-    if(response.data){
-      toast.success('Aluno apagado com sucesso')
+  const deleteElement = async (id: number) => {    
+    
+    let response;   
+    
+    if(props.navOption=='Alunos'){
+    response =  await studentsService.deleteStudent(id);
+    console.log(response);
+    if (response.data) {
+      toast.success("Aluno apagado com sucesso");
       props.closeModal();
+    } else if (response.data.message) {
+      toast.error(response.data.message);
+    }}
+
+    else if(props.navOption=='Ger.Usuários'){
+      response =  await userService.deleteUser(id);
+      if (response.status == 204) {
+        toast.success("Usuário apagado com sucesso");
+        props.closeModal();
+      } else if (response.data.message) {
+        toast.error(response.data.message);
+      }
     }
-    else if(response.data.message){
-      toast.error(response.data.message)
+
+    else if(props.navOption=='Ger.Instituições'){
+      response =  await institutionService.deleteInstitution(id);
+      if (response.data) {
+        toast.success("Instituição apagada com sucesso");
+        props.closeModal();
+      } else if (response.data.message) {
+        toast.error(response.data.message);
+      }
     }
+    
   };
 
-  const handleDelete = (id: number) => {
+  const handleDelete = (id: any) => {
     if (props.navOption == "Alunos") {
-        deleteStudent(id)
-      };
+      deleteElement(id);
+    } else if (props.navOption == "Ger.Usuários") {
+      deleteElement(id);
+    } else if (props.navOption == "Ger.Instituições") {
+      deleteElement(id);
+    }
   };
 
   return (
@@ -35,7 +65,7 @@ const DeleteModal = (props: {
             <span className="delete-modal--span">
               Deseja realmente excluir{` `}
               <span className="element--highlight">
-                {props.element.name}
+                {props.element?.name}
               </span>{" "}
               do backoficce?
             </span>
@@ -44,7 +74,7 @@ const DeleteModal = (props: {
 
         <div className="delete-modal-buttons--container">
           <button
-            onClick={(event) => handleDelete(props.element.id)}
+            onClick={(event) => handleDelete(props.element?.id)}
             className="delete-modal--button confirm"
           >
             DELETAR

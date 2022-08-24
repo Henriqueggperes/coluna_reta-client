@@ -84,7 +84,8 @@ const Student = () => {
   const handleOpenModal = ()=>{
     setIsModalOpen(true)
   }
-
+ 
+  console.log('ESTOU RENDERIZANDO')
   return (
     <>
       {/* <Navbar navOptionSelected={getCurrentOption}></Navbar> */}

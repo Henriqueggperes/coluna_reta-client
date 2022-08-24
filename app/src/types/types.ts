@@ -12,7 +12,7 @@ export interface userObj {
   created_at?: string;
   deleted?: boolean;
   email: string;
-  institution_id:number;
+  institution_id:number[];
   institution?: {
     name?: string;
     id?: number;
@@ -23,18 +23,18 @@ export interface userObj {
 }
 
 export interface studentObj {
-  id: number|any ;
+  id?: number;
   name: string;
   birth_date: string;
   phone: string;
   institution_id: number;
-  address_id?: number|any;
-  created_at?: string|any;
-  updated_at?: string|any;
-  deleted?: boolean|any;
+  address_id?: number;
+  created_at?: string;
+  updated_at?: string;
+  deleted?: boolean
   institution?: {
-    id: number;
-    name: string;
+    id?: number;
+    name?: string;
   };
   address?: {};
 }
