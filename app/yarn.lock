@@ -387,6 +387,11 @@ browserslist@^4.20.2:
     node-releases "^2.0.6"
     update-browserslist-db "^1.0.5"
 
+build-create-react-app-netlify@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/build-create-react-app-netlify/-/build-create-react-app-netlify-1.3.0.tgz#f6fbb3906358f092297bad6d99b48acbc3caf557"
+  integrity sha512-tSHL04WV8o9XANfSfkc10lW6DPbr8wbSOnq9prjtCUkOFky/9X6FwpIYVUqSucuK0r+stiR7hkce51nI3f58tA==
+
 caniuse-lite@^1.0.30001370:
   version "1.0.30001374"
   resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001374.tgz"
