@@ -1,14 +1,15 @@
 import "./style.css";
 import close_icon from "./../../assets/icons/close_icon.svg";
 import filterArrowIcon from "./../../assets/icons/filter_arrow_icon.svg";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import institutionService from "../../services/institutionService";
 import { institutionObj, userObj } from "../../types/types";
 import { CgChevronLeft } from "react-icons/cg";
 import { CgChevronRight } from "react-icons/cg";
 import { toast } from "react-toastify";
+import userService from "../../services/userService";
 
-const UsersModal = (props: { closeModal: Function }) => {
+const UsersModal = (props: {userInfo:userObj|any ,type:string, closeModal: Function }) => {
   
   const [allInsts, setAllInsts] = useState<institutionObj[]>();
 
@@ -25,16 +26,31 @@ const UsersModal = (props: { closeModal: Function }) => {
   })
 
   const [institution,setInstitution] = useState<number>()
-
    
+  useEffect(()=>{
+    setUser(props.userInfo)
+  },[])
+
   const handleChanges = (event: React.ChangeEvent<HTMLInputElement>)=>{
      setUser({
         ...user,
-       [event.target.name]: event.target.value
+       [event.target.name]: event.target.value,
      })
-     console.log(user);
   }
-
+  
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>)=>{
+      event.preventDefault()
+      const response = await userService.postUser({...user,
+      id: undefined,
+      institution_id: Number(institution)
+    })
+      if(response.data){
+        toast.success('Usuário registrado com sucesso!')
+      }
+      else {
+        console.log(response.error.message)
+      }
+  }
 
   const getAllInstitutions = async () => {
     const response = await institutionService.getAllInstitutions(page);
@@ -53,7 +69,7 @@ const UsersModal = (props: { closeModal: Function }) => {
 
   return (
     <section className="users-modal--container">
-      <form className="users-modal--form">
+      <form onSubmit={handleSubmit} className="users-modal--form">
         <div className="users-modal-form--header">
           <h1 className="users-modal-form--heading">Criar um usuário</h1>
           <img
@@ -72,7 +88,7 @@ const UsersModal = (props: { closeModal: Function }) => {
                 onChange={handleChanges}
                 autoComplete="off"
                 className="users-modal-form--input"
-                required
+                required={props.type=='CREATE'? true : false}
               />
               <label htmlFor="name" className="users-modal-form--label">
                 Nome
@@ -84,7 +100,7 @@ const UsersModal = (props: { closeModal: Function }) => {
                 type="text"
                 onChange={handleChanges}
                 autoComplete="off"
-                required
+                required={props.type=='CREATE'? true : false}
                 className="users-modal-form--input"
               />
               <label htmlFor="name" className="users-modal-form--label">
@@ -97,7 +113,7 @@ const UsersModal = (props: { closeModal: Function }) => {
                 type="email"
                 onChange={handleChanges}
                 autoComplete="off"
-                required
+                required={props.type=='CREATE'? true : false}
                 className="users-modal-form--input"
               />
               <label htmlFor="name" className="users-modal-form--label">
@@ -110,11 +126,11 @@ const UsersModal = (props: { closeModal: Function }) => {
                 type="password"
                 onChange={handleChanges}
                 autoComplete="off"
-                required
+                required={props.type=='CREATE'? true : false}
                 className="users-modal-form--input"
               />
               <label htmlFor="name" className="users-modal-form--label">
-                Senha
+                Senha <span className="password-regex">(Caracter especial, letra maiúscula, minúscula e numeros)</span>
               </label>
             </div>
             <div className="user-form-input-label--container institution--container">
@@ -125,7 +141,7 @@ const UsersModal = (props: { closeModal: Function }) => {
                   onChange={handleChanges}
                   autoComplete="off"
                   value={institution}
-                  required
+                  required={props.type=='CREATE'? true : false}
                   className="users-modal-form--input"
                 />
                 <label
@@ -147,7 +163,7 @@ const UsersModal = (props: { closeModal: Function }) => {
                   <div className="user-dropdown--container">
                     <div className="dropdown-content">
                       {allInsts?.map((inst) => (
-                        <span onClick={()=>setInstitution(inst.id)} className="user-institution-span">
+                        <span onClick={()=>setInstitution(Number(inst.id))} className="user-institution-span">
                           {inst.name}
                         </span>
                       ))}

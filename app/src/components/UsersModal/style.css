@@ -84,11 +84,16 @@
 
 .users-modal-form--label{
     font-size: 1rem;
+    width: 100%;
     z-index: 0;
     color: rgb(114, 114, 114);
     transform: translateY(.9rem);
     transition: all 0.4s;
     
+}
+
+.password-regex{
+    font-size: .8rem;
 }
 .users-modal-form--input{
     height: 50%;
