@@ -39,13 +39,30 @@
     color: #2B0548;
 }
 
-.header_user_card-container{
+.header_user_card-container {
     display: flex;
     justify-content: center;
-
     align-items: center;
     height: 100%;
-    width: 10%;
+    width: 20%;
+    gap: .5rem;
+    transition: all .2s;
+    cursor: context-menu;
+}
+
+.ADMIN {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1rem;
+    line-height: 1rem;
+    color: aliceblue;
+}
+
+.optAdmin {
+    font-size: .8rem;
+    text-align: end;
+    color: rgb(43, 255, 0);
 }
 
 .header_user_card-image{
@@ -57,13 +74,14 @@
 .header_user_card_exit-icon{
     margin-left: .5rem;
     cursor: pointer;
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 1.8rem;
+    width: 1.8rem;
     transition: all 0.4s;
 }
 
 .header_user_card_exit-icon:hover{
-    background-color: rgba(208, 135, 135, 0.803);
+    color: #ffff;
+    /* background-color: rgba(208, 135, 135, 0.803); */
     transform: scale(1.1);
 }
 

@@ -35,7 +35,10 @@ const Header = (props:{loggedUser:userObj,}) => {
         </div>
       </Link>
       <div className="header_user_card-container">
-        <span>{props.loggedUser.name}</span>
+        <div className="ADMIN">
+          <span>{props.loggedUser.name}</span>
+          {props.loggedUser.role == 'ADMIN' ? <span className="optAdmin">Admin</span> : ''} 
+        </div>
         <img
           src={exit}
           alt="Icone para sair da plataforma"
