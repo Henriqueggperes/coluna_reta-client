@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { institutionObj } from "../../types/types";
 import { Link } from "react-router-dom";
 import { FaRegBuilding } from "react-icons/fa";
-import InstIcon from "../../assets/icons/Insticon.svg";
+import InstIcon from "./../../assets/icons/InstIcon.svg";
 import "./style.css";
 
 //currentInst: instObj[] 
