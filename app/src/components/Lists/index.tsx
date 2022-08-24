@@ -1,7 +1,4 @@
 import React, { FormEvent, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { CgChevronLeft } from "react-icons/cg";
-import { Students } from "../../mocks/Students/students.mocks";
 import { ToastContainer, toast } from "react-toastify";
 import { MetaType, studentObj, sValueObj, userObj } from "../../types/types";
 import { institutionObj } from "../../types/types";
