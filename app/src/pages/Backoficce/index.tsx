@@ -34,9 +34,7 @@ const Backoficce = () => {
     name: "",
     role: "",
     updated_at: "",
-
-    institution_id:0
-
+    institution_id:0,
   });
    
   const getLoggedUser = async () => {

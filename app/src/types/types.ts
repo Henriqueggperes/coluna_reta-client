@@ -8,11 +8,15 @@ export interface sValueObj {
 }
 
 export interface userObj {
+  id?: number;
   created_at?: string;
   deleted?: boolean;
   email: string;
-  id: number;
   institution_id:number;
+  institution?: {
+    name?: string;
+    id?: number;
+  }
   name: string;
   role: string;
   updated_at?: string;
