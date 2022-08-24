@@ -15,16 +15,16 @@ const Backoficce = () => {
   const jwt = localStorage.getItem("jwt");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!jwt) {
-      toast.error("Realize o login antes de acessar o backoffice", {
-        position: toast.POSITION.TOP_RIGHT,
-        className: "toast-class",
-        closeButton: false,
-      });
-      navigate("/");
-    }
-  });
+  // useEffect(() => {
+  //   if (!jwt) {
+  //     toast.error("Realize o login antes de acessar o backoffice", {
+  //       position: toast.POSITION.TOP_RIGHT,
+  //       className: "toast-class",
+  //       closeButton: false,
+  //     });
+  //     navigate("/");
+  //   }
+  // });
 
   const [userLogged, setUserLogged] = useState<userObj>({
     created_at: "",
@@ -34,7 +34,9 @@ const Backoficce = () => {
     name: "",
     role: "",
     updated_at: "",
-    institution_id:0,
+
+    institution_id:0
+
   });
    
   const getLoggedUser = async () => {

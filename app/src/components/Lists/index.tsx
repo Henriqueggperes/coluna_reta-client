@@ -1,9 +1,6 @@
 import React, { FormEvent, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { CgChevronLeft } from "react-icons/cg";
-import { Students } from "../../mocks/Students/students.mocks";
 import { ToastContainer, toast } from "react-toastify";
-import { studentObj, sValueObj, userObj } from "../../types/types";
+import { MetaType, studentObj, sValueObj, userObj } from "../../types/types";
 import { institutionObj } from "../../types/types";
 import studentsService from "../../services/studentsService";
 import magnifier from "./../../assets/icons/search_icon.svg";
@@ -11,7 +8,6 @@ import filter from "./../../assets/icons/filter_icon.svg";
 import arrow from "./../../assets/icons/back_arrow_icon.svg";
 import filterArrowIcon from "./../../assets/icons/filter_arrow_icon.svg";
 import StudentsCards from "../StudentsCards";
-import PaginationComponent from "../PaginationComponent";
 import "./style.css";
 import UsersCard from "../UsersCards";
 import ListIcon from "../ListIcon";
@@ -20,15 +16,16 @@ import userService from "../../services/userService";
 import institutionService from "../../services/institutionService";
 import StudentModal from "../StudentModal";
 import UsersModal from "../UsersModal";
+import ReactPaginate from "react-paginate";
 
 const Lists = (props: { userRole: string; navOption: string }) => {
   useEffect(() => {
     if (props.navOption == "Alunos") {
-      StudentData();
+      StudentData(1);
     } else if (props.navOption == "Ger.Usuários") {
-      userData();
+      userData(1);
     } else if (props.navOption == "Ger.Instituições") {
-      InstData();
+      InstData(1);
     }
   }, [props.navOption]);
 
@@ -47,7 +44,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
       name: "",
       role: "",
       updated_at: "",
-      institution_id:0
+      institution_id: 0,
     },
   ]);
 
@@ -68,9 +65,15 @@ const Lists = (props: { userRole: string; navOption: string }) => {
     },
   ]);
 
-  const [studentsPerPage, setStudentsPerPage] = useState(5);
-
-  const [currentPage, setCurrentPage] = useState(1);
+  const [metaData, setMetaData] = useState<MetaType>({
+    hasNextPage: false,
+    hasPreviousPage: false,
+    itemCount: 1,
+    orderByColumn: "",
+    page: 1,
+    pageCount: 1,
+    take: 1,
+  });
 
   const [InstInfo, setInstInfo] = useState<institutionObj[]>([
     {
@@ -86,40 +89,31 @@ const Lists = (props: { userRole: string; navOption: string }) => {
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>();
 
-
-  const pages = Math.ceil(studentsInfo.length / studentsPerPage);
-  const startIndex = currentPage * studentsPerPage;
-  const endIndex = startIndex + studentsPerPage;
-  const currentStudents = studentsInfo.slice(startIndex, endIndex);
-
-  const userData = async () => {
-    const response = await userService.getAllUsers();
+  const userData = async (page: number) => {
+    const response = await userService.getAllUsers(page);
     setUsersInfo(response.data.data);
+    setMetaData(response.data.meta);
     if (response.data.message) {
-      toast.error(response.data.message, {
-        position: "top-right",
-        className: "toast-class",
-        closeButton: false,
-      });
+      toast.error(response.data.message);
     }
   };
 
-  const StudentData = async () => {
-    const response = await studentsService.getAllStudents(currentPage);
+  const StudentData = async (page: number) => {
+    const response = await studentsService.getAllStudents(page);
     setStudentsInfo(response.data.data);
+    setMetaData(response.data.meta);
     if (response.data.message) {
-      toast.error(response.data.message, {
-        position: "top-right",
-        className: "toast-class",
-        closeButton: false,
-      });
+      toast.error(response.data.message);
     }
   };
 
-  const InstData = async () => {
-    const response = await institutionService.getAllInstitutions(1);
+  const InstData = async (page: number) => {
+    const response = await institutionService.getAllInstitutions(page);
     setInstInfo(response.data.data);
-    console.log(response.data.data);
+    setMetaData(response.data.meta);
+    if (response.data.message) {
+      toast.error(response.data.message);
+    }
   };
 
   const handleChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -157,19 +151,15 @@ const Lists = (props: { userRole: string; navOption: string }) => {
     setSearchedStudents([]);
   };
 
-  const NextPage = () => {
-    if (currentPage + 1 > pages - 1) {
-      console.log("Página indisponivel");
-    } else {
-      setCurrentPage(currentPage + 1);
-    }
-  };
+  const handleClick = (selectedItem: { selected: number }) => {
+    const page = selectedItem.selected + 1;
 
-  const PreviousPage = () => {
-    if (currentPage - 1 < 0) {
-      console.log("Página indisponivel");
-    } else {
-      setCurrentPage(currentPage - 1);
+    if (props.navOption == "Alunos") {
+      StudentData(page);
+    } else if (props.navOption == "Ger.Usuários") {
+      userData(page);
+    } else if (props.navOption == "Ger.Instituições") {
+      InstData(page);
     }
   };
 
@@ -251,8 +241,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
             {props.navOption == "Alunos" ? (
               <StudentsCards
                 navOption={props.navOption}
-                currentStudents={currentStudents}
-                StudentData={studentsInfo}
+                currentStudents={studentsInfo}
                 searchStudents={searchedStudents}
                 userRole={props.userRole}
               />
@@ -264,19 +253,29 @@ const Lists = (props: { userRole: string; navOption: string }) => {
               ""
             )}
           </section>
-
-          {searchedStudents.length > 0 ? (
-            ""
-          ) : (
-            <div className="paginationMainComp">
-              <CgChevronLeft className="previous" onClick={PreviousPage} />
-              <PaginationComponent
-                pages={pages}
-                setCurrentPage={setCurrentPage}
-              />
-              <CgChevronLeft className="next" onClick={NextPage} />
-            </div>
-          )}
+          <div className="pagination-main-comp">
+            <ReactPaginate
+              pageCount={metaData.pageCount}
+              nextLabel={">"}
+              previousLabel={"<"}
+              breakLabel={"..."}
+              marginPagesDisplayed={3}
+              pageRangeDisplayed={3}
+              onPageChange={(selectedItem: { selected: number }) =>
+                handleClick(selectedItem)
+              }
+              containerClassName={"pagination"}
+              pageClassName={"page-item"}
+              pageLinkClassName={"page-link"}
+              previousClassName={"page-item"}
+              previousLinkClassName={"page-link"}
+              nextClassName={"page-item"}
+              nextLinkClassName={"page-link"}
+              breakClassName={"page-item"}
+              breakLinkClassName={"page-link"}
+              activeClassName={"active"}
+            />
+          </div>
         </section>
       </section>
       {isModalOpen && props.navOption == "Alunos" ? (
@@ -285,8 +284,8 @@ const Lists = (props: { userRole: string; navOption: string }) => {
           studentInfo={undefined}
           closeModal={handleModal}
         />
-      ) : isModalOpen && props.navOption=='Ger.Usuários'? (
-        <UsersModal closeModal={handleModal}/>
+      ) : isModalOpen && props.navOption == "Ger.Usuários" ? (
+        <UsersModal closeModal={handleModal} />
       ) : (
         ""
       )}
