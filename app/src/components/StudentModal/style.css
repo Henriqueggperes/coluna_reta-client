@@ -16,7 +16,7 @@
   flex-direction: column;
   justify-content: space-between; 
   height: 40%;
-  width: 20%;
+  width: 30%;
   box-sizing: border-box;
   padding: .7rem;
   background: linear-gradient(
@@ -53,7 +53,7 @@
 
 .inputs-labels--container{
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
 }
 
 .student-modal-form--heading {
@@ -79,8 +79,9 @@
 }
 
 .input--label{
-    font-size: 1rem;
+    font-size: .9rem;
     color:#6d6d6e;
+    transition: all 0.4s;
 }
 
 .student-modal-form--input{
@@ -114,3 +115,86 @@
 }
 
 
+.institution-student-filter--container{
+  height: 50%;
+  width: 100%;
+}
+
+.student-filter-arrow--icon{
+  position: absolute;
+  cursor: pointer;
+  left: 58%;
+  top: 60%;
+  height: 1.5rem;
+  width: 2rem;
+  transition: all 0.4s;
+}
+.student-filter-arrow--icon-active{
+  position: absolute;
+  cursor: pointer;
+  left: 58%;
+  top: 60%;
+  height: 1.5rem;
+  width: 1.5rem;
+  transform: rotate(180deg);
+  transition: all 0.4s;
+}
+
+.student-institution--input{
+  height: 60%;
+}
+
+.student-inst-label{
+  position: relative;
+  bottom: 3rem;
+}
+
+.student-modal-form--input:focus ~ .input--label,
+.student-modal-form--input:focus,
+.student-modal-form--input:valid ~ .input--label,
+.student-modal-form--input:valid{
+  color: #2a3577;
+  border-color: #2a3577;
+}
+
+.student-inst-dropdown--container{
+  position: absolute;
+  left: 60%;
+  top: 60%;
+  height: 0;
+  width: 10rem;
+  transition: all 0.4s;
+}
+
+.student-inst-dropdown--container-active{
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  height: 5rem;
+  width: 10rem;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25),
+  0px 4px 4px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  left: 60%;
+  top: 60%;
+  transition: all 0.4s;
+}
+
+.dropdown-student--item{
+  display: none;
+  height: 0;
+  width: 0;
+  transition: all 0.4s;
+}
+
+.dropdown-student--item-active{
+  font-size: .9rem;
+  width: 100%;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.dropdown-student--item-active:hover{
+  background-color: #979797;
+}

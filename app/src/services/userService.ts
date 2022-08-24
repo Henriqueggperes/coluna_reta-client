@@ -16,7 +16,11 @@ const userService = {
    
    getUserById: (id:number)=>api.get(`user/search/${id}`)
    .then((response)=>response)
-   .catch((error)=>error.data)
+   .catch((error)=>error.data),
+   
+   deleteUser: (id:number)=>api.delete(`user/delete/${id}`)
+   .then((response)=>response)
+   .catch((error)=>error.response)
 }
 
 export default userService;

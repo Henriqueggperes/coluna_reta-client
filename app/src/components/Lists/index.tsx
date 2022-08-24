@@ -44,7 +44,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
       name: "",
       role: "",
       updated_at: "",
-      institution_id: 0,
+      institution_id: [],
     },
   ]);
 
@@ -153,7 +153,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
 
   const handleClick = (selectedItem: { selected: number }) => {
     const page = selectedItem.selected + 1;
-
+    
     if (props.navOption == "Alunos") {
       StudentData(page);
     } else if (props.navOption == "Ger.Usuários") {
@@ -246,7 +246,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
                 userRole={props.userRole}
               />
             ) : props.navOption == "Ger.Usuários" ? (
-              <UsersCard userData={usersInfo} />
+              <UsersCard navOption={props.navOption} userRole={props.userRole} userData={usersInfo} />
             ) : props.navOption == "Ger.Instituições" ? (
               <InstCards InstData={InstInfo} />
             ) : (

@@ -85,7 +85,7 @@ const StudentsCards = (props: {
               )}
             </div>
           ))
-        : students.map((student: studentObj, index) => (
+        : students.map((student: studentObj) => (
             <div className="StudentsCard" key={student.id}>
               <Link
                 className="chosen-student__link"
@@ -105,9 +105,9 @@ const StudentsCards = (props: {
                     Instituição:
                   </label>{" "}
                   <span className="student-institution student--span">
-                    {student.institution?.name.split(' ')[0]}
+                    {student.institution?.name?.split(' ')[0]}
                     {' '}
-                    {student.institution?.name.split(' ')[1]}
+                    {student.institution?.name?.split(' ')[1]}
                   </span>
                 </div>
               </div>

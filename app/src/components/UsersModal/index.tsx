@@ -22,14 +22,22 @@ const UsersModal = (props: {userInfo:userObj|any ,type:string, closeModal: Funct
     name:'',
     email:'',
     role:'',
-    institution_id:0,
+    institution_id:[],
   })
 
-  const [institution,setInstitution] = useState<number>()
+  let selectedInstsArr:number[] = [] 
+  
+  const [selectedInsts,setSelectedInsts] = useState<number[]>([])
    
   useEffect(()=>{
     setUser(props.userInfo)
   },[])
+
+
+  const setInstitutions = (id:number)=>{
+    setSelectedInsts([...selectedInsts,id])
+    console.log(selectedInsts)
+  }
 
   const handleChanges = (event: React.ChangeEvent<HTMLInputElement>)=>{
      setUser({
@@ -42,10 +50,10 @@ const UsersModal = (props: {userInfo:userObj|any ,type:string, closeModal: Funct
       event.preventDefault()
       const response = await userService.postUser({...user,
       id: undefined,
-      institution_id: Number(institution)
+      institution_id: selectedInsts
     })
-      if(response.data){
-        toast.success('Usuário registrado com sucesso!')
+      if(response){
+        toast.success(response.message)
       }
       else {
         console.log(response.error.message)
@@ -53,8 +61,8 @@ const UsersModal = (props: {userInfo:userObj|any ,type:string, closeModal: Funct
   }
 
   const getAllInstitutions = async () => {
-    const response = await institutionService.getAllInstitutions(page);
-    setAllInsts(response.data.data);
+    const response = await institutionService.getInstitutions();
+    setAllInsts(response.data);
     console.log(response.data.data);
   };
 
@@ -120,19 +128,6 @@ const UsersModal = (props: {userInfo:userObj|any ,type:string, closeModal: Funct
                 E-mail
               </label>
             </div>
-            <div className="user-form-input-label--container">
-              <input
-                name="passwordHash"
-                type="password"
-                onChange={handleChanges}
-                autoComplete="off"
-                required={props.type=='CREATE'? true : false}
-                className="users-modal-form--input"
-              />
-              <label htmlFor="name" className="users-modal-form--label">
-                Senha <span className="password-regex">(Caracter especial, letra maiúscula, minúscula e numeros)</span>
-              </label>
-            </div>
             <div className="user-form-input-label--container institution--container">
               <div className="user-input--filter">
                 <input
@@ -140,7 +135,7 @@ const UsersModal = (props: {userInfo:userObj|any ,type:string, closeModal: Funct
                   type="number"
                   onChange={handleChanges}
                   autoComplete="off"
-                  value={institution}
+                 
                   required={props.type=='CREATE'? true : false}
                   className="users-modal-form--input"
                 />
@@ -163,7 +158,7 @@ const UsersModal = (props: {userInfo:userObj|any ,type:string, closeModal: Funct
                   <div className="user-dropdown--container">
                     <div className="dropdown-content">
                       {allInsts?.map((inst) => (
-                        <span onClick={()=>setInstitution(Number(inst.id))} className="user-institution-span">
+                        <span onClick={()=>setInstitutions(inst.id)} className="user-institution-span">
                           {inst.name}
                         </span>
                       ))}
