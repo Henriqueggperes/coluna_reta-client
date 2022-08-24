@@ -10,14 +10,10 @@ import DeleteModal from "../DeleteModal";
 
 const StudentsCards = (props: {
   navOption: string;
-  StudentData: studentObj[];
   searchStudents: studentObj[];
   currentStudents: studentObj[];
   userRole: string;
 }) => {
-  
-  
-
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 
   const [studentToDelete, setStudentToDelete] = useState<studentObj>({
@@ -26,10 +22,10 @@ const StudentsCards = (props: {
     birth_date: "",
     phone: "",
     institution_id: 0,
-    address_id: 0,
-    created_at: "",
-    updated_at: "",
-    deleted: false,
+    institution: {
+      id: 0,
+      name: "",
+    },
   });
   const [students, setStudents] = useState<studentObj[]>([]);
 
@@ -45,8 +41,8 @@ const StudentsCards = (props: {
   };
 
   useEffect(() => {
-     setStudents( 
-       props.currentStudents.sort((a, b) => {
+    setStudents(
+      props.currentStudents.sort((a, b) => {
         return a.name.localeCompare(b.name);
       })
     );
@@ -74,7 +70,7 @@ const StudentsCards = (props: {
                   <label className="student-institution label">
                     Instituição:
                   </label>{" "}
-                  <span className="student-institution span"></span>
+                  <span className="student-institution span">{item.institution?.name}</span>
                 </div>
               </div>
               {props.userRole == "ADMIN" ? (
@@ -109,7 +105,9 @@ const StudentsCards = (props: {
                     Instituição:
                   </label>{" "}
                   <span className="student-institution student--span">
-                    {student.institution_id}
+                    {student.institution?.name.split(' ')[0]}
+                    {' '}
+                    {student.institution?.name.split(' ')[1]}
                   </span>
                 </div>
               </div>
@@ -126,7 +124,11 @@ const StudentsCards = (props: {
             </div>
           ))}
       {isDeleteModalOpen ? (
-        <DeleteModal navOption={props.navOption} element={studentToDelete} closeModal={handleModal} />
+        <DeleteModal
+          navOption={props.navOption}
+          element={studentToDelete}
+          closeModal={handleModal}
+        />
       ) : (
         ""
       )}

@@ -32,7 +32,10 @@ export interface studentObj {
   created_at?: string|any;
   updated_at?: string|any;
   deleted?: boolean|any;
-  institution?: {};
+  institution?: {
+    id: number;
+    name: string;
+  };
   address?: {};
 }
 
@@ -51,4 +54,14 @@ export interface patchStudentObj{
   birth_date: string;
   phone: string;
   institution_id: number;
+}
+
+export interface MetaType {
+  hasNextPage?: boolean;
+  hasPreviousPage?: boolean;
+  itemCount?: number;
+  orderByColumn?: string;
+  page: number;
+  pageCount: number;
+  take: number;
 }

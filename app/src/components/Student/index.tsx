@@ -23,6 +23,10 @@ const Student = () => {
     phone:'',
     birth_date:"",
     institution_id: 0,
+    institution:{
+      id:0,
+      name: ''
+    },
   });
 
 
@@ -34,6 +38,7 @@ const Student = () => {
     name: "",
     role: "",
     updated_at: "",
+
     institution_id: 0,
   });
 
@@ -90,7 +95,7 @@ const Student = () => {
             <div className="chosen-student-heading">
               <span className="heding-student--name">{student?.name}</span>
               <span className="heding-student--institution">
-                {student?.institution_id}
+                {student?.institution?.name}
               </span>
             </div>
             <div className="chosen-student--info">
