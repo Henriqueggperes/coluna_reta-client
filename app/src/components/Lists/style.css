@@ -174,13 +174,19 @@
     height: 70%
 }
 
-.paginationMainComp{
+.pagination-main-comp{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 20%;
   width: 100%;
+}
+
+.pagination{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .active{

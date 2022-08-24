@@ -28,7 +28,10 @@ export interface studentObj {
   created_at?: string|any;
   updated_at?: string|any;
   deleted?: boolean|any;
-  institution?: {};
+  institution?: {
+    id: number;
+    name: string;
+  };
   address?: {};
 }
 

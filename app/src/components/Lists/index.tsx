@@ -44,7 +44,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
       name: "",
       role: "",
       updated_at: "",
-      institution_id:0
+      institution_id: 0,
     },
   ]);
 
@@ -62,17 +62,17 @@ const Lists = (props: { userRole: string; navOption: string }) => {
       institution_id: 0,
       phone: "",
       name: "",
-    }
+    },
   ]);
 
-  const [metaData,setMetaData] = useState<MetaType>({
-  hasNextPage: false,
-  hasPreviousPage: false,
-  itemCount: 1,
-  orderByColumn: '',
-  page: 1,
-  pageCount: 1,
-  take: 1,
+  const [metaData, setMetaData] = useState<MetaType>({
+    hasNextPage: false,
+    hasPreviousPage: false,
+    itemCount: 1,
+    orderByColumn: "",
+    page: 1,
+    pageCount: 1,
+    take: 1,
   });
 
   const [InstInfo, setInstInfo] = useState<institutionObj[]>([
@@ -89,30 +89,28 @@ const Lists = (props: { userRole: string; navOption: string }) => {
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>();
 
-  const userData = async (page:number) => {
+  const userData = async (page: number) => {
     const response = await userService.getAllUsers(page);
     setUsersInfo(response.data.data);
-    setMetaData(response.data.meta)
+    setMetaData(response.data.meta);
     if (response.data.message) {
       toast.error(response.data.message);
     }
   };
 
- 
-  
-  const StudentData = async (page:number) => {
+  const StudentData = async (page: number) => {
     const response = await studentsService.getAllStudents(page);
     setStudentsInfo(response.data.data);
-    setMetaData(response.data.meta)
+    setMetaData(response.data.meta);
     if (response.data.message) {
       toast.error(response.data.message);
     }
   };
 
-  const InstData = async (page:number) => {
+  const InstData = async (page: number) => {
     const response = await institutionService.getAllInstitutions(page);
     setInstInfo(response.data.data);
-    setMetaData(response.data.meta)
+    setMetaData(response.data.meta);
     if (response.data.message) {
       toast.error(response.data.message);
     }
@@ -124,7 +122,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
       [event.target.name]: event.target.value,
     });
   };
-  
+
   const handleModal = (event: any) => {
     setIsModalOpen(!isModalOpen);
   };
@@ -153,21 +151,17 @@ const Lists = (props: { userRole: string; navOption: string }) => {
     setSearchedStudents([]);
   };
 
-
-  const handleClick = (selectedItem: { selected: number })=>{
+  const handleClick = (selectedItem: { selected: number }) => {
     const page = selectedItem.selected + 1;
 
-    if(props.navOption=='Alunos'){
-      StudentData(page)
+    if (props.navOption == "Alunos") {
+      StudentData(page);
+    } else if (props.navOption == "Ger.Usuários") {
+      userData(page);
+    } else if (props.navOption == "Ger.Instituições") {
+      InstData(page);
     }
-    else if (props.navOption=='Ger.Usuários'){
-      userData(page)
-    }
-    else if (props.navOption=='Ger.Instituições'){
-      InstData(page)
-    }
-  }
-
+  };
 
   return (
     <section className="component-container">
@@ -259,27 +253,29 @@ const Lists = (props: { userRole: string; navOption: string }) => {
               ""
             )}
           </section>
-
-          <ReactPaginate 
-          pageCount={metaData.pageCount}
-          nextLabel={'>'}
-          previousLabel={'<'}
-          breakLabel={'...'}
-          marginPagesDisplayed={3}
-          pageRangeDisplayed={3}
-          onPageChange={(selectedItem: { selected: number })=>handleClick(selectedItem)}
-          containerClassName={'pagination'}
-          pageClassName={'page-item'}
-          pageLinkClassName={'page-link'}
-          previousClassName={'page-item'}
-          previousLinkClassName={'page-link'}
-          nextClassName={'page-item'}
-          nextLinkClassName={'page-link'}
-          breakClassName={'page-item'}
-          breakLinkClassName={'page-link'}
-          activeClassName={'active'}
-          />
-            
+          <div className="pagination-main-comp">
+            <ReactPaginate
+              pageCount={metaData.pageCount}
+              nextLabel={">"}
+              previousLabel={"<"}
+              breakLabel={"..."}
+              marginPagesDisplayed={3}
+              pageRangeDisplayed={3}
+              onPageChange={(selectedItem: { selected: number }) =>
+                handleClick(selectedItem)
+              }
+              containerClassName={"pagination"}
+              pageClassName={"page-item"}
+              pageLinkClassName={"page-link"}
+              previousClassName={"page-item"}
+              previousLinkClassName={"page-link"}
+              nextClassName={"page-item"}
+              nextLinkClassName={"page-link"}
+              breakClassName={"page-item"}
+              breakLinkClassName={"page-link"}
+              activeClassName={"active"}
+            />
+          </div>
         </section>
       </section>
       {isModalOpen && props.navOption == "Alunos" ? (
@@ -288,8 +284,8 @@ const Lists = (props: { userRole: string; navOption: string }) => {
           studentInfo={undefined}
           closeModal={handleModal}
         />
-      ) : isModalOpen && props.navOption=='Ger.Usuários'? (
-        <UsersModal closeModal={handleModal}/>
+      ) : isModalOpen && props.navOption == "Ger.Usuários" ? (
+        <UsersModal closeModal={handleModal} />
       ) : (
         ""
       )}
