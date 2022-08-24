@@ -34,7 +34,6 @@
 }
 
 .delete-modal--heading{
-    margin-top: 1rem;
     margin-bottom: 1rem;
     font-size: 2rem;
     color: #2A3577;
@@ -73,6 +72,9 @@
     transition: all 0.4s;
 }
 
+.confirm {
+    color: red;
+}
 
 .confirm:hover{
     background-color: rgb(249, 69, 69);

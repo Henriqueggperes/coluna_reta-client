@@ -23,7 +23,7 @@
     padding: 0;
     width: 100%;
     font-size: 4rem;
-    color:#2B0549;
+    color:#000;
     font-weight: 0;
     margin-bottom: 1.5rem;
 }
@@ -38,7 +38,8 @@
 
 .parag-styled{
     margin-left: 10px;
-    color: #2B0549;
+    color:#000;
+
 }
 
 .home_welcome_parag-1{

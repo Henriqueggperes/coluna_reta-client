@@ -57,7 +57,7 @@ export const LoginPage = () => {
 
           <div className="card-login">
             <form onSubmit={handleAuthLogin} className="login__form" >
-              <h1>BEM VINDO!</h1>
+              <h1>Bem vindo!</h1>
               <div className="single-input">
                 <input
                   required
@@ -80,7 +80,7 @@ export const LoginPage = () => {
                 />
                 <label htmlFor="password">Password</label>
               </div>
-              <button type="submit">ENTRAR</button>
+              <button type="submit">Entrar</button>
               <ToastContainer
                 position="top-right"
                 autoClose={5000}

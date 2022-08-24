@@ -87,7 +87,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
     },
   ]);
 
-  const [isModalOpen, setIsModalOpen] = useState<boolean>();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const userData = async (page: number) => {
     const response = await userService.getAllUsers(page);
@@ -126,6 +126,10 @@ const Lists = (props: { userRole: string; navOption: string }) => {
   const handleModal = (event: any) => {
     setIsModalOpen(!isModalOpen);
   };
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+  }
 
   const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -248,7 +252,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
             ) : props.navOption == "Ger.Usuários" ? (
               <UsersCard navOption={props.navOption} userRole={props.userRole} userData={usersInfo} />
             ) : props.navOption == "Ger.Instituições" ? (
-              <InstCards InstData={InstInfo} />
+              <InstCards InstData={InstInfo} navOption={props.navOption} userRole={props.userRole}/>
             ) : (
               ""
             )}
@@ -282,11 +286,11 @@ const Lists = (props: { userRole: string; navOption: string }) => {
         <StudentModal
           type="CREATE"
           studentInfo={undefined}
-          closeModal={handleModal}
+          closeModal={closeModal}
         />
 
       ) : isModalOpen && props.navOption=='Ger.Usuários'? (
-        <UsersModal userInfo type="CREATE" closeModal={handleModal}/>
+        <UsersModal userInfo type="CREATE" closeModal={closeModal}/>
 
       ) : (
         ""

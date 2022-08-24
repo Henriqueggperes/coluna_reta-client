@@ -12,37 +12,37 @@
     0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 1rem;
 }
-.user-info--container{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 90%;
+.user-info--container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 90%;
 }
-.user--icon{
-    height: 100%;
-    width: 30%;
+.user--icon {
+  height: 100%;
+  width: 30%;
 }
-.info--content{
-    display: flex;
-    flex-direction: column;
-    height: 40%;
-    width: 80%;
+.info--content {
+  display: flex;
+  flex-direction: column;
+  height: 40%;
+  width: 80%;
+  margin-top: .4rem;
 }
-.user-info--label{
+.user-info--label {
   font-size: 1rem;
-    font-weight: bold;
+  font-weight: bold;
 }
 
-
-.user--info{
-  font-size: .9rem;
+.user--info {
+  font-size: 0.9rem;
 }
 
-.trash-can-icon{
+.trash-can-icon {
   width: 2.2rem;
 }
 
-.admin{
-  color: #2B0548;
+.admin {
+  color: #2b0548;
   font-weight: bold;
 }

@@ -17,7 +17,7 @@ const User = () => {
   const [user,setUser] = useState<userObj>({
     name:'',
     role: '',
-    institution_id:0,
+    institution_id: 0,
     email: '',
     institution:{
       name: '',

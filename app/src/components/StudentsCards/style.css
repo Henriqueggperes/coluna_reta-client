@@ -24,13 +24,12 @@
    transform: scale(1.1);
 }
 
-
-
 .CardInfo {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   justify-content: space-evenly;
+  margin-top: 1.4rem;
   gap: .5rem;
   line-height: 0.01rem;
   font-family: Prompt;

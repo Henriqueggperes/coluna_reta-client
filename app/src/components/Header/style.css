@@ -15,6 +15,7 @@
 .header_logo-container{
     box-sizing: border-box;
     display: flex;
+    align-items: center;
     padding: .5rem;
     align-items: baseline;
     height: 100%;
@@ -23,7 +24,7 @@
 }
 
 .header_logo-container:hover{
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 
@@ -41,10 +42,11 @@
 
 .header_user_card-container {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     height: 100%;
     width: 20%;
+    margin-right: 1rem;
     gap: .5rem;
     transition: all .2s;
     cursor: context-menu;
@@ -61,6 +63,7 @@
 
 .optAdmin {
     font-size: .8rem;
+    font-weight: 600;
     text-align: end;
     color: rgb(43, 255, 0);
 }

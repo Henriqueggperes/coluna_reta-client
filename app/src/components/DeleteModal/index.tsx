@@ -4,13 +4,14 @@ import studentsService from "../../services/studentsService";
 import { toast } from "react-toastify";
 import userService from "../../services/userService";
 import institutionService from "../../services/institutionService";
+import { useState } from "react";
 
 const DeleteModal = (props: {
   navOption: string;
   element: studentObj | userObj | institutionObj | undefined;
   closeModal: Function;
 }) => {
-  const deleteElement = async (id: number) => {    
+   const deleteElement = async (id: number) => {    
     
     let response;   
     

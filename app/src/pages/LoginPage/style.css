@@ -61,6 +61,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 2.5rem;
 }
 
 div.single-input {
@@ -121,6 +122,8 @@ div.single-input .input:valid ~ label {
 }
 
 .logo {
+  display: flex;
+  gap: .5rem;
   width: 100%;
   margin-top: -2rem;
   margin-bottom: -2rem;
@@ -133,6 +136,7 @@ div.single-input .input:valid ~ label {
 
 .CR {
   width: 6rem;
+  height: 3rem;
 }
 
 .LoginImg {
