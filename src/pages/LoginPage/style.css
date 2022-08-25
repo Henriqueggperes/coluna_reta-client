@@ -107,6 +107,7 @@ div.single-input .input:valid ~ label {
 
 .login__form h1 {
   width: 100%;
+  margin-top: 1rem;
   text-align: center;
   color: #2a3577;
   font-family: Prompt;
@@ -141,6 +142,9 @@ div.single-input .input:valid ~ label {
 }
 
 .login-heading__span {
+  position: relative;
+  top: 1rem;
+  left: .5rem;
   font-size: 2.4rem;
   font-family: Prompt;
   color: #2a3577;
