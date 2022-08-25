@@ -172,7 +172,7 @@ const UsersModal = (props: {
             <div className="user-form-input-label--container institution--container">
             <div className="user-input--filter">
                 <ul className="institutions-list">
-                  {props.userInfo.institutions?
+                  {props.userInfo?
                   selectedInsts.map((item:any,)=>(
                     <li className="inst-id">{item.id? item.id : item}</li>                      
                     )):
