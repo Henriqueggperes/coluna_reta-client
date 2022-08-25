@@ -312,7 +312,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
         />
 
       ) : isModalOpen && props.navOption=='Ger.Usuários'? (
-        <UsersModal userInfo type="CREATE" closeModal={handleModal}/>
+        <UsersModal userInfo={undefined} type="CREATE" closeModal={handleModal}/>
 
       ) : (
         ""

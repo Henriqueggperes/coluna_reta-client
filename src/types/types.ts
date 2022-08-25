@@ -12,6 +12,8 @@ export interface userObj {
   id?: number;
   created_at?: string;
   deleted?: boolean;
+  recoverPasswordToken?: string;
+  passwordHash?:string;
   email: string;
   institution_id?:number[]|any;
   institutions?: [{
