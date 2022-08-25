@@ -12,11 +12,11 @@ export interface userObj {
   created_at?: string;
   deleted?: boolean;
   email: string;
-  institution_id:number[];
-  institution?: {
+  institution_id?:number[]|any;
+  institutions?: [{
     name?: string;
     id?: number;
-  }
+  }]|any
   name: string;
   role: string;
   updated_at?: string;

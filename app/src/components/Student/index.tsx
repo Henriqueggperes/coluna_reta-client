@@ -38,8 +38,7 @@ const Student = () => {
     name: "",
     role: "",
     updated_at: "",
-
-    institution_id: 0,
+    institution_id: [],
   });
 
   const getStudent = async ()=>{

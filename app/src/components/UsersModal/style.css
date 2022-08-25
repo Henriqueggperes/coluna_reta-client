@@ -89,14 +89,14 @@
     color: rgb(114, 114, 114);
     transform: translateY(.9rem);
     transition: all 0.4s;
-    
 }
 
 .password-regex{
     font-size: .8rem;
 }
+
 .users-modal-form--input{
-    height: 50%;
+    height: 60%;
     z-index: 1;
     width: 90%;
     background:none;
@@ -105,6 +105,7 @@
     border-bottom: 2px solid rgb(114, 114, 114);;
     transition: all 0.4s;
 }
+
 
 .user-input--filter{
     display: flex;
@@ -123,6 +124,7 @@
 .users-modal-form--input:valid{
     border-color: #2a3577;
 }
+
 .create-user-button--container{
     display: flex;
     justify-content: start;
@@ -184,6 +186,7 @@
     cursor: pointer;
     transition: all 0.4s;
 }
+
 .user-institution-filter-arrow--icon-active{
     height: 1.5rem;
     width: 1.5rem;
@@ -191,6 +194,7 @@
     cursor: pointer;
     transition: all 0.4s;
 }
+
 .dropdown-content{
     display: flex;
     position: relative;
@@ -225,8 +229,20 @@
     margin: 0;
 }
 
-.user-pagination--chevron{
-    cursor: pointer;
-    height: 1.5rem;
-    width: 4rem;
+
+.user-intitution{ 
+    position: absolute;
+    bottom: 3.5rem
+}
+
+.institution-user-span{
+    height: 100%;
+    width: 90%;
+    overflow: auto;
+    border-bottom: 2px solid rgb(114, 114, 114);;
+}
+
+.institutions-list{
+    position: absolute;
+    top: 1rem;
 }
