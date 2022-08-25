@@ -1,15 +1,27 @@
 import "./style.css";
 import Header from "../Header";
-import loginService from "../../services/auth";
+import loginService from "../../services/authService";
 import { useEffect, useState } from "react";
 import { institutionObj, userObj } from "../../types/types";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import userService from "../../services/userService";
 import "./style.css";
 import institutionService from "../../services/institutionService";
 import UsersModal from "../UsersModal";
+import { toast } from "react-toastify";
 
 const User = () => {
+
+const jwt = localStorage.getItem('jwt')
+
+const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!jwt) {
+      toast.error("Realize o login antes de acessar o backoffice");
+      navigate("/");
+    }
+  });
   const params = useParams();
 
   const id = Number(params.id);

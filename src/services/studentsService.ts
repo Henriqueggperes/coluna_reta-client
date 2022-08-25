@@ -25,9 +25,13 @@ const studentsService = {
         return error.response;
       }),
 
-  searchStudent: (value: sValueObj) =>
+  searchStudent: (value: sValueObj,page:number) =>
     api
-      .post("student/search", value)
+      .post("student/search", value,{
+        params:{ 
+          page
+        }
+      })
       .then((response) => response)
       .catch((error) => error.response),
 

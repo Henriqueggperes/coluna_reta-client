@@ -70,7 +70,11 @@ const StudentsCards = (props: {
                   <label className="student-institution label">
                     Instituição:
                   </label>{" "}
-                  <span className="student-institution span">{item.institution?.name}</span>
+                  <span className="student-institution span">
+                    {item.institution?.name?.split(' ')[0]}
+                    {' '}
+                    {item.institution?.name?.split(' ')[1]}
+                    </span>
                 </div>
               </div>
               {props.userRole == "ADMIN" ? (

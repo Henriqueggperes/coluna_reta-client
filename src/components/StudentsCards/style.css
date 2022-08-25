@@ -82,3 +82,8 @@
   text-decoration: none;
   color: black;
 }
+
+.span{
+  height: 50%;
+  font-size: .9rem;
+}

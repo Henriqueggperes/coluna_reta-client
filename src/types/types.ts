@@ -5,6 +5,7 @@ export interface LoginInterface {
 
 export interface sValueObj {
   search: string;
+  filter: string;
 }
 
 export interface userObj {

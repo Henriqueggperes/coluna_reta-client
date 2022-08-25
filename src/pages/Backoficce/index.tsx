@@ -8,19 +8,21 @@ import { useState } from "react";
 import { render } from "react-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import loginService from "../../services/auth";
+import loginService from "../../services/authService";
 import { userObj } from "../../types/types";
 
 const Backoficce = () => {
-  const jwt = localStorage.getItem("jwt");
   const navigate = useNavigate();
-
+  
   useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
     if (!jwt) {
-      toast.error("Realize o login antes de acessar o backoffice");
+      toast.error("Realize o login antes de acessar o backoffice",{ 
+      });
+      console.log()
       navigate("/");
     }
-  });
+  },[]);
 
   const [userLogged, setUserLogged] = useState<userObj>({
     created_at: "",
