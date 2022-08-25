@@ -60,6 +60,8 @@
 }
 .navbar_admin-option {
   display: flex;
+  box-sizing: border-box;
+  padding-top: .5rem ;
 }
 
 .admin-dropdown{

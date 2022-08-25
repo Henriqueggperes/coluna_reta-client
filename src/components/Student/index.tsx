@@ -184,9 +184,10 @@ const Student = () => {
               <button onClick={handleOpenModal} className="student-schedule--button">
                 AGENDAR CONSULTA
               </button>
-              <button onClick={handleStudentModal} className="student-schedule--button">
+              {userLogged.role=='ADMIN'?
+                <button onClick={handleStudentModal} className="student-schedule--button">
                 ALTERAR INFORMAÇÕES
-              </button>
+              </button>:""}
             </div>
           </div>
         </section>

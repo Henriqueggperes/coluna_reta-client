@@ -181,10 +181,10 @@ const Lists = (props: { userRole: string; navOption: string }) => {
   const handleClick = (selectedItem: { selected: number }) => {
     const page = selectedItem.selected + 1;
     
-    if (props.navOption == "Alunos"&& searchedStudents==[]) {
+    if (props.navOption == "Alunos"&& searchedStudents.length<1) {
       StudentData(page);
     }
-    if (props.navOption == "Alunos"&& searchedStudents!=[]) {
+    if (props.navOption == "Alunos"&& searchedStudents.length>0) {
       searchPage(page)
     }
      else if (props.navOption == "Ger.Usuários") {
@@ -241,11 +241,13 @@ const Lists = (props: { userRole: string; navOption: string }) => {
       )}
       <section className="students_list-container">
         <section className="option-list">
+          <div className="list-icon--container">
           {props.userRole == "ADMIN" ? (
             <ListIcon handleModal={handleModal} navOption={props.navOption} />
-          ) : (
-            ""
-          )}
+            ) : (
+              ""
+              )}
+          </div>
           {searchedStudents.length > 0 ? (
             <div
               className="all-list-elements__option"
