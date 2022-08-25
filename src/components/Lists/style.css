@@ -59,12 +59,12 @@
   position: absolute;
   top:10%;
   background-color:#FFFF ;
-  width: 10rem;
+  height: 2rem;
+  width: 13rem;
   z-index: 1;
   justify-content: space-between;
   align-items: center;
   margin-left: .5rem;
-  height: 2rem;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25),
     0px 4px 4px rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
@@ -93,6 +93,9 @@
     display: none;
     transform: all 0.4s;
 }
+.filter-dropdown__item{
+  font-size: 1rem;
+}
 .filter-dropdown__item:hover{
   background-color: #c5c5c5;
   cursor: pointer;
@@ -100,19 +103,16 @@
 .filter-dropdown__container-active{
     position: relative;
     background-color: #FFFF;
+    width: 13rem;
     top: 82%;
     z-index: 0;
     left: 5%;
 }
 
 .active,.filter-dropdown__container-active{
-    width:10rem;
     overflow: auto;
 }
 
-.filter-dropdown__item{
-  font-size: 1.2rem;
-}
 
 
 .filter-institution{

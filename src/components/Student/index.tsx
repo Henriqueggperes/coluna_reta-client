@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Header from "../Header";
 import "./style.css";
-import doctor from "../../assets/img/doctor_char.svg";
 import AppointmentModal from "../AppointmentModal";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { studentObj, userObj } from "../../types/types";
-import loginService from "../../services/auth";
+import loginService from "../../services/authService";
 import studentsService from "../../services/studentsService";
 import StudentModal from "../StudentModal";
 
@@ -59,11 +58,7 @@ const Student = () => {
 
   useEffect(() => {
     if (!jwt) {
-      toast.error("Realize o login antes de acessar o backoffice", {
-        position: toast.POSITION.TOP_RIGHT,
-        className: "toast-class",
-        closeButton: false,
-      });
+      toast.error("Realize o login antes de acessar o backoffice");
       navigate("/");
     }
   });

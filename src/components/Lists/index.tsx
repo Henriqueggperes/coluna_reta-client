@@ -17,9 +17,11 @@ import institutionService from "../../services/institutionService";
 import StudentModal from "../StudentModal";
 import UsersModal from "../UsersModal";
 import ReactPaginate from "react-paginate";
+import loginService from "../../services/authService";
 
 const Lists = (props: { userRole: string; navOption: string }) => {
   useEffect(() => {
+     getInstitutions()
     if (props.navOption == "Alunos") {
       StudentData(1);
     } else if (props.navOption == "Ger.Usuários") {
@@ -29,10 +31,14 @@ const Lists = (props: { userRole: string; navOption: string }) => {
     }
   }, [props.navOption]);
 
+  
+  const [institutions,setInstitutions] = useState<institutionObj[]>([])
+
   const [searchedStudents, setSearchedStudents] = useState<studentObj[]>([]);
 
   const [searchValue, setSearchValue] = useState<sValueObj>({
     search: "",
+    filter:"",
   });
 
   const [usersInfo, setUsersInfo] = useState<userObj[]>([
@@ -47,6 +53,12 @@ const Lists = (props: { userRole: string; navOption: string }) => {
       institution_id: [],
     },
   ]);
+
+  const getInstitutions = async ()=>{
+     const response = await institutionService.getInstitutions()
+     setInstitutions(response.data)
+  }
+
 
   const [filterActive, setFilterActive] = useState<string>("");
 
@@ -119,7 +131,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
   const handleChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue({
       ...searchValue,
-      [event.target.name]: event.target.value,
+      search: event.target.value,
     });
   };
 
@@ -127,11 +139,25 @@ const Lists = (props: { userRole: string; navOption: string }) => {
     setIsModalOpen(!isModalOpen);
   };
 
-  const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSearch = async (event: any,page:number) => {
     event.preventDefault();
-    const response = await studentsService.searchStudent(searchValue);
+    const response = await studentsService.searchStudent({
+      ...searchValue,
+     filter: selectedInst
+    },page);
+    console.log(response)
     setSearchedStudents(response.data.data);
+    setMetaData(response.data.meta)
   };
+
+  const searchPage = async (page:number)=>{
+    const response = await studentsService.searchStudent({
+      ...searchValue,
+     filter: selectedInst
+    },page);
+    setSearchedStudents(response.data.data)
+    setMetaData(response.data.meta)
+  }
 
   const onClickFilter = () => {
     if (filterActive == "active") {
@@ -149,14 +175,19 @@ const Lists = (props: { userRole: string; navOption: string }) => {
 
   const handleClearSearch = () => {
     setSearchedStudents([]);
+    StudentData(1)
   };
 
   const handleClick = (selectedItem: { selected: number }) => {
     const page = selectedItem.selected + 1;
     
-    if (props.navOption == "Alunos") {
+    if (props.navOption == "Alunos"&& searchedStudents==[]) {
       StudentData(page);
-    } else if (props.navOption == "Ger.Usuários") {
+    }
+    if (props.navOption == "Alunos"&& searchedStudents!=[]) {
+      searchPage(page)
+    }
+     else if (props.navOption == "Ger.Usuários") {
       userData(page);
     } else if (props.navOption == "Ger.Instituições") {
       InstData(page);
@@ -167,7 +198,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
     <section className="component-container">
       {props.navOption == "Alunos" ? (
         <form
-          onSubmit={handleSearch}
+          onSubmit={(event)=>handleSearch(event, 1)}
           className="students_list_search_filter-container"
         >
           <button className="students_search-button">
@@ -197,18 +228,11 @@ const Lists = (props: { userRole: string; navOption: string }) => {
               ></img>
             </div>
             <div className={`filter-dropdown__container-${filterActive}`}>
+              {institutions.map((inst)=>(
               <div className="filter-dropdown__item" onClick={handleFilter}>
-                la
+                {inst.name}
               </div>
-              <div className="filter-dropdown__item" onClick={handleFilter}>
-                aqui
-              </div>
-              <div className="filter-dropdown__item" onClick={handleFilter}>
-                acola
-              </div>
-              <div className="filter-dropdown__item" onClick={handleFilter}>
-                ali
-              </div>
+              ))}
             </div>
           </div>
         </form>

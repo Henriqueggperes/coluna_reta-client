@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import LoginImg from "../../assets/img/login_char.svg";
 import Logo from "../../assets/icons/cr_logo.png";
 import { LoginInterface } from "../../types/types";
-import loginService from "../../services/auth";
+import loginService from "../../services/authService";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import "./style.css";
