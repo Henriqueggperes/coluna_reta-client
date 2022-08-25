@@ -65,25 +65,22 @@ const Student = () => {
   
   const [isStudentModalOpen, setIsStudentModalOpen] = useState<boolean>(false)
 
-  const [isModalOpen,setIsModalOpen] = useState<boolean>(false)
+  const [isAppointmentModalOpen,setIsAppointmentModalOpen] = useState<boolean>(false)
   
 
   const handleStudentModal = ()=>{
       setIsStudentModalOpen(!isStudentModalOpen)
   }
   
-  const handleCloseModal = ()=>{
-    setIsModalOpen(false)
-  }
-  const handleOpenModal = ()=>{
-    setIsModalOpen(true)
+  const handleAppointMentModal= ()=>{
+    setIsAppointmentModalOpen(!isAppointmentModalOpen)
   }
  
   console.log('ESTOU RENDERIZANDO')
   return (
     <>
       {/* <Navbar navOptionSelected={getCurrentOption}></Navbar> */}
-      <main className={isModalOpen?'chosen-student-main__container modal':'chosen-student-main__container'}>
+      <main className='chosen-student-main__container'>
         <Header loggedUser={userLogged} ></Header>
         <section className="unique-student-card__container">
           <div className="chosen-student-info--container">
@@ -181,7 +178,7 @@ const Student = () => {
               </div>
             </div>
             <div className="student-schedule-button--container">
-              <button onClick={handleOpenModal} className="student-schedule--button">
+              <button onClick={handleAppointMentModal} className="student-schedule--button">
                 AGENDAR CONSULTA
               </button>
               {userLogged.role=='ADMIN'?
@@ -192,8 +189,8 @@ const Student = () => {
           </div>
         </section>
       </main>
-      {isModalOpen?<AppointmentModal closeModal={handleCloseModal}/>:""}
       {isStudentModalOpen?<StudentModal type="EDIT" studentInfo={student} closeModal={handleStudentModal}/>:""}
+      {isAppointmentModalOpen?<AppointmentModal closeModal={handleAppointMentModal}/>:''}
     </>
   );
 };
