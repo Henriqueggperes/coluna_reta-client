@@ -1,5 +1,5 @@
 import "./style.css";
-import close_icon from "./../../assets/icons/close_icon.svg";
+import close_icon from "../../assets/icons/close_icon.svg";
 import React, { useEffect, useState } from "react";
 import { institutionObj, patchStudentObj, studentObj } from "../../types/types";
 import studentsService from "../../services/studentsService";

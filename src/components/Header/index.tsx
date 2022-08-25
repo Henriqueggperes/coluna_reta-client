@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./style.css";
-import logo from "./../../assets/icons/cr_logo.png";
-import user from "./../../assets/icons/user.svg";
-import exit from "./../../assets/icons/exit.svg";
+import logo from "../../assets/icons/cr_logo.png";
+import user from "../../assets/icons/user.svg";
+import exit from "../../assets/icons/exit.svg";
 import loginService from "../../services/auth";
 import { useEffect, useState } from "react";
 import { userObj } from "../../types/types";

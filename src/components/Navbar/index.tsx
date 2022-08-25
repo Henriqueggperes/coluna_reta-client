@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "./style.css";
 
-import user_profile from "./../../assets/icons/user_icon.svg";
-import dashboard_icon from "./../../assets/icons/dashboard_icon.svg";
-import students_icon from "./../../assets/icons/students_icon.svg";
-import list_icon from "./../../assets/icons/list_icon.svg";
-import gear_icon from "./../../assets/icons/gear_icon.svg";
+import user_profile from "../../assets/icons/user_icon.svg";
+import dashboard_icon from "../../assets/icons/dashboard_icon.svg";
+import students_icon from "../../assets/icons/students_icon.svg";
+import list_icon from "../../assets/icons/list_icon.svg";
+import gear_icon from "../../assets/icons/gear_icon.svg";
 
 const Navbar = (props: { navOptionSelected: Function, userRole:string}) => {
   const [option, setOption] = useState("");

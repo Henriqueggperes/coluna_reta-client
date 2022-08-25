@@ -1,6 +1,6 @@
 import "./style.css";
-import close_icon from "./../../assets/icons/close_icon.svg";
-import filterArrowIcon from "./../../assets/icons/filter_arrow_icon.svg";
+import close_icon from "../../assets/icons/close_icon.svg";
+import filterArrowIcon from "../../assets/icons/filter_arrow_icon.svg";
 import React, { useEffect, useState } from "react";
 import institutionService from "../../services/institutionService";
 import { institutionObj, userObj } from "../../types/types";

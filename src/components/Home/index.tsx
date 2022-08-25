@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
-import thesis_char from "./../../assets/img/home_thesis_char.svg";
-import teacher_char from "./../../assets/img/home_teacher_char.svg";
+import thesis_char from "../../assets/img/home_thesis_char.svg";
+import teacher_char from "../../assets/img/home_teacher_char.svg";
 import { userObj } from "../../types/types";
 
 const Home = (props: { loggedUser: userObj }) => {

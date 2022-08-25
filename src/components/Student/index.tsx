@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../Header";
 import "./style.css";
-import doctor from "./../../assets/img/doctor_char.svg";
+import doctor from "../../assets/img/doctor_char.svg";
 import AppointmentModal from "../AppointmentModal";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";

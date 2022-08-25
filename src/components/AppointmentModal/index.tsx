@@ -1,5 +1,5 @@
 import "./style.css";
-import close from "./../../assets/icons/close_icon.svg";
+import close from "../../assets/icons/close_icon.svg";
 
 const AppointmentModal = (props:{closeModal:any}) => {
    return (

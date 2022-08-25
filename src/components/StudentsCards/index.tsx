@@ -4,7 +4,7 @@ import "./style.css";
 import { studentObj } from "../../types/types";
 import studentsService from "../../services/studentsService";
 
-import students_icon from "./../../assets/icons/students_icon.svg";
+import students_icon from "../../assets/icons/students_icon.svg";
 import { BiTrash } from "react-icons/bi";
 import DeleteModal from "../DeleteModal";
 
