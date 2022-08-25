@@ -36,6 +36,7 @@ const navigate = useNavigate()
         name: "",
       },
     ],
+    recoverPasswordToken: ''
   });
 
   const [isModalOpen,setIsModalOpen] =useState<boolean>(false)
@@ -50,6 +51,7 @@ const navigate = useNavigate()
         name: "",
       },
     ],
+    recoverPasswordToken: '',
   });
 
   const handleModal = ()=>{

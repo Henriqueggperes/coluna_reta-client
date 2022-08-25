@@ -181,6 +181,9 @@
 }
 
 .user-institution-filter-arrow--icon{
+    position: absolute;
+    top: 0;
+    right: 15rem;
     height: 1.5rem;
     width: 1.5rem;
     cursor: pointer;
@@ -190,6 +193,8 @@
 .user-institution-filter-arrow--icon-active{
     height: 1.5rem;
     width: 1.5rem;
+    position: absolute;
+    top: 0;
     transform: rotate(180deg);
     cursor: pointer;
     transition: all 0.4s;
@@ -243,6 +248,14 @@
 }
 
 .institutions-list{
+    height: 3rem;
+    width: 10rem;
     position: absolute;
     top: 1rem;
+    overflow: auto;
+}
+
+.inst-id{
+    width: 1rem;
+    height: 1rem;
 }
