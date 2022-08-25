@@ -1,0 +1,68 @@
+export interface LoginInterface {
+  email: string;
+  passwordHash: string;
+}
+
+export interface sValueObj {
+  search: string;
+  filter: string;
+}
+
+export interface userObj {
+  id?: number;
+  created_at?: string;
+  deleted?: boolean;
+  email: string;
+  institution_id?:number[]|any;
+  institutions?: [{
+    name?: string;
+    id?: number;
+  }]|any
+  name: string;
+  role: string;
+  updated_at?: string;
+}
+
+export interface studentObj {
+  id?: number;
+  name: string;
+  birth_date: string;
+  phone: string;
+  institution_id: number;
+  address_id?: number;
+  created_at?: string;
+  updated_at?: string;
+  deleted?: boolean
+  institution?: {
+    id?: number;
+    name?: string;
+  };
+  address?: {};
+}
+
+export interface institutionObj {
+  id: number;
+  name: string;
+  phone_number: string;
+  address_id?: number;
+  created_at?: string;
+  updated_at?: string;
+  deleted?: boolean;
+}
+
+export interface patchStudentObj{
+  name: string;
+  birth_date: string;
+  phone: string;
+  institution_id: number;
+}
+
+export interface MetaType {
+  hasNextPage?: boolean;
+  hasPreviousPage?: boolean;
+  itemCount?: number;
+  orderByColumn?: string;
+  page: number;
+  pageCount: number;
+  take: number;
+}

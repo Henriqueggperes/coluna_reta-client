@@ -1,0 +1,23 @@
+.icons-container{
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+.icon--container{
+    margin: 1rem 1rem 0 0;
+    height: fit-content;
+    width: fit-content;
+    cursor: pointer;
+    transition: all 0.4s;
+}
+
+.icon{
+    height: 2rem;
+    width: 2rem;
+    transition: all 0.4s;
+}
+
+.icon--container:hover .icon{
+   transform: scale(1.2);
+}
