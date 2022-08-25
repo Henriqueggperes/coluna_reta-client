@@ -56,7 +56,7 @@
     flex-direction: column-reverse;
 }
 
-.student-modal-form--heading {
+.student-modal-form--heading { 
   font-size: 1.5rem;
   height: 100%;
   width: 85%;

@@ -17,6 +17,7 @@ import institutionService from "../../services/institutionService";
 import StudentModal from "../StudentModal";
 import UsersModal from "../UsersModal";
 import ReactPaginate from "react-paginate";
+import InstitutionModal from "../InstitutionModal";
 
 const Lists = (props: { userRole: string; navOption: string }) => {
   useEffect(() => {
@@ -283,18 +284,15 @@ const Lists = (props: { userRole: string; navOption: string }) => {
         </section>
       </section>
       {isModalOpen && props.navOption == "Alunos" ? (
-        <StudentModal
-          type="CREATE"
-          studentInfo={undefined}
-          closeModal={closeModal}
-        />
-
-      ) : isModalOpen && props.navOption=='Ger.Usuários'? (
+        <StudentModal type="CREATE" studentInfo={undefined} closeModal={closeModal}/>
+      
+       ) : isModalOpen && props.navOption=='Ger.Usuários'? (
         <UsersModal userInfo type="CREATE" closeModal={closeModal}/>
 
-      ) : (
-        ""
-      )}
+      ) : isModalOpen && props.navOption == 'Ger.Instituições' ? (
+        <InstitutionModal instInfo={InstInfo} type="CREATE" closeModal={closeModal}/>
+        
+      ) : ""}
     </section>
   );
 };

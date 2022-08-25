@@ -1,0 +1,202 @@
+.institution-modal--container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.163);
+  }
+  
+  .institution-modal--form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    height: 40%;
+    width: 30%;
+    box-sizing: border-box;
+    padding: .7rem;
+    background: linear-gradient(
+      213.28deg,
+      #eaf3ffe1 2.43%,
+      rgb(219, 227, 238) 95.17%
+    );
+    border-radius: .5rem;
+  }
+  
+  .institution-modal-form--header {
+    display: flex;
+    justify-content: space-between;
+    height: 10%;
+    width: 100%;
+  }
+  
+  .institution-modal-form-inputs--container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    justify-content: space-evenly;
+    padding: 1rem;
+    height: 80%;
+  }
+  
+  .student-modal-form-send-button--container{
+      display: flex;
+      box-sizing: border-box;
+      padding-left: 1rem;
+      height: 10%;
+      width: 100%;
+  }
+  
+  .inputs-labels--container{
+      display: flex;
+      flex-direction: column-reverse;
+  }
+  
+  .institution-modal-form--heading {
+    font-size: 1.5rem;
+    height: 100%;
+    width: 85%;
+    margin:0;
+    border-bottom: 1px solid;
+    color: #2a3577;
+  
+  }
+  
+  .institution-modal-form--close-button {
+      height: 70%;
+      width: 5%;
+      transition: all 0.4s;
+      cursor: pointer;
+  }
+  
+  .institution-modal-form--close-button:hover{
+      transform: scale(1.2);
+      background-color: rgba(255, 0, 0, 0.519);
+  }
+  
+  .input--label{
+      font-size: .9rem;
+      color:#6d6d6e;
+      transition: all 0.4s;
+  }
+  
+  .institution-modal-form--input{
+      background: none;
+      font-size: 1rem;
+      z-index: 1;
+      height: 30%;
+      width: 80%;
+      border: none;
+      outline: none;
+      border-bottom: 2px solid #6d6d6e;
+      transition: all 0.4s;
+  }
+  
+  .send--button{
+      height: 100%;
+      width: 45%;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      background: linear-gradient(270deg, #6F81FF 0%, rgba(124, 139, 254, 0.65) 100%);
+      cursor: pointer;
+      color: #6d6d6e;
+      transition: all 0.4s;
+  }
+  
+  .send--button:hover {
+      color: #FFFF;
+      transform: scale(1.2);
+      border-radius: .5rem;
+  }
+  
+  
+  .address-student-filter--container{
+    height: 50%;
+    width: 100%;
+  }
+  
+  .institution-filter-arrow--icon{
+    position: absolute;
+    cursor: pointer;
+    left: 58%;
+    top: 60%;
+    height: 1.5rem;
+    width: 2rem;
+    transition: all 0.4s;
+  }
+
+  .institution-filter-arrow--icon-active{
+    position: absolute;
+    cursor: pointer;
+    left: 58%;
+    top: 60%;
+    height: 1.5rem;
+    width: 1.5rem;
+    transform: rotate(180deg);
+    transition: all 0.4s;
+}
+  
+  .institution-address--input{
+    height: 60%;
+  }
+  
+  .institution-inst-label{
+    position: relative;
+    bottom: 3rem;
+  }
+  
+  .institution-modal-form--input:focus ~ .input--label,
+  .institution-modal-form--input:focus,
+  .institution-modal-form--input:valid ~ .input--label,
+  .institution-modal-form--input:valid{
+    color: #2a3577;
+    border-color: #2a3577;
+  }
+  
+  .institution-inst-dropdown--container{
+    position: absolute;
+    left: 60%;
+    top: 60%;
+    height: 0;
+    width: 10rem;
+    transition: all 0.4s;
+  }
+  
+  .institution-inst-dropdown--container-active{
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    height: 5rem;
+    width: 10rem;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25),
+    0px 4px 4px rgba(0, 0, 0, 0.25);
+    position: absolute;
+    left: 60%;
+    top: 60%;
+    transition: all 0.4s;
+  }
+  
+  .dropdown-institution--item{
+    display: none;
+    height: 0;
+    width: 0;
+    transition: all 0.4s;
+  }
+  
+  .dropdown-institution--item-active{
+    font-size: .9rem;
+    width: 100%;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  
+  .dropdown-institution--item-active:hover{
+    background-color: #979797;
+  }
+  

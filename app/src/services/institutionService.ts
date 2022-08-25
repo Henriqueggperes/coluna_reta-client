@@ -1,14 +1,21 @@
+import { institutionObj } from "../types/types";
 import api from "./api";
 
 const institutionService = {
   //GET ALL COM PAGINAÇÃO
-  getAllInstitutions: (page:number) =>
+  getAllInstitutions: (page: number) =>
     api
       .get("/institution/all", {
         params: {
-          page
-        }
+          page,
+        },
       })
+      .then((response: any) => response)
+      .catch((error: any) => error.response),
+
+  postInstitution: (values: institutionObj) =>
+    api
+      .post("institution/create", values)
       .then((response: any) => response)
       .catch((error: any) => error.response),
 
@@ -17,15 +24,18 @@ const institutionService = {
       .get(`institution/search/${id}`)
       .then((response) => response)
       .catch((error) => error.response),
-  
-  getInstitutions: ()=> api.get('institution/all/institutions')
-  .then((response)=>response)
-  .catch((error)=>error.response),
 
-  deleteInstitution: (id:number)=> api.delete(`institution/delete/${id}`)
-  .then((response)=>response)
-  .catch((error)=>error.response)
+  getInstitutions: () =>
+    api
+      .get("institution/all/institutions")
+      .then((response) => response)
+      .catch((error) => error.response),
+
+  deleteInstitution: (id: number) =>
+    api
+      .delete(`institution/delete/${id}`)
+      .then((response) => response)
+      .catch((error) => error.response),
 };
-
 
 export default institutionService;
