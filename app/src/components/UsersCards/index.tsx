@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BiTrash } from "react-icons/bi";
+import { Link } from "react-router-dom";
 import UserIcon from "../../assets/icons/userCard.png";
 import { userObj } from "../../types/types";
 import DeleteModal from "../DeleteModal";
@@ -22,12 +23,13 @@ const UsersCard = (props: {navOption:string , userRole: string , userData: userO
     }
   };
  
- 
   return (
     <>
       {props.userData.map((item:userObj)=>(
         <section className="user--card">
+          <Link className="unique-user--link" to={`/backoffice-user/${item.id}`}>
           <img className="user--icon" src={UserIcon} />
+          </Link>
           <div className="user-info--container">
             <div className="info--content">
               <label htmlFor="" className="user-info--label">

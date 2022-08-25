@@ -20,6 +20,7 @@ const Header = (props:{loggedUser:userObj,}) => {
     })
     navigate('/')
   }
+
  
   return (
     <>

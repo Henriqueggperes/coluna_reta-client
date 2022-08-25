@@ -141,12 +141,13 @@
 }
 
 .student-institution--input{
-  height: 60%;
+  height: 1rem;
 }
 
 .student-inst-label{
-  position: relative;
-  bottom: 3rem;
+  position: absolute;
+  left: 41.5rem;
+  top: 34.5rem
 }
 
 .student-modal-form--input:focus ~ .input--label,

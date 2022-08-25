@@ -12,6 +12,12 @@
     0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 1rem;
 }
+
+.unique-user--link{
+  height: 100%;
+  width: 30%;
+}
+
 .user-info--container{
     display: flex;
     flex-direction: column;
@@ -19,9 +25,17 @@
     width: 90%;
 }
 .user--icon{
-    height: 100%;
-    width: 30%;
+    height: 80%;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.4s;  
 }
+
+.user--icon:hover{
+    transform: scale(1.2);
+}
+
+
 .info--content{
     display: flex;
     flex-direction: column;
