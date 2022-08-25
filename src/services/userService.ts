@@ -20,6 +20,10 @@ const userService = {
    
    deleteUser: (id:number)=>api.delete(`user/delete/${id}`)
    .then((response)=>response)
+   .catch((error)=>error.response),
+   
+   patchUser : (id:number,values:userObj) => api.patch(`user/update/${id}`,values)
+   .then((response)=>response)
    .catch((error)=>error.response)
 }
 

@@ -19,6 +19,10 @@ const UsersModal = (props: {
   
   useEffect(() => {    
     setUser(props.userInfo);
+    console.log(user)
+    if(props.userInfo!=undefined){
+      setSelectedInsts(props.userInfo.institutions)
+    }
   }, []);
  
   const [allInsts, setAllInsts] = useState<institutionObj[]>();
@@ -53,15 +57,40 @@ const UsersModal = (props: {
   
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const response = await userService.postUser({
-      ...user,
-      id: undefined,
-      institution_id: selectedInsts,
-    });
-    if (response) {
-      toast.success(response.message);
-    } else {
-      console.log(response.error.message);
+    let response 
+    if(props.type=='CREATE'){
+
+      response = await userService.postUser({
+        ...user,
+        id: undefined,
+        institution_id: selectedInsts,
+        created_at: undefined,
+        updated_at: undefined,
+        recoverPasswordToken: undefined,
+        institutions: undefined,
+      });
+      if (response.status == 201) {
+        toast.success(response.data)
+      } else {
+        toast.error(response.data.message[0]);
+      } 
+    }
+    else if(props.type=='EDIT'){
+      response = await userService.patchUser(Number(user.id),{
+        ...user,
+        id: undefined,
+        institution_id: selectedInsts,
+        created_at: undefined,
+        updated_at: undefined,
+        recoverPasswordToken: undefined,
+        institutions: undefined,
+        passwordHash: undefined,
+      });
+      if (response.status == 201) {
+        toast.success(response.data)
+      } else {
+        toast.error(response.data.message[0]);
+      } 
     }
   };
   
@@ -102,7 +131,7 @@ const UsersModal = (props: {
               <input
                 name="name"
                 type="text"
-                value={props.type == "EDIT" ? props.userInfo.name : ""}
+                placeholder={props.type == "EDIT" ? props.userInfo.name : ""}
                 onChange={handleChanges}
                 autoComplete="off"
                 className="users-modal-form--input"
@@ -116,7 +145,7 @@ const UsersModal = (props: {
               <input
                 name="role"
                 type="text"
-                value={props.type == "EDIT" ? props.userInfo.role : ""}
+                placeholder={props.type == "EDIT" ? props.userInfo.role : ""}
                 onChange={handleChanges}
                 autoComplete="off"
                 required={props.type == "CREATE" ? true : false}
@@ -130,7 +159,7 @@ const UsersModal = (props: {
               <input
                 name="email"
                 type="email"
-                value={props.type == "EDIT" ? props.userInfo.email : ""}
+                placeholder={props.type == "EDIT" ? props.userInfo.email : ""}
                 onChange={handleChanges}
                 autoComplete="off"
                 required={props.type == "CREATE" ? true : false}
@@ -143,10 +172,14 @@ const UsersModal = (props: {
             <div className="user-form-input-label--container institution--container">
             <div className="user-input--filter">
                 <ul className="institutions-list">
-                  {
-                    props.userInfo.institutions.map((item:any)=>(
-                    <li>{item.id}</li>                      
+                  {props.userInfo?
+                  selectedInsts.map((item:any,)=>(
+                    <li className="inst-id">{item.id? item.id : item}</li>                      
+                    )):
+                    selectedInsts.map((item:any,)=>(
+                    <li className="inst-id">{item}</li>                      
                     ))
+                    
                   }
                 </ul>
                 <label
