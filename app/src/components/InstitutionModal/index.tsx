@@ -9,6 +9,8 @@ import institutionService from "../../services/institutionService";
 import addressService from "../../services/addressService";
 import './style.css';
 
+//TODO PATH INST, PAGINA BY ID
+
 const InstitutionModal = (props: {
   type: string;
   closeModal: Function;
@@ -33,11 +35,19 @@ const InstitutionModal = (props: {
 
   const handleSendInst = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    let response;
     if (props.type == "CREATE") {
-      const response = await institutionService.postInstitution({
+      response = await institutionService.postInstitution({
         ...institution,
         address_id: Number(selectedAddress),
       });
+    } if (response.status == 201) {
+      toast.success("Instituição adicionada com sucesso!");
+      props.closeModal();
+    } else if (response) {
+      console.log(response.status == 400)
+      toast.error(response.data.message[0]);
+      props.closeModal();
     }
   };
 
