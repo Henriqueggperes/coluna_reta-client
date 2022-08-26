@@ -20,6 +20,9 @@ const InstCards = (props: { InstData: institutionObj[]; userRole: string, navOpt
       deleted: false,
     });
 
+    console.log(props.InstData);
+    
+
   const handleModal = (event: any, element: institutionObj) => {
     if(isDeleteModalOpen) {
       setIsDeleteModalOpen(false);      
