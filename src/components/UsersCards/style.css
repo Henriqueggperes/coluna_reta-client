@@ -13,50 +13,42 @@
   border-radius: 1rem;
 }
 
-.unique-user--link{
+.unique-user--link {
   height: 100%;
   width: 30%;
 }
 
-.user-info--container{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 90%;
+.user-info--container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 90%;
 }
-.user--icon{
-    height: 80%;
-    width: 100%;
-    cursor: pointer;
-    transition: all 0.4s;  
+.user--icon {
+  height: 100%;
+  width: 30%;
 }
-
-.user--icon:hover{
-    transform: scale(1.2);
+.info--content {
+  display: flex;
+  flex-direction: column;
+  height: 40%;
+  width: 80%;
+  margin-top: 0.4rem;
 }
-
-
-.info--content{
-    display: flex;
-    flex-direction: column;
-    height: 40%;
-    width: 80%;
-}
-.user-info--label{
+.user-info--label {
   font-size: 1rem;
-    font-weight: bold;
+  font-weight: bold;
 }
 
-
-.user--info{
-  font-size: .9rem;
+.user--info {
+  font-size: 0.9rem;
 }
 
-.trash-can-icon{
+.trash-can-icon {
   width: 2.2rem;
 }
 
-.admin{
-  color: #2B0548;
+.admin {
+  color: #2b0548;
   font-weight: bold;
 }
