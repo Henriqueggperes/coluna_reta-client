@@ -25,8 +25,9 @@
   width: 90%;
 }
 .user--icon {
-  height: 100%;
-  width: 30%;
+  margin-top: .5rem;
+  height: 80%;
+  width: 100%;
 }
 .info--content {
   display: flex;
