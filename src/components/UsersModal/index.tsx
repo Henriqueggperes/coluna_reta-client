@@ -203,7 +203,7 @@ const UsersModal = (props: {
                     <div className="dropdown-content">
                       {allInsts?.map((inst) => (
                         <span
-                          onClick={() => setInstitutions(inst.id)}
+                          onClick={() => setInstitutions(Number(inst.id))}
                           className="user-institution-span"
                         >
                           {inst.name}
