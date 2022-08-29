@@ -11,10 +11,10 @@ const loginService = {
       .catch((error: any) => error.response),
 
    loggedUser: ()=> api.get('auth/user-logged')
-   .then((response)=>{
+   .then((response: any)=>{
      return response;
    })
-   .catch((error)=>{
+   .catch((error: any)=>{
      return error.response
    })
 };
