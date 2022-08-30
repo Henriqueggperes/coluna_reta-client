@@ -75,7 +75,8 @@ const UsersModal = (props: {
         toast.error(response.data.message[0]);
       } 
     }
-    else if(props.type=='EDIT'){
+    
+    else if(props.type === 'EDIT'){
       response = await userService.patchUser(Number(user.id),{
         ...user,
         id: undefined,

@@ -16,14 +16,12 @@ export interface userObj {
   passwordHash?: string;
   email: string;
   institution_id?: number[] | any;
-  institutions?:
-    | [
+  institutions?: [
         {
           name?: string;
           id?: number;
         }
-      ]
-    | any;
+      ];
   name: string;
   role: string;
   updated_at?: string;
@@ -50,7 +48,22 @@ export interface institutionObj {
   id?: number;
   name: string;
   phone_number: string;
-  address_id?: number;
+  address_id?: number | any;
+  address?: [
+    {
+      id: number;
+      city: string;
+      complement: string;
+      neighborhood: string;
+      number: string;
+      state: string;
+      street: string;
+      zip_code: string;
+      created_at?: string;
+      updated_at?: string;
+      deleted?: boolean;
+    }
+  ];
   created_at?: string;
   updated_at?: string;
   deleted?: boolean;
@@ -73,6 +86,7 @@ export interface MetaType {
   take: number;
 }
 
+
 export interface addressType {
   id: number;
   city: string;
@@ -85,4 +99,9 @@ export interface addressType {
   created_at?: string;
   updated_at?: string;
   deleted?: boolean;
+
+export interface registerPassword{
+  passwordHash: string,
+  confirmPassword: string,
+  recoverPasswordToken?: string,
 }

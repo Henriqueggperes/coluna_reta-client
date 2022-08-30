@@ -20,9 +20,6 @@ const InstCards = (props: { InstData: institutionObj[]; userRole: string, navOpt
       deleted: false,
     });
 
-    console.log(props.InstData);
-
-
   const handleModal = (event: any, element: institutionObj) => {
     if(isDeleteModalOpen) {
       setIsDeleteModalOpen(false);      
@@ -36,7 +33,12 @@ const InstCards = (props: { InstData: institutionObj[]; userRole: string, navOpt
     <>
       {props.InstData.map((institution: institutionObj) => (
         <div className="InstCard" key={institution.name}>
+          <Link
+          className="chosen-institution__link"
+          to={`/backoffice-institution/${institution.id}`}
+          >
           <img className="inst-icon" src={InstIcon} alt="" />
+          </Link>
           <div className="InstInfo">
             <div className="inst_card_info-name inst-info">
               <label className="inst-name label">Instituição:</label>{" "}

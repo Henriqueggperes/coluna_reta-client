@@ -36,11 +36,14 @@ const Backoficce = () => {
    
   const getLoggedUser = async () => {
     const user = await loginService.loggedUser();
-    setUserLogged(user.data.user);
+    setUserLogged(user.data);
   };
-
+  
   const role = userLogged.role;
-
+  console.log(userLogged);
+  
+  
+  
   const [currentOption, setCurrentOption] = useState<string>("");
   const getCurrentOption = (option: string) => {
     setCurrentOption(option);

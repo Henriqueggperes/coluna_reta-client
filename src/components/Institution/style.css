@@ -1,0 +1,144 @@
+.unique-inst-main--container {
+  height: 100vh;
+  width: 100vw;
+}
+
+.unique-inst-card--container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  width: 100vw;
+}
+
+.inst-card-crtdat--container {
+  margin-top: 5rem;
+  display: flex;
+  /* justify-content: space-between; */
+  width: 100%;
+}
+
+.inst-card-id--container {
+  margin-top: 2rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.unique-inst--card {
+  height: 50%;
+  width: 40%;
+  border-radius: 0.5rem;
+  background: linear-gradient(
+    213.28deg,
+    #dae8fbeb 2.43%,
+    rgba(205, 226, 255, 0.615) 95.17%
+  );
+  border-top: 1px solid rgba(0, 0, 0, 0.209);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.35), 0px 4px 4px rgba(0, 0, 0, 0.339),
+    0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.inst-card--heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10%;
+  width: 100%;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.084), 0px 4px 4px rgba(0, 0, 0, 0.107),
+    0px 4px 4px rgba(0, 0, 0, 0.083);
+}
+
+.inst-card-heading {
+  display: flex;
+  font-size: 1.5rem;
+  color: #2a3577;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+  width: 50%;
+}
+
+.inst-card-phone {
+  font-size: 1.3rem;
+  width: 100%;
+}
+
+.inst-card-info--separation {
+  display: flex;
+  height: 80%;
+  width: 100%;
+}
+
+.inst-card-info--container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-sizing: border-box;
+  padding: 1rem;
+  height: 100%;
+  width: 50%;
+}
+
+.inst-card-insts--container {
+  box-sizing: border-box;
+  padding: 1rem;
+  height: 80%;
+  width: 50%;
+}
+.inst-institutions-container {
+  overflow: auto;
+  width: 50%;
+  height: 60%;
+}
+
+.inst-institution--li {
+  font-size: 1.1rem;
+}
+
+.unique-info {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  height: 20%;
+}
+
+.unique-inst-card--label {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.unique-inst-card--label-ID {
+  width: 100%;
+  font-weight: bold;
+}
+
+.unique-inst-card--info {
+  font-size: 1.1rem;
+}
+
+.inst-card-edit-button--container {
+  height: 10%;
+  box-sizing: border-box;
+  padding: 1rem;
+  width: 100%;
+}
+
+.inst-card-edit--button {
+  border: none;
+  background: linear-gradient(
+    270deg,
+    #6f81ff 0%,
+    rgba(124, 139, 254, 0.65) 100%
+  );
+  color: rgb(212, 211, 211);
+  transition: all 0.4s;
+  margin-bottom: 2rem;
+}
+
+.inst-card-edit--button:hover {
+  transform: scale(1.1);
+  color: #fff;
+  border-radius: 0.2rem;
+}
