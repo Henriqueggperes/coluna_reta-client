@@ -73,7 +73,7 @@ const Institution = () => {
           <div className="unique-inst--card">
             <div className="inst-card--heading">
               <span className="inst-card-name inst-card-heading">
-                Instituição: {institution.name}
+                Instituiçãssso: {institution.name}
               </span>
             </div>
 
