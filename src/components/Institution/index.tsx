@@ -45,6 +45,21 @@ const Institution = () => {
     name: "",
     phone_number: "",
     address_id: 0,
+    address: [
+      {
+        id: 0,
+        city: "",
+        complement: "",
+        neighborhood: "",
+        number: "",
+        state: "",
+        street: "",
+        zip_code: "",
+        created_at: "",
+        updated_at: "",
+        deleted: false,
+      },
+    ],
     created_at: "",
     updated_at: "",
     deleted: false,
@@ -56,13 +71,14 @@ const Institution = () => {
 
   const getLoggedUser = async () => {
     const response = await loginService.loggedUser();
-    setUserLogged(response.data.user);
+    setUserLogged(response.data);
   };
 
   const getInstitution = async () => {
     const id = Number(params.id);
     const response = await institutionService.getInstitutionById(id);
     setInstitution(response.data);
+    console.log(response.data);
   };
 
   return (
@@ -79,53 +95,44 @@ const Institution = () => {
 
             <section className="inst-card-info--separation">
               <div className="inst-card-info--container">
-                
                 <div className="inst-card-id--container unique-info">
-                  
                   <label htmlFor="" className="unique-inst-card--label-ID">
                     ID
                   </label>
-                  <span className="unique-inst-card--label">
+                  <span className="unique-inst-card--label--ID">
                     {institution.id}
                   </span>
-                  
-                  <label htmlFor="" className="unique-inst-card--label">
-                  Telefone:
-                  </label>
-                  <span className="inst-card-phone inst-card-heading">
-                     {institution.phone_number}
-                  </span>
-                
-                </div>
 
-                <div className="inst-card-crtdat--container unique-info">
                   <label htmlFor="" className="unique-inst-card--label">
-                    Adicionado em
+                    Telefone:
                   </label>
-                  <span className="unique-inst-card--info-crt">
-                    {institution.created_at}
+                  <span className="inst-card-phone">
+                    {institution.phone_number}
                   </span>
-                  
-                  <label htmlFor="" className="unique-inst-card--label">
-                    Atualizado em
-                  </label>
-                  <span className="unique-inst-card--info">
-                    {institution.updated_at}
-                  </span>
-                </div>
 
-                {/* <div className="inst-card-crtdat--container unique-info">
-                  <label htmlFor="" className="unique-inst-card--label">
-                    Atualizado em
-                  </label>
-                  <span className="unique-inst-card--info">
-                    {institution.updated_at}
-                  </span>
-                </div> */}
+                  <div className="inst-space-create-update">
+                    <div className="infos-space-create-update">
+                      <label htmlFor="" className="unique-inst-card--label">
+                        Adicionado em:
+                      </label>
+                      <span className="unique-inst-card--info">
+                        {institution.name}
+                      </span>
+                    </div>
+
+                    <div className="infos-space-create-update">
+                      <label htmlFor="" className="unique-inst-card--label">
+                        Atualizado em:
+                      </label>
+                      <span className="unique-inst-card--info">
+                        {institution.phone_number}
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              
+
               <div className="inst-card-insts--container">
-                <h1 className="unique-inst-card--label">Endereço</h1>
                 <ul className="inst-address-container">
                   {institution.address?.map((item: addressType) => (
                     <li className="inst-institution--li">{item.id}</li>

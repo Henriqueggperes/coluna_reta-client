@@ -86,7 +86,6 @@ export interface MetaType {
   take: number;
 }
 
-
 export interface addressType {
   id: number;
   city: string;
@@ -99,7 +98,7 @@ export interface addressType {
   created_at?: string;
   updated_at?: string;
   deleted?: boolean;
-
+}
 export interface registerPassword{
   passwordHash: string,
   confirmPassword: string,
