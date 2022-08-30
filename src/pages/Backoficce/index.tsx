@@ -36,7 +36,7 @@ const Backoficce = () => {
    
   const getLoggedUser = async () => {
     const user = await loginService.loggedUser();
-    setUserLogged(user.data.user);
+    setUserLogged(user.data)
   };
 
   const role = userLogged.role;
