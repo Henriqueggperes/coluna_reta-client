@@ -121,11 +121,12 @@ const navigate = useNavigate()
                     {user.updated_at}
                   </span>
                 </div>
+                
               </div>
               <div className="user-card-insts--container">
                 <h1 className="unique-user-card--label">Instituições</h1>
                 <ul className="user-institutions-container">
-                  {user.institutions?.map((item:institutionObj) => (
+                  {user.institution_id?.map((item:institutionObj) => (
                     <li className="user-institution--li">{item.name}</li>
                   ))}
                 </ul>

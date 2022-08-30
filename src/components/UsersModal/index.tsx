@@ -75,7 +75,8 @@ const UsersModal = (props: {
         toast.error(response.data.message[0]);
       } 
     }
-    else if(props.type=='EDIT'){
+    
+    else if(props.type === 'EDIT'){
       response = await userService.patchUser(Number(user.id),{
         ...user,
         id: undefined,
@@ -172,7 +173,7 @@ const UsersModal = (props: {
             <div className="user-form-input-label--container institution--container">
             <div className="user-input--filter">
                 <ul className="institutions-list">
-                  {props.userInfo.institutions?
+                  {props.userInfo?
                   selectedInsts.map((item:any,)=>(
                     <li className="inst-id">{item.id? item.id : item}</li>                      
                     )):

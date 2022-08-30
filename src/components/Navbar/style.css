@@ -23,6 +23,7 @@
   margin: 1rem;
   cursor: pointer;
 }
+
 .Alunos,
 .Dashboard,
 .User,
@@ -52,6 +53,8 @@
   display: flex;
   flex-direction: column;
   border-top: solid 1px #2b0548;
+  padding-top: .8rem;
+  transition: all 1s ease-in-out;
 }
 
 .navbar_admin-span {
@@ -61,7 +64,7 @@
 .navbar_admin-option {
   display: flex;
   box-sizing: border-box;
-  padding-top: .5rem ;
+  /* padding-top: .1rem ; */
 }
 
 .admin-dropdown{
