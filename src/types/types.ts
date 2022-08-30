@@ -99,6 +99,7 @@ export interface addressType {
   created_at?: string;
   updated_at?: string;
   deleted?: boolean;
+}
 
 export interface registerPassword{
   passwordHash: string,
