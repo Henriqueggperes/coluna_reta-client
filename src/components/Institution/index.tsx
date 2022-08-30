@@ -116,7 +116,7 @@ const Institution = () => {
                         Adicionado em:
                       </label>
                       <span className="unique-inst-card--info">
-                        {institution.name}
+                        {institution.created_at}
                       </span>
                     </div>
 
@@ -125,7 +125,7 @@ const Institution = () => {
                         Atualizado em:
                       </label>
                       <span className="unique-inst-card--info">
-                        {institution.phone_number}
+                        {institution.updated_at}
                       </span>
                     </div>
                   </div>

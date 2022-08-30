@@ -67,6 +67,7 @@ export interface institutionObj {
   created_at?: string;
   updated_at?: string;
   deleted?: boolean;
+  _count?: string;
 }
 
 export interface patchStudentObj {

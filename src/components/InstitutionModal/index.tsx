@@ -1,5 +1,10 @@
 import React from "react";
-import { addressType, institutionObj, patchStudentObj, studentObj } from "../../types/types";
+import {
+  addressType,
+  institutionObj,
+  patchStudentObj,
+  studentObj,
+} from "../../types/types";
 import close_icon from "./../../assets/icons/close_icon.svg";
 import { useEffect, useState } from "react";
 import studentsService from "../../services/studentsService";
@@ -7,7 +12,7 @@ import filter_arrow from "../../assets/icons/filter_arrow_icon.svg";
 import { toast } from "react-toastify";
 import institutionService from "../../services/institutionService";
 import addressService from "../../services/addressService";
-import './style.css';
+import "./style.css";
 
 //TODO PATH INST, PAGINA BY ID
 
@@ -17,12 +22,13 @@ const InstitutionModal = (props: {
   instInfo: institutionObj | any;
 }) => {
   const [institution, setInstitution] = useState<institutionObj>({
+    id: undefined,
     name: "",
     phone_number: "",
     address_id: 0,
   });
 
-  const [address, setAddress] = useState<addressType[]>()
+  const [address, setAddress] = useState<addressType[]>();
 
   const [dropdownActive, setDropdowActive] = useState<string>("");
 
@@ -30,25 +36,38 @@ const InstitutionModal = (props: {
 
   const getAddress = async () => {
     const response = await addressService.getAllAddress();
-    setAddress(response.data)   
-  }
+    setAddress(response.data);
+  };
 
   const handleSendInst = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     let response;
-    
+
     if (props.type === "CREATE") {
       response = await institutionService.postInstitution({
         ...institution,
         address_id: Number(selectedAddress),
       });
-    } 
-    
-    if (response.status === 201) {
+    } else if (props.type === "EDIT") {
+      response = institutionService.updateInstitution(Number(institution.id), {
+        ...institution,
+        id: undefined,
+        name: institution.name,
+        phone_number: institution.phone_number,
+        created_at: undefined,
+        updated_at: undefined,
+        _count: undefined,
+      });
+    }
+
+    if (response.status === 200 && props.type == 'CREATE') {
       toast.success("Instituição adicionada com sucesso!");
       props.closeModal();
-    } else if (response) {
-      console.log(response.status == 400)
+    } else {
+      toast.success("Instituição alterada com sucesso!");
+      props.closeModal();
+    } if (response) {
+      console.log(response.status == 400);
       toast.error(response.data.message[0]);
       props.closeModal();
     }
@@ -114,51 +133,57 @@ const InstitutionModal = (props: {
               onChange={handleChanges}
               name="phone_number"
               type="text"
-              autoComplete="off"
+              autoComplete="on"
               className="institution-modal-form--input"
               placeholder={props.type == "EDIT" ? institution.phone_number : ""}
               required={props.type == "EDIT" ? false : true}
             />
-            <label className="input--label">Telefone</label>
+            <label htmlFor="phone_number" className="input--label">Telefone</label>
           </div>
 
-          <div className="inputs-labels--container">
-            <div className="address-student-filter--container">
-              <input
-                onChange={handleChanges}
-                name="address_id"
-                type="number"
-                value={selectedAddress}
-                autoComplete="off"
-                className="institution-modal-form--input institution-address--input"
-                placeholder={
-                  props.type == "EDIT" ? institution.address_id?.toString() : ""
-                }
-                required={props.type == "EDIT" ? false : true}
-              />
-              <label className="input--label institution-inst-label">
-                Endereço(ID)
-              </label>
-              <img
-                onClick={handleDropdown}
-                className={`institution-filter-arrow--icon${dropdownActive}`}
-                src={filter_arrow}
-              />
-            </div>
+          {props.type === "CREATE" ? (
+            <div className="inputs-labels--container">
+              <div className="address-student-filter--container">
+                <input
+                  onChange={handleChanges}
+                  name="address_id"
+                  type="number"
+                  value={selectedAddress}
+                  autoComplete="off"
+                  className="institution-modal-form--input institution-address--input"
+                  placeholder={
+                    props.type == "CREATE"
+                      ? institution.address_id?.toString()
+                      : ""
+                  }
+                  required={props.type == "CREATE" ? false : true}
+                />
+                <label className="input--label institution-inst-label">
+                  Endereço(ID)
+                </label>
+                <img
+                  onClick={handleDropdown}
+                  className={`institution-filter-arrow--icon${dropdownActive}`}
+                  src={filter_arrow}
+                />
+              </div>
 
-            <div
-              className={`institution-inst-dropdown--container${dropdownActive}`}
-            >
-              {address?.map((adrss) => (
-                <span
-                  onClick={(event) => setSelectedAddress(adrss.id)}
-                  className={`dropdown-institution--item${dropdownActive}`}
-                >
-                  {adrss.street}
-                </span>
-              ))}
+              <div
+                className={`institution-inst-dropdown--container${dropdownActive}`}
+              >
+                {address?.map((adrss) => (
+                  <span
+                    onClick={(event) => setSelectedAddress(adrss.id)}
+                    className={`dropdown-institution--item${dropdownActive}`}
+                  >
+                    {adrss.street}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
+          ) : (
+            ""
+          )}
         </div>
 
         <div className="student-modal-form-send-button--container">

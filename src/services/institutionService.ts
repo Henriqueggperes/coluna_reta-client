@@ -36,6 +36,12 @@ const institutionService = {
       .delete(`institution/delete/${id}`)
       .then((response) => response)
       .catch((error) => error.response),
+
+  updateInstitution: (id: number, values: institutionObj) =>
+    api
+      .patch(`institution/update/${id}`, values)
+      .then((response) => response)
+      .catch((error) => error.response),
 };
 
 export default institutionService;
