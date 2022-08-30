@@ -3,6 +3,7 @@ import {
   addressType,
   institutionObj,
   patchStudentObj,
+  postInstitutionObj,
   studentObj,
 } from "../../types/types";
 import close_icon from "./../../assets/icons/close_icon.svg";
@@ -22,11 +23,17 @@ const InstitutionModal = (props: {
   instInfo: institutionObj | any;
 }) => {
   const [institution, setInstitution] = useState<institutionObj>({
-    id: undefined,
     name: "",
     phone_number: "",
     address_id: 0,
   });
+
+  const [createInstitution, setCreateInstitution] =
+    useState<postInstitutionObj>({
+      name: "",
+      phone_number: "",
+      address_id: 0,
+    });
 
   const [address, setAddress] = useState<addressType[]>();
 
@@ -45,9 +52,16 @@ const InstitutionModal = (props: {
 
     if (props.type === "CREATE") {
       response = await institutionService.postInstitution({
-        ...institution,
+        ...createInstitution,
         address_id: Number(selectedAddress),
       });
+
+      if (response.status == 201) {
+        toast.success("Instituição adicionada com sucesso!");
+      } else {
+        toast.error(response.data.message[0]);
+      }
+
     } else if (props.type === "EDIT") {
       response = institutionService.updateInstitution(Number(institution.id), {
         ...institution,
@@ -60,13 +74,14 @@ const InstitutionModal = (props: {
       });
     }
 
-    if (response.status === 200 && props.type == 'CREATE') {
+    if (response.status === 200 && props.type == "CREATE") {
       toast.success("Instituição adicionada com sucesso!");
       props.closeModal();
-    } else {
+    } else if (response.status === 200 && props.type == "EDIT") {
       toast.success("Instituição alterada com sucesso!");
       props.closeModal();
-    } if (response) {
+    }
+    if (response) {
       console.log(response.status == 400);
       toast.error(response.data.message[0]);
       props.closeModal();
@@ -84,10 +99,17 @@ const InstitutionModal = (props: {
 
   const handleChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-    setInstitution({
-      ...institution,
-      [event.target.name]: event.target.value,
-    });
+    if (event.target.name === "address_id") {
+      setCreateInstitution({
+        ...createInstitution,
+        [event.target.name]: parseInt(event.target.value),
+      });
+    } else {
+      setCreateInstitution({
+        ...createInstitution,
+        [event.target.name]: event.target.value,
+      });
+    }
   };
 
   useEffect(() => {
@@ -138,7 +160,9 @@ const InstitutionModal = (props: {
               placeholder={props.type == "EDIT" ? institution.phone_number : ""}
               required={props.type == "EDIT" ? false : true}
             />
-            <label htmlFor="phone_number" className="input--label">Telefone</label>
+            <label htmlFor="phone_number" className="input--label">
+              Telefone
+            </label>
           </div>
 
           {props.type === "CREATE" ? (

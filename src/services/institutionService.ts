@@ -1,4 +1,4 @@
-import { institutionObj } from "../types/types";
+import { institutionObj, postInstitutionObj } from "../types/types";
 import api from "./api";
 
 const institutionService = {
@@ -13,7 +13,7 @@ const institutionService = {
       .then((response: any) => response)
       .catch((error: any) => error.response),
 
-  postInstitution: (values: institutionObj) =>
+  postInstitution: (values: postInstitutionObj) =>
     api
       .post("institution/create", values)
       .then((response: any) => response)

@@ -70,6 +70,12 @@ export interface institutionObj {
   _count?: string;
 }
 
+export interface postInstitutionObj {
+  name: string;
+  phone_number: string;
+  address_id?: number | any;
+}
+
 export interface patchStudentObj {
   name: string;
   birth_date: string;
