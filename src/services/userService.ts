@@ -1,4 +1,4 @@
-import { userObj } from "../types/types";
+import { registerPassword, userObj } from "../types/types";
 import api from "./api";
 
 const userService = {
@@ -24,7 +24,11 @@ const userService = {
    
    patchUser : (id:number,values:userObj) => api.patch(`user/update/${id}`,values)
    .then((response)=>response)
-   .catch((error)=>error.response)
+   .catch((error)=>error.response),
+
+   registerPassword : (values:registerPassword) => api.patch('user/update_password',values)
+   .then((response)=>response)
+   .catch((error)=>error.response) 
 }
 
 export default userService;

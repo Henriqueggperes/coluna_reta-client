@@ -7,3 +7,4 @@ export enum RoutePath {
   INSTITUTION = "/backoffice-institution/:id",
   RECOVER = "/recover/password/:token",
 }
+
