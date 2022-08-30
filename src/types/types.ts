@@ -68,3 +68,9 @@ export interface MetaType {
   pageCount: number;
   take: number;
 }
+
+export interface registerPassword{
+  passwordHash: string,
+  confirmPassword: string,
+  recoverPasswordToken?: string,
+}

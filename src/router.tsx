@@ -4,6 +4,7 @@ import { LoginPage } from "./pages/LoginPage";
 import Backoficce from "./pages/Backoficce";
 import Student from "./components/Student";
 import User from "./components/User";
+import RecoverPassword from "./pages/RecoverPassword";
 
 const Router = () => {
   return (
@@ -12,6 +13,7 @@ const Router = () => {
       <Route path={RoutePath.BACKOFFICE} element={<Backoficce/>} />
       <Route path={RoutePath.STUDENT} element={<Student/>} />
       <Route path={RoutePath.USER} element={<User/>}/>
+      <Route path={RoutePath.RECOVER} element={<RecoverPassword/>}/>
     </Routes>
   );
 };
