@@ -16,7 +16,6 @@ const Navbar = (props: { navOptionSelected: Function, userRole:string}) => {
 
   const handleOption = (event: any) => {
     setOption(event.target.id);
-    console.log(event.target.id);
   };
 
   return (

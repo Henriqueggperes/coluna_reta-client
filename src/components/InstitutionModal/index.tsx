@@ -36,12 +36,15 @@ const InstitutionModal = (props: {
   const handleSendInst = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     let response;
-    if (props.type == "CREATE") {
+    
+    if (props.type === "CREATE") {
       response = await institutionService.postInstitution({
         ...institution,
         address_id: Number(selectedAddress),
       });
-    } if (response.status == 201) {
+    } 
+    
+    if (response.status === 201) {
       toast.success("Instituição adicionada com sucesso!");
       props.closeModal();
     } else if (response) {

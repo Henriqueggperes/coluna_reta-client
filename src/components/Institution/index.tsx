@@ -6,6 +6,7 @@ import Header from "../Header";
 import loginService from "../../services/authService";
 import institutionService from "../../services/institutionService";
 import InstitutionModal from "../InstitutionModal";
+import "./style.css";
 
 const Institution = () => {
   const jwt = localStorage.getItem("jwt");
@@ -22,7 +23,6 @@ const Institution = () => {
   }, []);
 
   const params = useParams();
-  const id = Number(params.id);
 
   const [userLogged, setUserLogged] = useState<userObj>({
     name: "",
@@ -35,6 +35,8 @@ const Institution = () => {
       },
     ],
     recoverPasswordToken: "",
+    created_at: "",
+    updated_at: "",
   });
 
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
@@ -58,63 +60,82 @@ const Institution = () => {
   };
 
   const getInstitution = async () => {
+    const id = Number(params.id);
     const response = await institutionService.getInstitutionById(id);
     setInstitution(response.data);
   };
 
   return (
     <>
-      <main className="unique-user-main--container">
+      <main className="unique--main--container">
         <Header loggedUser={userLogged} />
-        <section className="unique-user-card--container">
-          <div className="unique-user--card">
-            <div className="user-card--heading">
-              <span className="user-card-name user-card-heading">
-                {institution.name}
-              </span>
-              <span className="user-card-role user-card-heading">
-                {institution.phone_number}
+        <section className="unique-inst-card--container">
+          <div className="unique-inst--card">
+            <div className="inst-card--heading">
+              <span className="inst-card-name inst-card-heading">
+                Instituição: {institution.name}
               </span>
             </div>
-            <section className="user-card-info--separation">
-              <div className="user-card-info--container">
-                <div className="user-card-id--container unique-info">
-                  <label htmlFor="" className="unique-user-card--label">
+
+            <section className="inst-card-info--separation">
+              <div className="inst-card-info--container">
+                
+                <div className="inst-card-id--container unique-info">
+                  
+                  <label htmlFor="" className="unique-inst-card--label-ID">
                     ID
                   </label>
-                  <span className="unique-user-card--info">{institution.id}</span>
+                  <span className="unique-inst-card--info">
+                    {institution.id}
+                  </span>
+                  
+                  <label htmlFor="" className="unique-inst-card--label">
+                  Telefone:
+                  </label>
+                  <span className="inst-card-phone inst-card-heading">
+                     {institution.phone_number}
+                  </span>
+                
                 </div>
 
-                <div className="user-card-updtdat--container unique-info">
-                  <label htmlFor="" className="unique-user-card--label">
+                <div className="inst-card-crtdat--container unique-info">
+                  <label htmlFor="" className="unique-inst-card--label">
                     Adicionado em
                   </label>
-                  <span className="unique-user-card--info">
+                  <span className="unique-inst-card--info-crt">
                     {institution.created_at}
                   </span>
-                </div>
-
-                <div className="user-card-crtdat--container unique-info">
-                  <label htmlFor="" className="unique-user-card--label">
+                  
+                  <label htmlFor="" className="unique-inst-card--label">
                     Atualizado em
                   </label>
-                  <span className="unique-user-card--info">
+                  <span className="unique-inst-card--info">
                     {institution.updated_at}
                   </span>
                 </div>
+
+                {/* <div className="inst-card-crtdat--container unique-info">
+                  <label htmlFor="" className="unique-inst-card--label">
+                    Atualizado em
+                  </label>
+                  <span className="unique-inst-card--info">
+                    {institution.updated_at}
+                  </span>
+                </div> */}
               </div>
-              <div className="user-card-insts--container">
-                <h1 className="unique-user-card--label">Instituições</h1>
-                <ul className="user-institutions-container">
+              
+              <div className="inst-card-insts--container">
+                <h1 className="unique-inst-card--label">Endereço</h1>
+                <ul className="inst-address-container">
                   {institution.address?.map((item: addressType) => (
-                    <li className="user-institution--li">{item.street}</li>
+                    <li className="inst-institution--li">{item.id}</li>
                   ))}
                 </ul>
               </div>
             </section>
 
-            <div className="user-card-edit-button--container">
-              <button onClick={handleModal} className="user-card-edit--button">
+            <div className="inst-card-edit-button--container">
+              <button onClick={handleModal} className="inst-card-edit--button">
                 ALTERAR INFORMAÇÕES
               </button>
             </div>
@@ -122,7 +143,11 @@ const Institution = () => {
         </section>
       </main>
       {modalIsOpen ? (
-        <InstitutionModal closeModal={handleModal} type="EDIT" instInfo={institution} />
+        <InstitutionModal
+          closeModal={handleModal}
+          type="EDIT"
+          instInfo={institution}
+        />
       ) : (
         ""
       )}
