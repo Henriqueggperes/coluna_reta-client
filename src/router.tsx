@@ -5,6 +5,7 @@ import Backoficce from "./pages/Backoficce";
 import Student from "./components/Student";
 import User from "./components/User";
 import Institution from "./components/Institution";
+import RecoverPassword from "./pages/RecoverPassword";
 
 const Router = () => {
   return (
@@ -14,6 +15,7 @@ const Router = () => {
       <Route path={RoutePath.STUDENT} element={<Student/>} />
       <Route path={RoutePath.USER} element={<User/>}/>
       <Route path={RoutePath.INSTITUTION} element={<Institution/>}/>
+      <Route path={RoutePath.RECOVER} element={<RecoverPassword/>}/>
     </Routes>
   );
 };

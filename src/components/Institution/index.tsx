@@ -73,7 +73,7 @@ const Institution = () => {
           <div className="unique-inst--card">
             <div className="inst-card--heading">
               <span className="inst-card-name inst-card-heading">
-                Instituiçãssso: {institution.name}
+                Instituição: {institution.name}
               </span>
             </div>
 
@@ -85,7 +85,7 @@ const Institution = () => {
                   <label htmlFor="" className="unique-inst-card--label-ID">
                     ID
                   </label>
-                  <span className="unique-inst-card--info">
+                  <span className="unique-inst-card--label">
                     {institution.id}
                   </span>
                   

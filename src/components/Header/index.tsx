@@ -57,8 +57,8 @@ const Header = (props: { loggedUser: userObj }) => {
         </Link>
         <div className="header_user_card-container">
           <div className="ADMIN">
-            <span>{userLogged.name}</span>
-            {userLogged.role == "ADMIN" ? (
+            <span>{props.loggedUser.name}</span>
+            {props.loggedUser.role == "ADMIN" ? (
               <span className="optAdmin">Admin</span>
             ) : (
               ""
