@@ -52,6 +52,14 @@ const studentsService = {
       .patch(`student/${id}`, values)
       .then((response) => response)
       .catch((error) => error.response.data),
+  
+  getVisitsHistory: (id:number,page:number)=> api.get(`historic/find/${id}` , {
+    params:{
+      page
+    }
+  })
+  .then((response)=>response)
+  .catch((error)=>error.response),
 };
 
 export default studentsService;

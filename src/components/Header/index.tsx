@@ -31,7 +31,6 @@ const Header = (props: { loggedUser: userObj }) => {
   };
 
   const navigate = useNavigate();
-  console.log(props.loggedUser);
 
   const logOutUser = () => {
     localStorage.clear();

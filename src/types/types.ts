@@ -16,12 +16,7 @@ export interface userObj {
   passwordHash?: string;
   email: string;
   institution_id?: number[] | any;
-  institutions?: [
-        {
-          name?: string;
-          id?: number;
-        }
-      ];
+  institutions?: number[];
   name: string;
   role: string;
   updated_at?: string;
@@ -105,4 +100,29 @@ export interface registerPassword{
   passwordHash: string,
   confirmPassword: string,
   recoverPasswordToken?: string,
+}
+
+export interface studentHistory{
+  id: number 
+  student_id: number
+  visit_date: string,
+  image_1: string,
+  image_2: string ,
+  forwarding: string,
+  cobb_angle: string,
+  return_date: string,
+  updated_at: string,
+  deleted: boolean,
+  consultation: consultationType[]
+}
+
+export interface consultationType{
+  id: number
+  student_id: number
+  historic_id: number
+  clinic: string
+  consultation_date: string
+  created_at: string
+  updated_at: string
+  deleted: boolean
 }
