@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { institutionObj } from "../../types/types";
+import { institutionObj, postInstitutionObj } from "../../types/types";
 import { Link } from "react-router-dom";
 import { FaRegBuilding } from "react-icons/fa";
 import { BiTrash } from "react-icons/bi";
@@ -7,37 +7,39 @@ import InstIcon from "./../../assets/icons/InstIcon.svg";
 import "./style.css";
 import DeleteModal from "../DeleteModal";
 
-const InstCards = (props: { InstData: institutionObj[]; userRole: string, navOption: string }) => {
+const InstCards = (props: {
+  InstData: postInstitutionObj[];
+  userRole: string;
+  navOption: string;
+}) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
   const [institutionToDelete, setInstitutionToDelete] =
-    useState<institutionObj>({
-      id: 0,
+    useState<postInstitutionObj>({
       name: "",
       phone_number: "",
-      address_id: 0,
-      created_at: "",
-      updated_at: "",
-      deleted: false,
+      state: "",
+      city: "",
+      zip_code: "",
     });
 
-  const handleModal = (event: any, element: institutionObj) => {
-    if(isDeleteModalOpen) {
-      setIsDeleteModalOpen(false);      
+  const handleModal = (event: any, element: postInstitutionObj) => {
+    if (isDeleteModalOpen) {
+      setIsDeleteModalOpen(false);
     } else {
       setIsDeleteModalOpen(true);
-      setInstitutionToDelete(element)
+      setInstitutionToDelete(element);
     }
   };
 
   return (
     <>
-      {props.InstData.map((institution: institutionObj) => (
+      {props.InstData.map((institution: postInstitutionObj) => (
         <div className="InstCard" key={institution.name}>
           <Link
-          className="chosen-institution__link"
-          to={`/backoffice-institution/${institution.id}`}
+            className="chosen-institution__link"
+            to={`/backoffice-institution/${institution.id}`}
           >
-          <img className="inst-icon" src={InstIcon} alt="" />
+            <img className="inst-icon" src={InstIcon} alt="" />
           </Link>
           <div className="InstInfo">
             <div className="inst_card_info-name inst-info">
@@ -54,9 +56,9 @@ const InstCards = (props: { InstData: institutionObj[]; userRole: string, navOpt
           <div>
             {props.userRole == "ADMIN" ? (
               <div className="trash-can-icon--container-Inst">
-                <BiTrash 
-                className="trash-can-icon-Inst"
-                onClick={(event) => handleModal(event, institution)} 
+                <BiTrash
+                  className="trash-can-icon-Inst"
+                  onClick={(event) => handleModal(event, institution)}
                 />
               </div>
             ) : (
@@ -66,12 +68,14 @@ const InstCards = (props: { InstData: institutionObj[]; userRole: string, navOpt
         </div>
       ))}
       {isDeleteModalOpen ? (
-        <DeleteModal 
-        navOption={props.navOption}
-        element={institutionToDelete}
-        closeModal={handleModal}
+        <DeleteModal
+          navOption={props.navOption}
+          element={institutionToDelete}
+          closeModal={handleModal}
         />
-      ) : ""}
+      ) : (
+        ""
+      )}
     </>
   );
 };
