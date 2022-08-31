@@ -26,18 +26,6 @@ const navigate = useNavigate()
 
   const id = Number(params.id);
 
-  const [userLogged, setUserLogged] = useState<userObj>({
-    name: "",
-    role: "",
-    institution_id: [],
-    email: "",
-    institutions: [
-      {
-        name: "",
-      },
-    ],
-    recoverPasswordToken: ''
-  });
 
   const [isModalOpen,setIsModalOpen] =useState<boolean>(false)
 
@@ -46,11 +34,7 @@ const navigate = useNavigate()
     role: "",
     institution_id: [],
     email: "",
-    institutions: [
-      {
-        name: "",
-      },
-    ],
+    institutions: [],
     recoverPasswordToken: '',
   });
 
@@ -58,10 +42,7 @@ const navigate = useNavigate()
     setIsModalOpen(!isModalOpen)
   }
 
-  const getLoggedUser = async () => {
-    const response = await loginService.loggedUser();
-    setUserLogged(response.data.user);
-  };
+ 
 
   const getUser = async () => {
     const response = await userService.getUserById(id);
@@ -69,15 +50,13 @@ const navigate = useNavigate()
   };
 
   useEffect(() => {
-    getLoggedUser();
     getUser();
-    console.log(user.institutions);
   }, []);
 
   return (
     <>
       <main className="unique-user-main--container">
-        <Header loggedUser={userLogged} />
+        <Header/>
         <section className="unique-user-card--container">
           <div className="unique-user--card">
             <div className="user-card--heading">
@@ -94,14 +73,18 @@ const navigate = useNavigate()
                   <label htmlFor="" className="unique-user-card--label">
                     ID
                   </label>
-                  <span className="unique-user-card--info">{user.id}</span>
+                  <span className="unique-user-card--info">
+                    {user.id}
+                    </span>
                 </div>
 
                 <div className="user-card-email--container unique-info">
                   <label htmlFor="" className="unique-user-card--label">
                     E-mail
                   </label>
-                  <span className="unique-user-card--info">{user.email}</span>
+                  <span className="unique-user-card--info">
+                    {user.email}
+                    </span>
                 </div>
 
                 <div className="user-card-updtdat--container unique-info">
@@ -126,7 +109,7 @@ const navigate = useNavigate()
               <div className="user-card-insts--container">
                 <h1 className="unique-user-card--label">Instituições</h1>
                 <ul className="user-institutions-container">
-                  {user.institution_id?.map((item:institutionObj) => (
+                  {user.institutions?.map((item:any) => (
                     <li className="user-institution--li">{item.name}</li>
                   ))}
                 </ul>

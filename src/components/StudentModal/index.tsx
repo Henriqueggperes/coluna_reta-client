@@ -65,8 +65,10 @@ const StudentModal = (props: {
         address: undefined,
         institution: undefined,
         id: undefined,
+        historic:undefined,
         created_at: undefined,
         updated_at: undefined,
+        institution_id: Number(selectedInst)
       });
       if (response.data.data) {
         toast.success("Estudante editado com sucesso!");
