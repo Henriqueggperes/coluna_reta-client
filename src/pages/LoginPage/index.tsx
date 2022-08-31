@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LoginImg from "../../assets/img/login_char.svg";
 import Logo from "../../assets/icons/cr_logo.png";
 import { LoginInterface } from "../../types/types";
@@ -7,16 +7,28 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import "./style.css";
 import { useNavigate } from "react-router-dom";
-import { setMaxListeners } from "events";
 
 
 export const LoginPage = () => {
+ 
+  useEffect(()=>{
+    if(jwt){
+      navigate('/backoffice')
+    }
+  },[])
+
+
+  const navigate = useNavigate()
+
+  const jwt = localStorage.getItem('jwt')
+
+  
+ 
   const [values, setValues] = useState({
     email: "",
     passwordHash: "",
   });
  
-  const navigate = useNavigate()
 
   const handleChangesValues = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues((values: LoginInterface) => ({
