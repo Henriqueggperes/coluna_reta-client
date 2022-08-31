@@ -37,7 +37,7 @@ const institutionService = {
       .then((response) => response)
       .catch((error) => error.response),
 
-  updateInstitution: (id: number, values: institutionObj) =>
+  updateInstitution: (id: number, values: postInstitutionObj) =>
     api
       .patch(`institution/update/${id}`, values)
       .then((response) => response)

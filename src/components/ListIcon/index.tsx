@@ -4,7 +4,7 @@ import { FaRegBuilding } from "react-icons/fa";
 import { AiOutlinePlus } from "react-icons/ai";
 import './style.css'
 
-const ListIcon = (props: { navOption: string, handleModal:Function }) => {
+const ListIcon = (props: { navOption: string, handleModal:Function,  }) => {
   return (
     <div onClick={(event)=>props.handleModal()} className="icons-container">
       {props.navOption == "Ger.Instituições" ? (

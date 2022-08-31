@@ -14,37 +14,31 @@ import { toast } from "react-toastify";
 import institutionService from "../../services/institutionService";
 import addressService from "../../services/addressService";
 import "./style.css";
+import ModalAddress from "../AddressModal";
 
-//TODO PATH INST, PAGINA BY ID
 
 const InstitutionModal = (props: {
   type: string;
   closeModal: Function;
-  instInfo: institutionObj | any;
+  handleModal: Function;
+  instInfo: postInstitutionObj | any;
 }) => {
-  const [institution, setInstitution] = useState<institutionObj>({
+  const [institution, setInstitution] = useState<postInstitutionObj>({
     name: "",
     phone_number: "",
-    address_id: 0,
+    state: "",
+    city: "",
+    zip_code: "",
   });
 
   const [createInstitution, setCreateInstitution] =
     useState<postInstitutionObj>({
       name: "",
       phone_number: "",
-      address_id: 0,
+      state: "",
+      city: "",
+      zip_code: "",
     });
-
-  const [address, setAddress] = useState<addressType[]>();
-
-  const [dropdownActive, setDropdowActive] = useState<string>("");
-
-  const [selectedAddress, setSelectedAddress] = useState<number>();
-
-  const getAddress = async () => {
-    const response = await addressService.getAllAddress();
-    setAddress(response.data);
-  };
 
   const handleSendInst = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -53,24 +47,28 @@ const InstitutionModal = (props: {
     if (props.type === "CREATE") {
       response = await institutionService.postInstitution({
         ...createInstitution,
-        address_id: Number(selectedAddress),
       });
 
       if (response.status == 201) {
         toast.success("Instituição adicionada com sucesso!");
+        props.closeModal();
       } else {
         toast.error(response.data.message[0]);
+        props.closeModal();
       }
-
     } else if (props.type === "EDIT") {
       response = institutionService.updateInstitution(Number(institution.id), {
         ...institution,
         id: undefined,
         name: institution.name,
         phone_number: institution.phone_number,
+        state: institution.state,
+        city: institution.city,
+        zip_code: institution.zip_code,
         created_at: undefined,
         updated_at: undefined,
         _count: undefined,
+        deleted: undefined,
       });
     }
 
@@ -88,33 +86,16 @@ const InstitutionModal = (props: {
     }
   };
 
-  const handleDropdown = () => {
-    if (dropdownActive == "-active") {
-      setDropdowActive("");
-    } else {
-      setDropdowActive("-active");
-      getAddress();
-    }
-  };
-
   const handleChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-    if (event.target.name === "address_id") {
-      setCreateInstitution({
-        ...createInstitution,
-        [event.target.name]: parseInt(event.target.value),
-      });
-    } else {
-      setCreateInstitution({
-        ...createInstitution,
-        [event.target.name]: event.target.value,
-      });
-    }
+    setCreateInstitution({
+      ...createInstitution,
+      [event.target.name]: event.target.value,
+    });
   };
 
   useEffect(() => {
     setInstitution(props.instInfo);
-    getAddress();
   }, []);
 
   return (
@@ -165,51 +146,52 @@ const InstitutionModal = (props: {
             </label>
           </div>
 
-          {props.type === "CREATE" ? (
-            <div className="inputs-labels--container">
-              <div className="address-student-filter--container">
-                <input
-                  onChange={handleChanges}
-                  name="address_id"
-                  type="number"
-                  value={selectedAddress}
-                  autoComplete="off"
-                  className="institution-modal-form--input institution-address--input"
-                  placeholder={
-                    props.type == "CREATE"
-                      ? institution.address_id?.toString()
-                      : ""
-                  }
-                  required={props.type == "CREATE" ? false : true}
-                />
-                <label className="input--label institution-inst-label">
-                  Endereço(ID)
-                </label>
-                <img
-                  onClick={handleDropdown}
-                  className={`institution-filter-arrow--icon${dropdownActive}`}
-                  src={filter_arrow}
-                />
-              </div>
+          <div className="inputs-labels--container">
+            <input
+              onChange={handleChanges}
+              name="state"
+              type="text"
+              autoComplete="on"
+              className="institution-modal-form--input"
+              placeholder={props.type == "EDIT" ? institution.state : ""}
+              required={props.type == "EDIT" ? false : true}
+            />
+            <label htmlFor="state" className="input--label">
+              Estado - UF
+            </label>
+          </div>
+          
+          <div className="inputs-labels--container">
+            <input
+              onChange={handleChanges}
+              name="city"
+              type="text"
+              autoComplete="off"
+              className="institution-modal-form--input"
+              placeholder={props.type == "EDIT" ? institution.city : ""}
+              required={props.type == "EDIT" ? false : true}
+            />
+            <label htmlFor="city" className="input--label">
+              Cidade
+            </label>
+          </div>
+          
+          <div className="inputs-labels--container">
+            <input
+              onChange={handleChanges}
+              name="zip_code"
+              type="text"
+              autoComplete="off"
+              className="institution-modal-form--input"
+              placeholder={props.type == "EDIT" ? institution.zip_code : ""}
+              required={props.type == "EDIT" ? false : true}
+            />
+            <label htmlFor="zip_code" className="input--label">
+              CEP
+            </label>
+          </div>
 
-              <div
-                className={`institution-inst-dropdown--container${dropdownActive}`}
-              >
-                {address?.map((adrss) => (
-                  <span
-                    onClick={(event) => setSelectedAddress(adrss.id)}
-                    className={`dropdown-institution--item${dropdownActive}`}
-                  >
-                    {adrss.street}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ) : (
-            ""
-          )}
         </div>
-
         <div className="student-modal-form-send-button--container">
           <button className="send--button">
             {props.type == "EDIT" ? "EDITAR" : "CRIAR"}

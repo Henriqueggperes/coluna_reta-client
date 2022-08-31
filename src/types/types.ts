@@ -71,9 +71,16 @@ export interface institutionObj {
 }
 
 export interface postInstitutionObj {
+  id?: number;
   name: string;
   phone_number: string;
-  address_id?: number | any;
+  state: string;
+  city: string;
+  zip_code: string;
+  created_at?: string,
+  updated_at?: string,
+  _count?: string,
+  deleted?: boolean;
 }
 
 export interface patchStudentObj {
@@ -94,7 +101,7 @@ export interface MetaType {
 }
 
 export interface addressType {
-  id: number;
+  id?: number;
   city: string;
   complement: string;
   neighborhood: string;
@@ -110,4 +117,12 @@ export interface registerPassword{
   passwordHash: string,
   confirmPassword: string,
   recoverPasswordToken?: string,
+}
+
+export interface modalProps {
+  isOpen: boolean; 
+  closeModal: any; 
+  type: string; 
+  title: string; 
+  btnName: string; 
 }
