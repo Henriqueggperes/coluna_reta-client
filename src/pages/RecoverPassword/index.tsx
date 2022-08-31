@@ -30,7 +30,7 @@ const RecoverPassword = () => {
     event.preventDefault();
     const response = await userService.registerPassword(regPassword);
     if (!response.data) {
-      toast.error(response.message, {
+      toast.error(response.data.message, {
         className: "toast-error--message",
       });
     } else {
