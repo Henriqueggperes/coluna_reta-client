@@ -216,3 +216,8 @@
 .toast-error--message{
   background-color: #dcdcdc;
 }
+
+.password-match{
+  color: red;
+  font-size: .7rem;
+}
