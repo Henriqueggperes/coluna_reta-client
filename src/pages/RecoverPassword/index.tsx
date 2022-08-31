@@ -31,7 +31,7 @@ const RecoverPassword = () => {
     event.preventDefault();
     const response = await userService.registerPassword(regPassword);
     if (response.data.statusCode != 204) {
-      toast.error(response.data.message[0],{
+      toast.error(response.data.message,{
         className:"toast-error--message"
       });
     } else {
