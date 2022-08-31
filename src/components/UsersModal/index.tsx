@@ -62,7 +62,7 @@ const UsersModal = (props: {
         recoverPasswordToken: undefined,
         institutions: selectedInsts,
       });
-      if (response.status == 200) {
+      if (response.status == 201) {
         toast.success(response.data)
       } else {
         toast.error(response.data.message);
@@ -80,7 +80,7 @@ const UsersModal = (props: {
         institutions: selectedInsts,
         passwordHash: undefined,
       });
-      if (response.status == 200) {
+      if (response.status == 201) {
         toast.success('Usuário editado com sucesso!')
       } else {
         toast.error(response.data.message);
