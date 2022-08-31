@@ -9,6 +9,7 @@ import { CgChevronRight } from "react-icons/cg";
 import { toast } from "react-toastify";
 import userService from "../../services/userService";
 import { userInfo } from "os";
+import Institution from "../Institution";
 
 const UsersModal = (props: {
   userInfo: userObj | any;
@@ -36,7 +37,7 @@ const UsersModal = (props: {
     name: "",
     email: "",
     role: "",
-    institution_id: [],
+    institutions:[]
   });
 
 
@@ -63,11 +64,11 @@ const UsersModal = (props: {
       response = await userService.postUser({
         ...user,
         id: undefined,
-        institution_id: selectedInsts,
         created_at: undefined,
         updated_at: undefined,
+        institution_id:undefined,
         recoverPasswordToken: undefined,
-        institutions: undefined,
+        institutions: selectedInsts,
       });
       if (response.status == 201) {
         toast.success(response.data)
@@ -80,11 +81,11 @@ const UsersModal = (props: {
       response = await userService.patchUser(Number(user.id),{
         ...user,
         id: undefined,
-        institution_id: selectedInsts,
+        institution_id: undefined,
         created_at: undefined,
         updated_at: undefined,
         recoverPasswordToken: undefined,
-        institutions: undefined,
+        institutions: selectedInsts,
         passwordHash: undefined,
       });
       if (response.status == 201) {
