@@ -33,7 +33,7 @@ const RecoverPassword = () => {
       toast.error(response.data, {
         className: "toast-error--message",
       });
-    } else {
+    } else if(response.data.statusCode == 204) {
       toast.success("Senha registrada com sucesso!");
       navigate("/");
     }

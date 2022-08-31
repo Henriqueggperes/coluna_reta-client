@@ -63,7 +63,7 @@ const UsersModal = (props: {
         institutions: selectedInsts,
       });
       if (response.status == 201) {
-        toast.success(response.data.message)
+        toast.success(response)
       } else {
         toast.error(response.data.message);
       } 
