@@ -29,7 +29,7 @@ const RecoverPassword = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const response = await userService.registerPassword(regPassword);
-    if (response.statusCode != 200) {
+    if (!response.data) {
       toast.error(response.message, {
         className: "toast-error--message",
       });

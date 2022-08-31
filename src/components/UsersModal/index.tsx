@@ -62,11 +62,14 @@ const UsersModal = (props: {
         recoverPasswordToken: undefined,
         institutions: selectedInsts,
       });
-      if (response.status == 201) {
-        toast.success(response)
-      } else {
-        toast.error(response.data.message);
+      if (response.data) {
+        toast.success(response.data)
+        console.log(response)
       } 
+      else {  
+          toast.error(response.data.message[0]);
+        }
+        props.closeModal()
     }
     
     else if(props.type === 'EDIT'){
