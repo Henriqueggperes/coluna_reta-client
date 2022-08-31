@@ -10,8 +10,8 @@ import { IoInformationCircleOutline } from "react-icons/io5";
 
 const RecoverPassword = () => {
   const params = useParams();
-  
-  const navigate = useNavigate()
+
+  const navigate = useNavigate();
 
   const [regPassword, setRegPassword] = useState<registerPassword>({
     passwordHash: "",
@@ -24,19 +24,18 @@ const RecoverPassword = () => {
       ...regPassword,
       [event.target.name]: event.target.value,
     });
-    console.log(regPassword);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const response = await userService.registerPassword(regPassword);
     if (response.data.statusCode != 204) {
-      toast.error(response.data,{
-        className:"toast-error--message"
+      toast.error(response.data, {
+        className: "toast-error--message",
       });
     } else {
       toast.success("Senha registrada com sucesso!");
-      navigate('/')
+      navigate("/");
     }
   };
 
@@ -86,14 +85,32 @@ const RecoverPassword = () => {
                     onChange={handleChanges}
                     className="register-password-form--input"
                     required
-                  />
+                    />
                   <label className="register-password-form--label">
                     Confirme sua senha
+                    {regPassword.passwordHash != "" &&
+                    regPassword.confirmPassword != "" &&
+                    regPassword.passwordHash != regPassword.confirmPassword ? (
+                      <span className="password-match">*Senhas não conferem*</span>
+                    ) : (
+                      ""
+                    )}
                   </label>
                 </div>
               </div>
               <div className="register-password-button--container">
-                <button className="register-password--button">ENVIAR</button>
+                <button
+                  disabled={
+                    regPassword.passwordHash != "" &&
+                    regPassword.confirmPassword != "" &&
+                    regPassword.passwordHash != regPassword.confirmPassword
+                      ? true
+                      : false
+                  }
+                  className="register-password--button"
+                >
+                  ENVIAR
+                </button>
               </div>
             </form>
           </div>
