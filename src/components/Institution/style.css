@@ -56,6 +56,10 @@
     0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+.unique-inst-card--label {
+  color: #7A89FD;
+}
+
 .inst-space-create-update {
   display: flex;
   justify-content: center;
@@ -93,19 +97,13 @@
 .inst-card-heading {
   display: flex;
   font-size: 1.5rem;
-  color: #2a3577;
+  color: #7A89FD;
   justify-content: center;
   align-items: center;
   height: 80%;
   width: 100%;
 }
 
-.inst-card-phone {
-  margin-top: -.8rem;
-  font-size: 1.1rem;
-  color: #2a3577;
-  /* width: 100%; */
-}
 
 .inst-card-info--container {
   display: flex;
@@ -145,7 +143,8 @@
 
 .span-inst-card--info {
   text-align: center;
-  color: #2a3577;
+  font-size: 1rem;
+  color: rgb(61, 61, 61);
   font-weight: bold;
 }
 
@@ -177,6 +176,7 @@
   );
   color: rgb(212, 211, 211);
   transition: all 0.4s;
+  border-radius: 0.2rem;
 }
 
 .inst-card-edit--button:hover {

@@ -1,8 +1,8 @@
 .navbar-container {
   height: 100%;
-  width: 12%;
+  width: 10%;
   box-shadow: 0px 0px 5px 0px #000000;
-  background-color: #ffff;
+  background-color: rgb(255, 255, 255);
   z-index: 1;
 }
 .nav-active {
