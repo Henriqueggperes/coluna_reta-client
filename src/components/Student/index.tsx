@@ -27,6 +27,7 @@ const Student = () => {
       id:0,
       name: ''
     },
+    historic: undefined
   });
 
   
@@ -82,7 +83,7 @@ const Student = () => {
     <>
       {/* <Navbar navOptionSelected={getCurrentOption}></Navbar> */}
       <main className='chosen-student-main__container'>
-        <Header loggedUser={userLogged} ></Header>
+        <Header></Header>
         <section className="unique-student-card__container">
           <div className="chosen-student-info--container">
             <div className="chosen-student-heading">

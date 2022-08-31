@@ -4,12 +4,9 @@ import filterArrowIcon from "../../assets/icons/filter_arrow_icon.svg";
 import React, { useEffect, useState } from "react";
 import institutionService from "../../services/institutionService";
 import { institutionObj, userObj } from "../../types/types";
-import { CgChevronLeft } from "react-icons/cg";
-import { CgChevronRight } from "react-icons/cg";
 import { toast } from "react-toastify";
 import userService from "../../services/userService";
-import { userInfo } from "os";
-import Institution from "../Institution";
+
 
 const UsersModal = (props: {
   userInfo: userObj | any;
@@ -20,17 +17,12 @@ const UsersModal = (props: {
   
   useEffect(() => {    
     setUser(props.userInfo);
-    console.log(user)
-    if(props.userInfo!=undefined){
-      setSelectedInsts(props.userInfo.institutions)
-    }
   }, []);
  
   const [allInsts, setAllInsts] = useState<institutionObj[]>();
   
   const [dropdownActive, setDropdownActive] = useState<string>("");
   
-  const [page, setPage] = useState<number>(1);
   
   const [user, setUser] = useState<userObj>({
     id: 0,
@@ -70,10 +62,10 @@ const UsersModal = (props: {
         recoverPasswordToken: undefined,
         institutions: selectedInsts,
       });
-      if (response.status == 201) {
+      if (response.status == 200) {
         toast.success(response.data)
       } else {
-        toast.error(response.data.message[0]);
+        toast.error(response.data.message);
       } 
     }
     
@@ -88,10 +80,10 @@ const UsersModal = (props: {
         institutions: selectedInsts,
         passwordHash: undefined,
       });
-      if (response.status == 201) {
-        toast.success(response.data)
+      if (response.status == 200) {
+        toast.success('Usuário editado com sucesso!')
       } else {
-        toast.error(response.data.message[0]);
+        toast.error(response.data.message);
       } 
     }
   };
@@ -110,8 +102,6 @@ const UsersModal = (props: {
       setDropdownActive("");
     }
   };
-  
-
   
   return (
     <section className="users-modal--container">
@@ -176,7 +166,7 @@ const UsersModal = (props: {
                 <ul className="institutions-list">
                   {props.userInfo?
                   selectedInsts.map((item:any,)=>(
-                    <li className="inst-id">{item.id? item.id : item}</li>                      
+                    <li className="inst-id">{item}</li>                      
                     )):
                     selectedInsts.map((item:any,)=>(
                     <li className="inst-id">{item}</li>                      

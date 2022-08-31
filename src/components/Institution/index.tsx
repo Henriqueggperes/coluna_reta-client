@@ -29,11 +29,6 @@ const Institution = () => {
     role: "",
     institution_id: [],
     email: "",
-    institutions: [
-      {
-        name: "",
-      },
-    ],
     recoverPasswordToken: "",
     created_at: "",
     updated_at: "",

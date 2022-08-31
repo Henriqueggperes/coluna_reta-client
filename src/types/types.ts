@@ -16,7 +16,21 @@ export interface userObj {
   passwordHash?: string;
   email: string;
   institution_id?: number[] | any;
-  institutions?: number[];
+  institutions?:
+    | number[]
+    | [
+        {
+          id: string;
+          name: string;
+          phone_number: string;
+          state: string;
+          city: string;
+          zip_code: string;
+          created_at: string;
+          updated_at: string;
+          deleted: boolean;
+        }
+      ];
   name: string;
   role: string;
   updated_at?: string;
@@ -37,6 +51,20 @@ export interface studentObj {
     name?: string;
   };
   address?: {};
+  historic?: [
+    {
+      id: number;
+      student_id: number;
+      visit_date: string;
+      forwarding: string;
+      cobb_angle: string;
+      return_date: string;
+      image_1: string;
+      image_2: string;
+      updated_at: string;
+      deleted: boolean;
+    }
+  ];
 }
 
 export interface institutionObj {
@@ -81,7 +109,6 @@ export interface MetaType {
   take: number;
 }
 
-
 export interface addressType {
   id: number;
   city: string;
@@ -96,33 +123,33 @@ export interface addressType {
   deleted?: boolean;
 }
 
-export interface registerPassword{
-  passwordHash: string,
-  confirmPassword: string,
-  recoverPasswordToken?: string,
+export interface registerPassword {
+  passwordHash: string;
+  confirmPassword: string;
+  recoverPasswordToken?: string;
 }
 
-export interface studentHistory{
-  id: number 
-  student_id: number
-  visit_date: string,
-  image_1: string,
-  image_2: string ,
-  forwarding: string,
-  cobb_angle: string,
-  return_date: string,
-  updated_at: string,
-  deleted: boolean,
-  consultation: consultationType[]
+export interface studentHistory {
+  id: number;
+  student_id: number;
+  visit_date: string;
+  image_1: string;
+  image_2: string;
+  forwarding: string;
+  cobb_angle: string;
+  return_date: string;
+  updated_at: string;
+  deleted: boolean;
+  consultation: consultationType[];
 }
 
-export interface consultationType{
-  id: number
-  student_id: number
-  historic_id: number
-  clinic: string
-  consultation_date: string
-  created_at: string
-  updated_at: string
-  deleted: boolean
+export interface consultationType {
+  id: number;
+  student_id: number;
+  historic_id: number;
+  clinic: string;
+  consultation_date: string;
+  created_at: string;
+  updated_at: string;
+  deleted: boolean;
 }
