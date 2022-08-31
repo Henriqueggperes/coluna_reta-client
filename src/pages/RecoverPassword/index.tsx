@@ -29,11 +29,11 @@ const RecoverPassword = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const response = await userService.registerPassword(regPassword);
-    if (response.data.statusCode != 204) {
-      toast.error(response.data, {
+    if (response.data.statusCode != 200) {
+      toast.error(response.message, {
         className: "toast-error--message",
       });
-    } else if(response.data.statusCode == 204) {
+    } else {
       toast.success("Senha registrada com sucesso!");
       navigate("/");
     }
