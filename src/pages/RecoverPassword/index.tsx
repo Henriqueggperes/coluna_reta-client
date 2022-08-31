@@ -2,7 +2,7 @@ import cr_logo from "./../../assets/icons/cr_logo.png";
 import confirm_icon from "./../../assets/icons/confirm_icon.svg";
 import "./style.css";
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import userService from "../../services/userService";
 import { registerPassword } from "../../types/types";
 import { toast } from "react-toastify";
@@ -10,6 +10,8 @@ import { IoInformationCircleOutline } from "react-icons/io5";
 
 const RecoverPassword = () => {
   const params = useParams();
+  
+  const navigate = useNavigate()
 
   const [regPassword, setRegPassword] = useState<registerPassword>({
     passwordHash: "",
@@ -28,12 +30,13 @@ const RecoverPassword = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const response = await userService.registerPassword(regPassword);
-    if (response.data.statusCode != 201) {
+    if (response.data.statusCode != 204) {
       toast.error(response.data.message[0],{
         className:"toast-error--message"
       });
     } else {
       toast.success("Senha registrada com sucesso!");
+      navigate('/')
     }
   };
 
