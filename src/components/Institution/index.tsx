@@ -22,27 +22,11 @@ const Institution = () => {
       toast.error("Realize o login antes de acessar o backoffice");
       navigate("/");
     } else {
-      getLoggedUser();
       getInstitution();
     }
   }, []);
 
   const params = useParams();
-
-  const [userLogged, setUserLogged] = useState<userObj>({
-    name: "",
-    role: "",
-    institution_id: [],
-    email: "",
-    institutions: [
-      {
-        name: "",
-      },
-    ],
-    recoverPasswordToken: "",
-    created_at: "",
-    updated_at: "",
-  });
 
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [institution, setInstitution] = useState<postInstitutionObj>({
@@ -72,7 +56,7 @@ const Institution = () => {
   return (
     <>
       <main className="unique--main--container">
-        <Header loggedUser={userLogged} />
+        <Header/>
         <section className="unique-inst-card--container">
           <div className="unique-inst--card">
             <div className="inst-card--heading">

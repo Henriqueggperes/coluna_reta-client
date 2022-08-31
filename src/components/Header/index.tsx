@@ -8,31 +8,24 @@ import { useEffect, useState } from "react";
 import { userObj } from "../../types/types";
 import { toast } from "react-toastify";
 
-const Header = (props: { loggedUser: userObj }) => {
+const Header = () => {
+  
   const [userLogged, setUserLogged] = useState<userObj>({
     name: "",
     role: "",
     institution_id: [],
     email: "",
-    institutions: [
-      {
-        name: "",
-      },
-    ],
     recoverPasswordToken: "",
   });
-
-  useEffect(() => {
-    userLogg();
-  }, []);
-
-  const userLogg = () => {
-    setUserLogged(props.loggedUser);
+  
+  const getLoggedUser = async () => {
+    const response = await loginService.loggedUser();
+    setUserLogged(response.data)
   };
-
+  
+  
   const navigate = useNavigate();
-  console.log(props.loggedUser);
-
+  
   const logOutUser = () => {
     localStorage.clear();
     toast.success("Log-out realizado", {
@@ -41,7 +34,11 @@ const Header = (props: { loggedUser: userObj }) => {
     });
     navigate("/");
   };
+  
+  useEffect(() => {
+     getLoggedUser()
 
+  }, []);
   return (
     <>
       <header className="backoficce-header">
@@ -57,8 +54,8 @@ const Header = (props: { loggedUser: userObj }) => {
         </Link>
         <div className="header_user_card-container">
           <div className="ADMIN">
-            <span>{props.loggedUser.name}</span>
-            {props.loggedUser.role == "ADMIN" ? (
+            <span>{userLogged.name}</span>
+            {userLogged.role == "ADMIN" ? (
               <span className="optAdmin">Admin</span>
             ) : (
               ""

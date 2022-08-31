@@ -39,10 +39,7 @@ const Backoficce = () => {
     setUserLogged(user.data);
   };
   
-  const role = userLogged.role;
-  console.log(userLogged);
-  
-  
+  const role = userLogged.role;  
   
   const [currentOption, setCurrentOption] = useState<string>("");
   const getCurrentOption = (option: string) => {
@@ -55,7 +52,7 @@ const Backoficce = () => {
 
   return (
     <main className="backoficce_main-container">
-      <Header loggedUser={userLogged} />
+      <Header/>
       <section className="backoficce_content-container">
         <Navbar userRole={role} navOptionSelected={getCurrentOption} />
         <section className="backoficce-content">

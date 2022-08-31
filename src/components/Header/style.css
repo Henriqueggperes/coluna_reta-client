@@ -64,9 +64,9 @@
 
 .optAdmin {
     font-size: .8rem;
-    font-weight: 600;
+    font-weight: bold;
     text-align: end;
-    color: rgb(43, 255, 0);
+    color: #2B0548;
 }
 
 .header_user_card-image{

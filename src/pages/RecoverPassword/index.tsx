@@ -2,7 +2,7 @@ import cr_logo from "./../../assets/icons/cr_logo.png";
 import confirm_icon from "./../../assets/icons/confirm_icon.svg";
 import "./style.css";
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import userService from "../../services/userService";
 import { registerPassword } from "../../types/types";
 import { toast } from "react-toastify";
@@ -10,6 +10,8 @@ import { IoInformationCircleOutline } from "react-icons/io5";
 
 const RecoverPassword = () => {
   const params = useParams();
+
+  const navigate = useNavigate();
 
   const [regPassword, setRegPassword] = useState<registerPassword>({
     passwordHash: "",
@@ -22,18 +24,19 @@ const RecoverPassword = () => {
       ...regPassword,
       [event.target.name]: event.target.value,
     });
-    console.log(regPassword);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const response = await userService.registerPassword(regPassword);
-    if (response.data.statusCode != 201) {
-      toast.error(response.data.message[0],{
-        className:"toast-error--message"
-      });
-    } else {
-      toast.success("Senha registrada com sucesso!");
+   if(response.status != 200){
+     toast.error(response.data.message[0],{
+      className: 'toast-error--message'
+     })
+    }
+    else{
+       toast.success('Senha registrada com sucesso!')
+       navigate('/')
     }
   };
 
@@ -83,14 +86,32 @@ const RecoverPassword = () => {
                     onChange={handleChanges}
                     className="register-password-form--input"
                     required
-                  />
+                    />
                   <label className="register-password-form--label">
                     Confirme sua senha
+                    {regPassword.passwordHash != "" &&
+                    regPassword.confirmPassword != "" &&
+                    regPassword.passwordHash != regPassword.confirmPassword ? (
+                      <span className="password-match">*Senhas não conferem*</span>
+                    ) : (
+                      ""
+                    )}
                   </label>
                 </div>
               </div>
               <div className="register-password-button--container">
-                <button className="register-password--button">ENVIAR</button>
+                <button
+                  disabled={
+                    regPassword.passwordHash != "" &&
+                    regPassword.confirmPassword != "" &&
+                    regPassword.passwordHash != regPassword.confirmPassword
+                      ? true
+                      : false
+                  }
+                  className="register-password--button"
+                >
+                  ENVIAR
+                </button>
               </div>
             </form>
           </div>

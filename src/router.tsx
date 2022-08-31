@@ -11,7 +11,7 @@ const Router = () => {
   return (
     <Routes>
       <Route path={RoutePath.LOGIN} element={<LoginPage />} />
-      <Route path={RoutePath.BACKOFFICE} element={<Backoficce/>} />
+      <Route path='/backoffice' element={<Backoficce/>} />
       <Route path={RoutePath.STUDENT} element={<Student/>} />
       <Route path={RoutePath.USER} element={<User/>}/>
       <Route path={RoutePath.INSTITUTION} element={<Institution/>}/>
