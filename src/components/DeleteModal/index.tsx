@@ -6,6 +6,7 @@ import userService from "../../services/userService";
 import institutionService from "../../services/institutionService";
 
 const DeleteModal = (props: {
+  refreshComp: Function;
   navOption: string;
   element: studentObj | userObj | institutionObj | undefined;
   closeModal: Function;
@@ -43,7 +44,7 @@ const DeleteModal = (props: {
         toast.error(response.data.message);
       }
     }
-    
+    props.refreshComp()
   };
 
   const handleDelete = (id: any) => {

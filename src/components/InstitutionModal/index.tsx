@@ -12,6 +12,7 @@ import './style.css';
 //TODO PATH INST, PAGINA BY ID
 
 const InstitutionModal = (props: {
+  refreshComp:Function;
   type: string;
   closeModal: Function;
   instInfo: institutionObj | any;
@@ -46,6 +47,7 @@ const InstitutionModal = (props: {
     
     if (response.status === 201) {
       toast.success("Instituição adicionada com sucesso!");
+      props.refreshComp()
       props.closeModal();
     } else if (response) {
       console.log(response.status == 400)
