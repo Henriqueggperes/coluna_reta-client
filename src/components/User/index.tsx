@@ -9,6 +9,7 @@ import "./style.css";
 import institutionService from "../../services/institutionService";
 import UsersModal from "../UsersModal";
 import { toast } from "react-toastify";
+import LoadingModal from "../LoadingModal";
 
 const User = () => {
 
@@ -26,6 +27,7 @@ const navigate = useNavigate()
 
   const id = Number(params.id);
 
+  const [isInfoLoading,setIsInfoLoading] = useState(false);
 
   const [isModalOpen,setIsModalOpen] =useState<boolean>(false)
 
@@ -42,10 +44,13 @@ const navigate = useNavigate()
     setIsModalOpen(!isModalOpen)
   }
 
- 
 
   const getUser = async () => {
+    setIsInfoLoading(true)
     const response = await userService.getUserById(id);
+    if(response){
+      setIsInfoLoading(false);
+    }
     setUser(response.data);
   };
 
@@ -127,6 +132,7 @@ const navigate = useNavigate()
      {isModalOpen? <UsersModal closeModal={handleModal} type='EDIT' userInfo={user}/>
      :
      ""}
+     {isInfoLoading? <LoadingModal/> : ''}
     </>
   );
 };
