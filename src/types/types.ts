@@ -37,7 +37,7 @@ export interface userObj {
 }
 
 export interface studentObj {
-  id?: number;
+  id?: number | undefined;
   name: string;
   birth_date: string;
   phone: string;
@@ -158,14 +158,14 @@ export interface studentHistory {
 }
 
 export interface consultationType {
-  id: number;
-  student_id: number;
-  historic_id: number;
+  id?: number;
+  student_id?: number;
+  historic_id?: number;
   clinic: string;
   consultation_date: string;
-  created_at: string;
-  updated_at: string;
-  deleted: boolean;
+  created_at?: string;
+  updated_at?: string;
+  deleted?: boolean;
 }
 export interface registerPassword{
   passwordHash: string,
