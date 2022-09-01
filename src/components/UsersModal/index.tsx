@@ -62,11 +62,13 @@ const UsersModal = (props: {
         recoverPasswordToken: undefined,
         institutions: selectedInsts,
       });
-      if (response.data) {
+      if (response.status == 201) {
+        console.log('CAIU')
         toast.success(response.data)
         console.log(response)
       } 
       else {  
+          console.log(response)
           toast.error(response.data.message[0]);
         }
         props.closeModal()
