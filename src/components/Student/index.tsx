@@ -33,6 +33,8 @@ const Student = () => {
     historic: undefined
   });
 
+  const studentId= student.id;
+  console.log(studentId);
   
 
   const [userLogged, setUserLogged] = useState<userObj>({
@@ -135,7 +137,7 @@ const Student = () => {
         </section>
       </main>
       {isStudentModalOpen?<StudentModal type="EDIT" studentInfo={student} closeModal={handleStudentModal}/>:""}
-      {isAppointmentModalOpen?<AppointmentModal closeModal={handleAppointMentModal}/>:''}
+      {isAppointmentModalOpen?<AppointmentModal studentId={studentId} closeModal={handleAppointMentModal}/>:''}
       {isInfoLoading? <LoadingModal/> : ''}
     </>
   );

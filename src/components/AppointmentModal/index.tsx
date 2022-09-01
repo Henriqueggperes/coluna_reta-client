@@ -2,12 +2,12 @@ import "./style.css";
 import close from "../../assets/icons/close_icon.svg";
 import React, { useState } from "react";
 import studentsService from "../../services/studentsService";
-import { consultationType } from "../../types/types";
+import { consultationType, studentObj } from "../../types/types";
 import { toast } from "react-toastify";
 
-const AppointmentModal = (props: { closeModal: any }) => {
+const AppointmentModal = (props: { closeModal: any, studentId: number | undefined }) => {
   const [appointment, setAppointment] = useState<consultationType>({
-    student_id: 0,
+    student_id: props.studentId,
     clinic: "",
     consultation_date: "",
   });
@@ -25,12 +25,10 @@ const AppointmentModal = (props: { closeModal: any }) => {
     event.preventDefault();
     const response = await studentsService.postAppointment(appointment);
     
-    if (response.status == 200) {
-      toast.success('Usuário editado com sucesso!')
+    if (response.status == 201) {
+      toast.success('Consulta agendada com sucesso!')
       props.closeModal();
-    } 
-    
-    if(response.data.message) {
+    } else {
       toast.error(response.data.message);
       props.closeModal();
     } 
@@ -64,14 +62,14 @@ const AppointmentModal = (props: { closeModal: any }) => {
             </div>
 
             <div className="appointment-modal-form-shcedule">
-              <label htmlFor="date" className="appointment-modal-form--span">
+              <label htmlFor="consultation_date" className="appointment-modal-form--span">
                 Data para a consulta:
               </label>
               <input
                 required
                 className="appointment-form-input"
                 type="date"
-                name="date"
+                name="consultation_date"
                 onChange={handleChanges}
               ></input>
             </div>

@@ -37,7 +37,7 @@ export interface userObj {
 }
 
 export interface studentObj {
-  id?: number;
+  id?: number | undefined;
   name: string;
   birth_date: string;
   phone: string;
