@@ -6,6 +6,7 @@ import { AiOutlinePlusSquare } from 'react-icons/ai'
 import './style.css'
 import ReactPaginate from 'react-paginate'
 import { toast } from 'react-toastify'
+import doctor from '../../assets/img/doctor_char.svg';
 
 const StudentHistory = () => {
   
@@ -101,10 +102,10 @@ return (
                </div>
                <div className='student-visit--images'>
                  <div className='studen-visit--image'>
-
+                    
                  </div>
                  <div className='studen-visit--image'>
-                    
+                 
                  </div>
                </div>
             </section>

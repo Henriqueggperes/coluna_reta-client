@@ -1,6 +1,6 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import { MetaType, studentObj, sValueObj, userObj } from "../../types/types";
+import { MetaType, postInstitutionObj, studentObj, sValueObj, userObj } from "../../types/types";
 import { institutionObj } from "../../types/types";
 import studentsService from "../../services/studentsService";
 import magnifier from "../../assets/icons/search_icon.svg";
@@ -19,7 +19,9 @@ import UsersModal from "../UsersModal";
 import ReactPaginate from "react-paginate";
 import loginService from "../../services/authService";
 import InstitutionModal from "../InstitutionModal";
+import Institution from "../Institution";
 import LoadingModal from "../LoadingModal";
+
 
 const Lists = (props: { userRole: string; navOption: string }) => {
   useEffect(() => {
@@ -34,7 +36,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
   }, [props.navOption]);
 
   
-  const [institutions,setInstitutions] = useState<institutionObj[]>([])
+  const [institutions,setInstitutions] = useState<postInstitutionObj[]>([])
 
   const [searchedStudents, setSearchedStudents] = useState<studentObj[]>([]);
 
@@ -90,15 +92,13 @@ const Lists = (props: { userRole: string; navOption: string }) => {
     take: 1,
   });
 
-  const [InstInfo, setInstInfo] = useState<institutionObj[]>([
+  const [InstInfo, setInstInfo] = useState<postInstitutionObj[]>([
     {
-      address_id: 0,
-      created_at: "",
-      deleted: false,
-      id: 0,
       name: "",
       phone_number: "",
-      updated_at: "",
+      state: "",
+      city: "",
+      zip_code: "",
     },
   ]);
 
@@ -337,7 +337,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
         <UsersModal userInfo={undefined} type="CREATE" closeModal={closeModal}/>
 
       ) :  isModalOpen && props.navOption == 'Ger.Instituições' ? (
-        <InstitutionModal instInfo={InstInfo} type="CREATE" closeModal={closeModal}/>
+        <InstitutionModal instInfo={InstInfo} handleModal={handleModal} type="CREATE" closeModal={closeModal}/>
 
       ) : ""}
       {isInfoLoading? <LoadingModal/> : ''}

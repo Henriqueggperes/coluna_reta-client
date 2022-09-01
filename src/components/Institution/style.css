@@ -12,22 +12,39 @@
 }
 
 .inst-card-crtdat--container {
-  margin-top: 5rem;
   display: flex;
-  /* justify-content: space-between; */
   width: 100%;
 }
 
 .inst-card-id--container {
-  margin-top: 2rem;
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  line-height: 2rem;
+}
+
+.info-main-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  line-height: 2rem;
+  gap: 2rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  font-size: 1.1rem;
 }
 
 .unique-inst--card {
-  height: 50%;
-  width: 40%;
+  height: 35%;
+  width: 28%;
   border-radius: 0.5rem;
   background: linear-gradient(
     213.28deg,
@@ -37,6 +54,34 @@
   border-top: 1px solid rgba(0, 0, 0, 0.209);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.35), 0px 4px 4px rgba(0, 0, 0, 0.339),
     0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.unique-inst-card--label {
+  color: #7A89FD;
+}
+
+.inst-space-create-update {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 5rem;
+}
+
+.infos-space-create-update {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.infos-space-create-update > label {
+  font-size: 1.2rem;
+  width: 100%;
+}
+
+.infos-space-create-update > span {
+  font-size: 1rem;
 }
 
 .inst-card--heading {
@@ -52,32 +97,26 @@
 .inst-card-heading {
   display: flex;
   font-size: 1.5rem;
-  color: #2a3577;
+  color: #7A89FD;
   justify-content: center;
   align-items: center;
   height: 80%;
-  width: 50%;
-}
-
-.inst-card-phone {
-  font-size: 1.3rem;
   width: 100%;
 }
 
-.inst-card-info--separation {
-  display: flex;
-  height: 80%;
-  width: 100%;
-}
 
 .inst-card-info--container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  box-sizing: border-box;
+  /* align-items: center; */
+  justify-content: center;
   padding: 1rem;
+  box-sizing: border-box;
+  margin-top: 1rem;
+  gap: 1rem;
   height: 100%;
-  width: 50%;
+  width: 100%;
+  margin-bottom: -3rem;
 }
 
 .inst-card-insts--container {
@@ -96,22 +135,23 @@
   font-size: 1.1rem;
 }
 
-.unique-info {
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: column;
-  height: 20%;
-}
-
 .unique-inst-card--label {
   text-align: center;
   font-weight: bold;
   font-size: 1.2rem;
 }
 
-.unique-inst-card--label-ID {
-  width: 100%;
+.span-inst-card--info {
+  text-align: center;
+  font-size: 1rem;
+  color: rgb(61, 61, 61);
   font-weight: bold;
+}
+
+.unique-inst-card--label--ID {
+  color: #2a3577;
+  font-size: 1.1rem;
+  margin-top: -.8rem;
 }
 
 .unique-inst-card--info {
@@ -119,10 +159,12 @@
 }
 
 .inst-card-edit-button--container {
-  height: 10%;
-  box-sizing: border-box;
-  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
+  box-sizing: border-box;
+  margin-top: 3.5rem;
 }
 
 .inst-card-edit--button {
@@ -134,7 +176,7 @@
   );
   color: rgb(212, 211, 211);
   transition: all 0.4s;
-  margin-bottom: 2rem;
+  border-radius: 0.2rem;
 }
 
 .inst-card-edit--button:hover {
