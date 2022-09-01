@@ -21,6 +21,7 @@ import loginService from "../../services/authService";
 import InstitutionModal from "../InstitutionModal";
 import LoadingModal from "../LoadingModal";
 import Institution from "../Institution";
+import LoadingModal from "../LoadingModal";
 
 
 const Lists = (props: { userRole: string; navOption: string }) => {
@@ -61,7 +62,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const [isInfoLoading, setIsInfoLoading] = useState<boolean>(false);
+  const [isInfoLoading,setIsInfoLoading] = useState<boolean>(false)
 
   const [filterActive, setFilterActive] = useState<string>("");
 
@@ -110,10 +111,11 @@ const Lists = (props: { userRole: string; navOption: string }) => {
   };
 
   const userData = async (page: number) => {
-    setIsInfoLoading(true);
+
+    setIsInfoLoading(true)
     const response = await userService.getAllUsers(page);
-    if (response) {
-      setIsInfoLoading(false);
+    if(response){
+      setIsInfoLoading(false)
     }
     setUsersInfo(response.data.data);
     setMetaData(response.data.meta);
@@ -123,10 +125,10 @@ const Lists = (props: { userRole: string; navOption: string }) => {
   };
 
   const StudentData = async (page: number) => {
-    setIsInfoLoading(true);
+    setIsInfoLoading(true)
     const response = await studentsService.getAllStudents(page);
-    if (response) {
-      setIsInfoLoading(false);
+    if(response){
+      setIsInfoLoading(false)
     }
     setStudentsInfo(response.data.data);
     setMetaData(response.data.meta);
@@ -136,10 +138,10 @@ const Lists = (props: { userRole: string; navOption: string }) => {
   };
 
   const InstData = async (page: number) => {
-    setIsInfoLoading(true);
+    setIsInfoLoading(true)
     const response = await institutionService.getAllInstitutions(page);
-    if (response) {
-      setIsInfoLoading(false);
+    if(response){
+      setIsInfoLoading(false)
     }
     setInstInfo(response.data.data);
     setMetaData(response.data.meta);
@@ -163,18 +165,16 @@ const Lists = (props: { userRole: string; navOption: string }) => {
     setIsModalOpen(!isModalOpen);
   };
 
-  const handleSearch = async (event: any, page: number) => {
-    setIsInfoLoading(true);
+
+  const handleSearch = async (event: any,page:number) => {
+    setIsInfoLoading(true)
     event.preventDefault();
-    const response = await studentsService.searchStudent(
-      {
-        ...searchValue,
-        filter: selectedInst,
-      },
-      page
-    );
-    if (response) {
-      setIsInfoLoading(false);
+    const response = await studentsService.searchStudent({
+      ...searchValue,
+     filter: selectedInst
+    },page);
+    if(response){
+      setIsInfoLoading(false)
     }
     setSearchedStudents(response.data.data);
     setMetaData(response.data.meta);
@@ -364,6 +364,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
           studentInfo={undefined}
           closeModal={closeModal}
         />
+
       ) : isModalOpen && props.navOption == "Ger.Usuários" ? (
         <UsersModal
           refreshComp={refreshList}
@@ -383,6 +384,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
         ""
       )}
       {isInfoLoading ? <LoadingModal /> : ""}
+
     </section>
   );
 };

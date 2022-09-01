@@ -12,6 +12,7 @@ import StudentHistory from "../StudentHistory";
 import LoadingModal from "../LoadingModal";
 import RegisterVisitModal from "../RegisterVisitModal";
 
+
 const Student = () => {
   
   const jwt = localStorage.getItem("jwt");
@@ -137,7 +138,6 @@ const Student = () => {
       {isStudentModalOpen?<StudentModal type="EDIT" studentInfo={student} closeModal={handleStudentModal}/>:""}
       {isAppointmentModalOpen?<AppointmentModal closeModal={handleAppointMentModal}/>:''}
       {isInfoLoading? <LoadingModal/> : ''}
-     
     </>
   );
 };

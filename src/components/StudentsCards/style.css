@@ -12,7 +12,7 @@
   width: 20rem;
 }
 
- .student-icon{
+.student-icon {
   width: 100%;
   height: 100%;
   margin-bottom: 1rem;
@@ -20,8 +20,8 @@
   transition: all 0.4s;
 }
 
-.student-icon:hover{
-   transform: scale(1.1);
+.student-icon:hover {
+  transform: scale(1.1);
 }
 
 .CardInfo {
@@ -30,7 +30,7 @@
   box-sizing: border-box;
   justify-content: space-evenly;
   margin-top: 1.4rem;
-  gap: .5rem;
+  gap: 0.5rem;
   line-height: 0.01rem;
   font-family: Prompt;
   font-size: 0.9rem;
@@ -38,51 +38,52 @@
   width: 60%;
 }
 
-.student-info{
+.student-info {
   display: flex;
   flex-direction: column;
   height: 100%;
   font-size: 1rem;
 }
 
-.trash-can-icon--container{
+.trash-can-icon--container {
   display: flex;
   flex-direction: column;
   justify-content: end;
   align-items: flex-end;
   height: 90%;
-  width:20%;
+  width: 20%;
 }
 
-.trash-can-icon{
+.trash-can-icon {
   height: 45%;
   width: 70%;
   transition: all 0.4s;
   cursor: pointer;
 }
 
-.trash-can-icon:hover{
+.trash-can-icon:hover {
   transform: scale(1.2);
   color: red;
 }
 
-.student--label{
+.student--label {
   height: 50%;
   font-size: 1.2rem;
   font-weight: bold;
+  color: #6573dc;
 }
-.student--span{
-  height: 50%;
-  font-size: 95%;
+.student--span {
+  font-size: 1rem;
+  font-weight: bold;
 }
-.chosen-student__link{
+.chosen-student__link {
   height: 100%;
   width: 30%;
   text-decoration: none;
   color: black;
 }
 
-.span{
+.span {
   height: 50%;
-  font-size: .9rem;
+  font-size: 0.9rem;
 }

@@ -115,6 +115,7 @@ const StudentHistory = () => {
                   <img className="student-image" src={visit.image_2} alt="" />
                 </div>
               </div>
+
             </section>
           </div>
         ))}
