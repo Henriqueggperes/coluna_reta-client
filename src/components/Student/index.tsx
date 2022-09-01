@@ -9,6 +9,7 @@ import loginService from "../../services/authService";
 import studentsService from "../../services/studentsService";
 import StudentModal from "../StudentModal";
 import StudentHistory from "../StudentHistory";
+import LoadingModal from "../LoadingModal";
 
 const Student = () => {
   
@@ -16,6 +17,8 @@ const Student = () => {
   const navigate = useNavigate();
   const params = useParams();
   
+ 
+  const [isInfoLoading,setIsInfoLoading] = useState<boolean>(false)
 
   const [student,setStudent] = useState<studentObj>({
     id:0,
@@ -44,8 +47,12 @@ const Student = () => {
   });
 
   const getStudent = async ()=>{
+    setIsInfoLoading(true)
     const id = Number(params.id)
     const response = await studentsService.getStudentByID(id)
+    if(response){
+      setIsInfoLoading(false)
+    }
     setStudent(response.data);
   }
 
@@ -129,6 +136,7 @@ const Student = () => {
       </main>
       {isStudentModalOpen?<StudentModal type="EDIT" studentInfo={student} closeModal={handleStudentModal}/>:""}
       {isAppointmentModalOpen?<AppointmentModal closeModal={handleAppointMentModal}/>:''}
+      {isInfoLoading? <LoadingModal/> : ''}
     </>
   );
 };

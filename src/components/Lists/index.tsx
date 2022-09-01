@@ -19,6 +19,7 @@ import UsersModal from "../UsersModal";
 import ReactPaginate from "react-paginate";
 import loginService from "../../services/authService";
 import InstitutionModal from "../InstitutionModal";
+import LoadingModal from "../LoadingModal";
 
 const Lists = (props: { userRole: string; navOption: string }) => {
   useEffect(() => {
@@ -60,6 +61,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
      setInstitutions(response.data)
   }
 
+  const [isInfoLoading,setIsInfoLoading] = useState<boolean>(false)
 
   const [filterActive, setFilterActive] = useState<string>("");
 
@@ -103,7 +105,11 @@ const Lists = (props: { userRole: string; navOption: string }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const userData = async (page: number) => {
+    setIsInfoLoading(true)
     const response = await userService.getAllUsers(page);
+    if(response){
+      setIsInfoLoading(false)
+    }
     setUsersInfo(response.data.data);
     setMetaData(response.data.meta);
     if (response.data.message) {
@@ -112,7 +118,11 @@ const Lists = (props: { userRole: string; navOption: string }) => {
   };
 
   const StudentData = async (page: number) => {
+    setIsInfoLoading(true)
     const response = await studentsService.getAllStudents(page);
+    if(response){
+      setIsInfoLoading(false)
+    }
     setStudentsInfo(response.data.data);
     setMetaData(response.data.meta);
     if (response.data.message) {
@@ -121,7 +131,11 @@ const Lists = (props: { userRole: string; navOption: string }) => {
   };
 
   const InstData = async (page: number) => {
+    setIsInfoLoading(true)
     const response = await institutionService.getAllInstitutions(page);
+    if(response){
+      setIsInfoLoading(false)
+    }
     setInstInfo(response.data.data);
     setMetaData(response.data.meta);
     if (response.data.message) {
@@ -145,12 +159,15 @@ const Lists = (props: { userRole: string; navOption: string }) => {
   };
 
   const handleSearch = async (event: any,page:number) => {
+    setIsInfoLoading(true)
     event.preventDefault();
     const response = await studentsService.searchStudent({
       ...searchValue,
      filter: selectedInst
     },page);
-    console.log(response)
+    if(response){
+      setIsInfoLoading(false)
+    }
     setSearchedStudents(response.data.data);
     setMetaData(response.data.meta)
   };
@@ -323,6 +340,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
         <InstitutionModal instInfo={InstInfo} type="CREATE" closeModal={closeModal}/>
 
       ) : ""}
+      {isInfoLoading? <LoadingModal/> : ''}
     </section>
   );
 };
