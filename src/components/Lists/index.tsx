@@ -373,6 +373,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
         />
       ) : isModalOpen && props.navOption == "Ger.Instituições" ? (
         <InstitutionModal
+          handleModal={handleModal}
           refreshComp={refreshList}
           instInfo={InstInfo}
           type="CREATE"
