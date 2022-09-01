@@ -41,10 +41,6 @@ const Institution = () => {
     setModalIsOpen(!modalIsOpen);
   };
 
-  const getLoggedUser = async () => {
-    const response = await loginService.loggedUser();
-    setUserLogged(response.data);
-  };
 
   const getInstitution = async () => {
     const id = Number(params.id);

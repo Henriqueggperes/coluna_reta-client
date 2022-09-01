@@ -166,7 +166,7 @@ export interface consultationType {
   created_at: string;
   updated_at: string;
   deleted: boolean;
-
+}
 export interface registerPassword{
   passwordHash: string,
   confirmPassword: string,
