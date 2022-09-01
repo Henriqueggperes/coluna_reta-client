@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import institutionService from "../../services/institutionService";
 
 const StudentModal = (props: {
+  refreshComp: Function;
   type: string;
   closeModal: Function;
   studentInfo: studentObj | any;
@@ -52,6 +53,7 @@ const StudentModal = (props: {
       });
       if (response.status == 201) {
         toast.success("Estudante adicionado com sucesso!");
+        props.refreshComp()
         props.closeModal();
       } else if (response) {
         console.log(response.status == 400)
@@ -73,6 +75,7 @@ const StudentModal = (props: {
       if (response.data.data) {
         toast.success("Estudante editado com sucesso!");
         props.closeModal();
+        props.refreshComp()
       } else if (response.data.error) {
         console.log(response.data.error);
       }

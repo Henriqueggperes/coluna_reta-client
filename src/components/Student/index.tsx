@@ -10,6 +10,8 @@ import studentsService from "../../services/studentsService";
 import StudentModal from "../StudentModal";
 import StudentHistory from "../StudentHistory";
 import LoadingModal from "../LoadingModal";
+import RegisterVisitModal from "../RegisterVisitModal";
+
 
 const Student = () => {
   
@@ -34,7 +36,6 @@ const Student = () => {
   });
 
   
-
   const [userLogged, setUserLogged] = useState<userObj>({
     created_at: "",
     deleted: false,
@@ -55,17 +56,17 @@ const Student = () => {
     }
     setStudent(response.data);
   }
-
+  
   const getLoggedUser = async () => {
     const user = await loginService.loggedUser();
     setUserLogged(user.data);
   };
-
+  
   useEffect(() => {
     getLoggedUser();
     getStudent();
   }, []);
-
+  
   useEffect(() => {
     if (!jwt) {
       toast.error("Realize o login antes de acessar o backoffice");
@@ -74,10 +75,10 @@ const Student = () => {
   });
   
   const [isStudentModalOpen, setIsStudentModalOpen] = useState<boolean>(false)
-
+  
   const [isAppointmentModalOpen,setIsAppointmentModalOpen] = useState<boolean>(false)
   
-
+  
   const handleStudentModal = ()=>{
       setIsStudentModalOpen(!isStudentModalOpen)
   }

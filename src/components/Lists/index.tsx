@@ -19,13 +19,14 @@ import UsersModal from "../UsersModal";
 import ReactPaginate from "react-paginate";
 import loginService from "../../services/authService";
 import InstitutionModal from "../InstitutionModal";
+import LoadingModal from "../LoadingModal";
 import Institution from "../Institution";
 import LoadingModal from "../LoadingModal";
 
 
 const Lists = (props: { userRole: string; navOption: string }) => {
   useEffect(() => {
-     getInstitutions()
+    getInstitutions();
     if (props.navOption == "Alunos") {
       StudentData(1);
     } else if (props.navOption == "Ger.Usuários") {
@@ -35,6 +36,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
     }
   }, [props.navOption]);
 
+  const [refresh, setRefresh] = useState<boolean>(false);
   
   const [institutions,setInstitutions] = useState<postInstitutionObj[]>([])
 
@@ -42,7 +44,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
 
   const [searchValue, setSearchValue] = useState<sValueObj>({
     search: "",
-    filter:"",
+    filter: "",
   });
 
   const [usersInfo, setUsersInfo] = useState<userObj[]>([
@@ -58,10 +60,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
     },
   ]);
 
-  const getInstitutions = async ()=>{
-     const response = await institutionService.getInstitutions()
-     setInstitutions(response.data)
-  }
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const [isInfoLoading,setIsInfoLoading] = useState<boolean>(false)
 
@@ -102,9 +101,17 @@ const Lists = (props: { userRole: string; navOption: string }) => {
     },
   ]);
 
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const refreshList = () => {
+    setRefresh(!refresh);
+  };
+
+  const getInstitutions = async () => {
+    const response = await institutionService.getInstitutions();
+    setInstitutions(response.data);
+  };
 
   const userData = async (page: number) => {
+
     setIsInfoLoading(true)
     const response = await userService.getAllUsers(page);
     if(response){
@@ -142,10 +149,10 @@ const Lists = (props: { userRole: string; navOption: string }) => {
       toast.error(response.data.message);
     }
   };
-  
+
   const closeModal = () => {
-    setIsModalOpen(false)
-  }
+    setIsModalOpen(false);
+  };
 
   const handleChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue({
@@ -158,6 +165,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
     setIsModalOpen(!isModalOpen);
   };
 
+
   const handleSearch = async (event: any,page:number) => {
     setIsInfoLoading(true)
     event.preventDefault();
@@ -169,17 +177,20 @@ const Lists = (props: { userRole: string; navOption: string }) => {
       setIsInfoLoading(false)
     }
     setSearchedStudents(response.data.data);
-    setMetaData(response.data.meta)
+    setMetaData(response.data.meta);
   };
 
-  const searchPage = async (page:number)=>{
-    const response = await studentsService.searchStudent({
-      ...searchValue,
-     filter: selectedInst
-    },page);
-    setSearchedStudents(response.data.data)
-    setMetaData(response.data.meta)
-  }
+  const searchPage = async (page: number) => {
+    const response = await studentsService.searchStudent(
+      {
+        ...searchValue,
+        filter: selectedInst,
+      },
+      page
+    );
+    setSearchedStudents(response.data.data);
+    setMetaData(response.data.meta);
+  };
 
   const onClickFilter = () => {
     if (filterActive == "active") {
@@ -197,30 +208,39 @@ const Lists = (props: { userRole: string; navOption: string }) => {
 
   const handleClearSearch = () => {
     setSearchedStudents([]);
-    StudentData(1)
+    StudentData(1);
   };
 
   const handleClick = (selectedItem: { selected: number }) => {
     const page = selectedItem.selected + 1;
-    
-    if (props.navOption == "Alunos"&& searchedStudents.length<1) {
+
+    if (props.navOption == "Alunos" && searchedStudents.length < 1) {
       StudentData(page);
     }
-    if (props.navOption == "Alunos"&& searchedStudents.length>0) {
-      searchPage(page)
-    }
-     else if (props.navOption == "Ger.Usuários") {
+    if (props.navOption == "Alunos" && searchedStudents.length > 0) {
+      searchPage(page);
+    } else if (props.navOption == "Ger.Usuários") {
       userData(page);
     } else if (props.navOption == "Ger.Instituições") {
       InstData(page);
     }
   };
+  useEffect(() => {
+    getInstitutions();
+    if (props.navOption == "Alunos") {
+      StudentData(1);
+    } else if (props.navOption == "Ger.Usuários") {
+      userData(1);
+    } else if (props.navOption == "Ger.Instituições") {
+      InstData(1);
+    }
+  }, [refresh]);
 
   return (
     <section className="component-container">
       {props.navOption == "Alunos" ? (
         <form
-          onSubmit={(event)=>handleSearch(event, 1)}
+          onSubmit={(event) => handleSearch(event, 1)}
           className="students_list_search_filter-container"
         >
           <button className="students_search-button">
@@ -250,10 +270,10 @@ const Lists = (props: { userRole: string; navOption: string }) => {
               ></img>
             </div>
             <div className={`filter-dropdown__container-${filterActive}`}>
-              {institutions.map((inst)=>(
-              <div className="filter-dropdown__item" onClick={handleFilter}>
-                {inst.name}
-              </div>
+              {institutions.map((inst) => (
+                <div className="filter-dropdown__item" onClick={handleFilter}>
+                  {inst.name}
+                </div>
               ))}
             </div>
           </div>
@@ -264,11 +284,11 @@ const Lists = (props: { userRole: string; navOption: string }) => {
       <section className="students_list-container">
         <section className="option-list">
           <div className="list-icon--container">
-          {props.userRole == "ADMIN" ? (
-            <ListIcon handleModal={handleModal} navOption={props.navOption} />
+            {props.userRole == "ADMIN" ? (
+              <ListIcon handleModal={handleModal} navOption={props.navOption} />
             ) : (
               ""
-              )}
+            )}
           </div>
           {searchedStudents.length > 0 ? (
             <div
@@ -288,15 +308,26 @@ const Lists = (props: { userRole: string; navOption: string }) => {
           <section className="list_cards-container">
             {props.navOption == "Alunos" ? (
               <StudentsCards
+                refreshComp={refreshList}
                 navOption={props.navOption}
                 currentStudents={studentsInfo}
                 searchStudents={searchedStudents}
                 userRole={props.userRole}
               />
             ) : props.navOption == "Ger.Usuários" ? (
-              <UsersCard navOption={props.navOption} userRole={props.userRole} userData={usersInfo} />
+              <UsersCard
+                refreshComp={refreshList}
+                navOption={props.navOption}
+                userRole={props.userRole}
+                userData={usersInfo}
+              />
             ) : props.navOption == "Ger.Instituições" ? (
-              <InstCards InstData={InstInfo} navOption={props.navOption} userRole={props.userRole}/>
+              <InstCards
+                refreshComp={refreshList}
+                InstData={InstInfo}
+                navOption={props.navOption}
+                userRole={props.userRole}
+              />
             ) : (
               ""
             )}
@@ -328,19 +359,32 @@ const Lists = (props: { userRole: string; navOption: string }) => {
       </section>
       {isModalOpen && props.navOption == "Alunos" ? (
         <StudentModal
+          refreshComp={refreshList}
           type="CREATE"
           studentInfo={undefined}
           closeModal={closeModal}
         />
 
-      ) : isModalOpen && props.navOption=='Ger.Usuários'? (
-        <UsersModal userInfo={undefined} type="CREATE" closeModal={closeModal}/>
+      ) : isModalOpen && props.navOption == "Ger.Usuários" ? (
+        <UsersModal
+          refreshComp={refreshList}
+          userInfo={undefined}
+          type="CREATE"
+          closeModal={closeModal}
+        />
+      ) : isModalOpen && props.navOption == "Ger.Instituições" ? (
+        <InstitutionModal
+          handleModal={handleModal}
+          refreshComp={refreshList}
+          instInfo={InstInfo}
+          type="CREATE"
+          closeModal={closeModal}
+        />
+      ) : (
+        ""
+      )}
+      {isInfoLoading ? <LoadingModal /> : ""}
 
-      ) :  isModalOpen && props.navOption == 'Ger.Instituições' ? (
-        <InstitutionModal instInfo={InstInfo} handleModal={handleModal} type="CREATE" closeModal={closeModal}/>
-
-      ) : ""}
-      {isInfoLoading? <LoadingModal/> : ''}
     </section>
   );
 };

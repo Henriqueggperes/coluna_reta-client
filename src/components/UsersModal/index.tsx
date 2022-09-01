@@ -9,6 +9,7 @@ import userService from "../../services/userService";
 
 
 const UsersModal = (props: {
+  refreshComp:Function;
   userInfo: userObj | any;
   type: string;
   closeModal: Function;
