@@ -80,8 +80,15 @@
     height: 2.5rem;
     width: 4rem;
     color: #008000;
+    cursor: pointer;
+    transition: all 0.4s;
 }
 
 .pagination-visit-comp{
     height: 5%;
+}
+
+.student-image{
+    height: 100%;
+    width: 100%;
 }

@@ -9,6 +9,8 @@ import loginService from "../../services/authService";
 import studentsService from "../../services/studentsService";
 import StudentModal from "../StudentModal";
 import StudentHistory from "../StudentHistory";
+import LoadingModal from "../LoadingModal";
+import RegisterVisitModal from "../RegisterVisitModal";
 
 const Student = () => {
   
@@ -16,6 +18,8 @@ const Student = () => {
   const navigate = useNavigate();
   const params = useParams();
   
+ 
+  const [isInfoLoading,setIsInfoLoading] = useState<boolean>(false)
 
   const [student,setStudent] = useState<studentObj>({
     id:0,
@@ -31,7 +35,6 @@ const Student = () => {
   });
 
   
-
   const [userLogged, setUserLogged] = useState<userObj>({
     created_at: "",
     deleted: false,
@@ -44,21 +47,25 @@ const Student = () => {
   });
 
   const getStudent = async ()=>{
+    setIsInfoLoading(true)
     const id = Number(params.id)
     const response = await studentsService.getStudentByID(id)
+    if(response){
+      setIsInfoLoading(false)
+    }
     setStudent(response.data);
   }
-
+  
   const getLoggedUser = async () => {
     const user = await loginService.loggedUser();
     setUserLogged(user.data);
   };
-
+  
   useEffect(() => {
     getLoggedUser();
     getStudent();
   }, []);
-
+  
   useEffect(() => {
     if (!jwt) {
       toast.error("Realize o login antes de acessar o backoffice");
@@ -67,10 +74,10 @@ const Student = () => {
   });
   
   const [isStudentModalOpen, setIsStudentModalOpen] = useState<boolean>(false)
-
+  
   const [isAppointmentModalOpen,setIsAppointmentModalOpen] = useState<boolean>(false)
   
-
+  
   const handleStudentModal = ()=>{
       setIsStudentModalOpen(!isStudentModalOpen)
   }
@@ -129,6 +136,8 @@ const Student = () => {
       </main>
       {isStudentModalOpen?<StudentModal type="EDIT" studentInfo={student} closeModal={handleStudentModal}/>:""}
       {isAppointmentModalOpen?<AppointmentModal closeModal={handleAppointMentModal}/>:''}
+      {isInfoLoading? <LoadingModal/> : ''}
+     
     </>
   );
 };
