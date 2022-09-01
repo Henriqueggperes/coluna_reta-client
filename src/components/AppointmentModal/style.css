@@ -13,7 +13,7 @@
     box-sizing: border-box;
     padding: .5rem;
     padding-bottom: 1rem;
-    border-radius: 1rem;
+    border-radius: .5rem;
     height: 20rem;
     width: 25rem;
     background: linear-gradient(213.28deg, #eaf3ffeb 2.43%, rgba(219, 227, 238, 0.615) 95.17%);
@@ -38,19 +38,21 @@
 }
 .close--icon{
     cursor: pointer;
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 1.2rem;
+    width: 1.2rem;
     transition: all 0.4s;
 }
 
 .close--icon:hover{
     transform: scale(1.2);
     background-color: rgba(255, 0, 0, 0.322);
+    border-radius: 50%;
 }
 
 .appointment-modal-form--content{
   display: flex;
   flex-direction: column;
+  gap: -2rem;
   justify-content: space-between;
   height: 80%;
   width: 100%;
@@ -68,8 +70,23 @@
 .appointment-form-input{
     height: 30%;
     border: none;
+    border-radius: .3rem;
     width: 65%;
-    font-size: 1.5rem;
+    font-size: 1rem;
+    background-color: #fbfbfbb4;
+    padding: 1rem;
+}
+
+.appointment-form-input:focus {
+    outline: solid 1px #6F81FF;
+}
+
+.appointment-modal-form--span {
+    text-align: start !important;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #6F81FF;
+    margin-bottom: .5rem;
 }
 
 .appointment-form-button--container{
@@ -80,14 +97,18 @@
 }
 
 .appointment-form--button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: none;
     width: 55%;
     height: 100%;
     color: #acacac;
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     background: linear-gradient(270deg, #6F81FF 0%, rgba(124, 139, 254, 0.65) 100%);
     transition: all .5s;
+    border-radius: .3rem;
 }
 
 .appointment-form--button:hover{
