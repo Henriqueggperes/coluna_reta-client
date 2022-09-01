@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { institutionObj } from "../../types/types";
+import { institutionObj, postInstitutionObj } from "../../types/types";
 import { Link } from "react-router-dom";
 import { FaRegBuilding } from "react-icons/fa";
 import { BiTrash } from "react-icons/bi";
@@ -9,7 +9,7 @@ import DeleteModal from "../DeleteModal";
 
 const InstCards = (props: {
   refreshComp: Function;
-  InstData: institutionObj[];
+  InstData: postInstitutionObj[];
   userRole: string;
   navOption: string;
 }) => {
@@ -17,17 +17,17 @@ const InstCards = (props: {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 
   const [institutionToDelete, setInstitutionToDelete] =
-    useState<institutionObj>({
-      id: 0,
+    useState<postInstitutionObj>({
       name: "",
       phone_number: "",
-      address_id: 0,
-      created_at: "",
-      updated_at: "",
-      deleted: false,
+      state: "",
+      city: "",
+      zip_code: "",
     });
 
-  const handleModal = (event: any, element: institutionObj) => {
+ {
+
+  const handleModal = (event: any, element: postInstitutionObj) => {
     if (isDeleteModalOpen) {
       setIsDeleteModalOpen(false);
     } else {
@@ -38,7 +38,7 @@ const InstCards = (props: {
 
   return (
     <>
-      {props.InstData.map((institution: institutionObj) => (
+      {props.InstData.map((institution: postInstitutionObj) => (
         <div className="InstCard" key={institution.name}>
           <Link
             className="chosen-institution__link"

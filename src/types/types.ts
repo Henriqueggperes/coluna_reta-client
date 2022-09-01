@@ -90,6 +90,20 @@ export interface institutionObj {
   created_at?: string;
   updated_at?: string;
   deleted?: boolean;
+  _count?: string;
+}
+
+export interface postInstitutionObj {
+  id?: number;
+  name: string;
+  phone_number: string;
+  state: string;
+  city: string;
+  zip_code: string;
+  created_at?: string,
+  updated_at?: string,
+  _count?: string,
+  deleted?: boolean;
 }
 
 export interface patchStudentObj {
@@ -110,7 +124,7 @@ export interface MetaType {
 }
 
 export interface addressType {
-  id: number;
+  id?: number;
   city: string;
   complement: string;
   neighborhood: string;
@@ -152,4 +166,17 @@ export interface consultationType {
   created_at: string;
   updated_at: string;
   deleted: boolean;
+
+export interface registerPassword{
+  passwordHash: string,
+  confirmPassword: string,
+  recoverPasswordToken?: string,
+}
+
+export interface modalProps {
+  isOpen: boolean; 
+  closeModal: any; 
+  type: string; 
+  title: string; 
+  btnName: string; 
 }

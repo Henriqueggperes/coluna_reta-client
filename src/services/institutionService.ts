@@ -1,4 +1,4 @@
-import { institutionObj } from "../types/types";
+import { institutionObj, postInstitutionObj } from "../types/types";
 import api from "./api";
 
 const institutionService = {
@@ -13,7 +13,7 @@ const institutionService = {
       .then((response: any) => response)
       .catch((error: any) => error.response),
 
-  postInstitution: (values: institutionObj) =>
+  postInstitution: (values: postInstitutionObj) =>
     api
       .post("institution/create", values)
       .then((response: any) => response)
@@ -34,6 +34,12 @@ const institutionService = {
   deleteInstitution: (id: number) =>
     api
       .delete(`institution/delete/${id}`)
+      .then((response) => response)
+      .catch((error) => error.response),
+
+  updateInstitution: (id: number, values: postInstitutionObj) =>
+    api
+      .patch(`institution/update/${id}`, values)
       .then((response) => response)
       .catch((error) => error.response),
 };

@@ -1,7 +1,12 @@
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { institutionObj, userObj, addressType } from "../../types/types";
+import {
+  institutionObj,
+  userObj,
+  addressType,
+  postInstitutionObj,
+} from "../../types/types";
 import Header from "../Header";
 import loginService from "../../services/authService";
 import institutionService from "../../services/institutionService";
@@ -24,25 +29,28 @@ const Institution = () => {
   const params = useParams();
 
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-  const [institution, setInstitution] = useState<institutionObj>({
-    id: 0,
+  const [institution, setInstitution] = useState<postInstitutionObj>({
     name: "",
     phone_number: "",
-    address_id: 0,
-    created_at: "",
-    updated_at: "",
-    deleted: false,
+    state: "",
+    city: "",
+    zip_code: "",
   });
 
   const handleModal = () => {
     setModalIsOpen(!modalIsOpen);
   };
 
+  const getLoggedUser = async () => {
+    const response = await loginService.loggedUser();
+    setUserLogged(response.data);
+  };
 
   const getInstitution = async () => {
     const id = Number(params.id);
     const response = await institutionService.getInstitutionById(id);
     setInstitution(response.data);
+    console.log(response.data);
   };
 
   return (
@@ -57,60 +65,77 @@ const Institution = () => {
               </span>
             </div>
 
-            <section className="inst-card-info--separation">
+            <section className="info-main-section">
               <div className="inst-card-info--container">
-                
                 <div className="inst-card-id--container unique-info">
-                  
-                  <label htmlFor="" className="unique-inst-card--label-ID">
-                    ID
-                  </label>
-                  <span className="unique-inst-card--label">
-                    {institution.id}
-                  </span>
-                  
-                  <label htmlFor="" className="unique-inst-card--label">
-                  Telefone:
-                  </label>
-                  <span className="inst-card-phone inst-card-heading">
-                     {institution.phone_number}
-                  </span>
-                
+                  <div className="info-main-card">
+                    
+                    <div className="info">
+                      <label htmlFor="" className="unique-inst-card--label">
+                        ID:
+                      </label>
+                      <span className="span-inst-card--info">
+                        {institution.id}
+                      </span>
+                    </div>
+
+                    <div className="info">
+                      <label htmlFor="" className="unique-inst-card--label">
+                        Telefone:
+                      </label>
+                      <span className="span-inst-card--info">
+                        {institution.phone_number}
+                      </span>
+                    </div>
+
+                    <div className="info">
+                      <label htmlFor="" className="unique-inst-card--label">
+                        CEP:
+                      </label>
+                      <span className="span-inst-card--info">
+                        {institution.zip_code}
+                      </span>
+                    </div>
+
+                    <div className="info">
+                      <label htmlFor="" className="unique-inst-card--label">
+                        Cidade:
+                      </label>
+                      <span className="span-inst-card--info">
+                        {institution.city}
+                      </span>
+                    </div>
+
+                    <div className="info">
+                      <label htmlFor="" className="unique-inst-card--label">
+                        Estado:
+                      </label>
+                      <span className="span-inst-card--info">
+                        {institution.state}
+                      </span>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="inst-card-crtdat--container unique-info">
-                  <label htmlFor="" className="unique-inst-card--label">
-                    Adicionado em
-                  </label>
-                  <span className="unique-inst-card--info-crt">
-                    {institution.created_at}
-                  </span>
-                  
-                  <label htmlFor="" className="unique-inst-card--label">
-                    Atualizado em
-                  </label>
-                  <span className="unique-inst-card--info">
-                    {institution.updated_at}
-                  </span>
-                </div>
+                <div className="inst-space-create-update">
+                  <div className="infos-space-create-update">
+                    <label htmlFor="" className="unique-inst-card--label">
+                      Adicionado em:
+                    </label>
+                    <span className="span-inst-card--info">
+                      {institution.created_at}
+                    </span>
+                  </div>
 
-                {/* <div className="inst-card-crtdat--container unique-info">
-                  <label htmlFor="" className="unique-inst-card--label">
-                    Atualizado em
-                  </label>
-                  <span className="unique-inst-card--info">
-                    {institution.updated_at}
-                  </span>
-                </div> */}
-              </div>
-              
-              <div className="inst-card-insts--container">
-                <h1 className="unique-inst-card--label">Endereço</h1>
-                <ul className="inst-address-container">
-                  {institution.address?.map((item: addressType) => (
-                    <li className="inst-institution--li">{item.id}</li>
-                  ))}
-                </ul>
+                  <div className="infos-space-create-update">
+                    <label htmlFor="" className="unique-inst-card--label">
+                      Atualizado em:
+                    </label>
+                    <span className="span-inst-card--info">
+                      {institution.updated_at}
+                    </span>
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -127,6 +152,7 @@ const Institution = () => {
           closeModal={handleModal}
           type="EDIT"
           instInfo={institution}
+          handleModal={handleModal}
         />
       ) : (
         ""

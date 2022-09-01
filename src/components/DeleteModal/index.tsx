@@ -37,7 +37,7 @@ const DeleteModal = (props: {
 
     else if(props.navOption=='Ger.Instituições'){
       response =  await institutionService.deleteInstitution(id);
-      if (response.data) {
+      if (response.status == 204) {
         toast.success("Instituição apagada com sucesso");
         props.closeModal();
       } else if (response.data.message) {

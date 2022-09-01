@@ -1,5 +1,11 @@
 import React from "react";
-import { addressType, institutionObj, patchStudentObj, studentObj } from "../../types/types";
+import {
+  addressType,
+  institutionObj,
+  patchStudentObj,
+  postInstitutionObj,
+  studentObj,
+} from "../../types/types";
 import close_icon from "./../../assets/icons/close_icon.svg";
 import { useEffect, useState } from "react";
 import studentsService from "../../services/studentsService";
@@ -7,75 +13,91 @@ import filter_arrow from "../../assets/icons/filter_arrow_icon.svg";
 import { toast } from "react-toastify";
 import institutionService from "../../services/institutionService";
 import addressService from "../../services/addressService";
-import './style.css';
+import "./style.css";
+import ModalAddress from "../AddressModal";
 
-//TODO PATH INST, PAGINA BY ID
 
 const InstitutionModal = (props: {
   refreshComp:Function;
   type: string;
   closeModal: Function;
-  instInfo: institutionObj | any;
+  handleModal: Function;
+  instInfo: postInstitutionObj | any;
 }) => {
-  const [institution, setInstitution] = useState<institutionObj>({
+  const [institution, setInstitution] = useState<postInstitutionObj>({
     name: "",
     phone_number: "",
-    address_id: 0,
+    state: "",
+    city: "",
+    zip_code: "",
   });
 
-  const [address, setAddress] = useState<addressType[]>()
-
-  const [dropdownActive, setDropdowActive] = useState<string>("");
-
-  const [selectedAddress, setSelectedAddress] = useState<number>();
-
-  const getAddress = async () => {
-    const response = await addressService.getAllAddress();
-    setAddress(response.data)   
-  }
+  const [createInstitution, setCreateInstitution] =
+    useState<postInstitutionObj>({
+      name: "",
+      phone_number: "",
+      state: "",
+      city: "",
+      zip_code: "",
+    });
 
   const handleSendInst = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     let response;
-    
+
     if (props.type === "CREATE") {
       response = await institutionService.postInstitution({
-        ...institution,
-        address_id: Number(selectedAddress),
+        ...createInstitution,
       });
-    } 
-    
-    if (response.status === 201) {
+
+      if (response.status == 201) {
+        toast.success("Instituição adicionada com sucesso!");
+        props.closeModal();
+      } else {
+        toast.error(response.data.message[0]);
+        props.closeModal();
+      }
+    } else if (props.type === "EDIT") {
+      response = institutionService.updateInstitution(Number(institution.id), {
+        ...institution,
+        id: undefined,
+        name: institution.name,
+        phone_number: institution.phone_number,
+        state: institution.state,
+        city: institution.city,
+        zip_code: institution.zip_code,
+        created_at: undefined,
+        updated_at: undefined,
+        _count: undefined,
+        deleted: undefined,
+      });
+    }
+
+    if (response.status === 200 && props.type == "CREATE") {
       toast.success("Instituição adicionada com sucesso!");
       props.refreshComp()
       props.closeModal();
-    } else if (response) {
-      console.log(response.status == 400)
+    } else if (response.status === 200 && props.type == "EDIT") {
+      toast.success("Instituição alterada com sucesso!");
+      props.closeModal();
+    }
+    if (response) {
+      console.log(response.status == 400);
       toast.error(response.data.message[0]);
       props.closeModal();
     }
   };
 
-  const handleDropdown = () => {
-    if (dropdownActive == "-active") {
-      setDropdowActive("");
-    } else {
-      setDropdowActive("-active");
-      getAddress();
-    }
-  };
-
   const handleChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-    setInstitution({
-      ...institution,
+    setCreateInstitution({
+      ...createInstitution,
       [event.target.name]: event.target.value,
     });
   };
 
   useEffect(() => {
     setInstitution(props.instInfo);
-    getAddress();
   }, []);
 
   return (
@@ -116,53 +138,62 @@ const InstitutionModal = (props: {
               onChange={handleChanges}
               name="phone_number"
               type="text"
-              autoComplete="off"
+              autoComplete="on"
               className="institution-modal-form--input"
               placeholder={props.type == "EDIT" ? institution.phone_number : ""}
               required={props.type == "EDIT" ? false : true}
             />
-            <label className="input--label">Telefone</label>
+            <label htmlFor="phone_number" className="input--label">
+              Telefone
+            </label>
           </div>
 
           <div className="inputs-labels--container">
-            <div className="address-student-filter--container">
-              <input
-                onChange={handleChanges}
-                name="address_id"
-                type="number"
-                value={selectedAddress}
-                autoComplete="off"
-                className="institution-modal-form--input institution-address--input"
-                placeholder={
-                  props.type == "EDIT" ? institution.address_id?.toString() : ""
-                }
-                required={props.type == "EDIT" ? false : true}
-              />
-              <label className="input--label institution-inst-label">
-                Endereço(ID)
-              </label>
-              <img
-                onClick={handleDropdown}
-                className={`institution-filter-arrow--icon${dropdownActive}`}
-                src={filter_arrow}
-              />
-            </div>
-
-            <div
-              className={`institution-inst-dropdown--container${dropdownActive}`}
-            >
-              {address?.map((adrss) => (
-                <span
-                  onClick={(event) => setSelectedAddress(adrss.id)}
-                  className={`dropdown-institution--item${dropdownActive}`}
-                >
-                  {adrss.street}
-                </span>
-              ))}
-            </div>
+            <input
+              onChange={handleChanges}
+              name="state"
+              type="text"
+              autoComplete="on"
+              className="institution-modal-form--input"
+              placeholder={props.type == "EDIT" ? institution.state : ""}
+              required={props.type == "EDIT" ? false : true}
+            />
+            <label htmlFor="state" className="input--label">
+              Estado - UF
+            </label>
           </div>
-        </div>
+          
+          <div className="inputs-labels--container">
+            <input
+              onChange={handleChanges}
+              name="city"
+              type="text"
+              autoComplete="off"
+              className="institution-modal-form--input"
+              placeholder={props.type == "EDIT" ? institution.city : ""}
+              required={props.type == "EDIT" ? false : true}
+            />
+            <label htmlFor="city" className="input--label">
+              Cidade
+            </label>
+          </div>
+          
+          <div className="inputs-labels--container">
+            <input
+              onChange={handleChanges}
+              name="zip_code"
+              type="text"
+              autoComplete="off"
+              className="institution-modal-form--input"
+              placeholder={props.type == "EDIT" ? institution.zip_code : ""}
+              required={props.type == "EDIT" ? false : true}
+            />
+            <label htmlFor="zip_code" className="input--label">
+              CEP
+            </label>
+          </div>
 
+        </div>
         <div className="student-modal-form-send-button--container">
           <button className="send--button">
             {props.type == "EDIT" ? "EDITAR" : "CRIAR"}

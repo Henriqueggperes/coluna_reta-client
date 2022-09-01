@@ -11,6 +11,7 @@
     height: 7.5rem;
     width: 20rem;
     max-width: 100%;
+    margin-top: 2.5rem;
   }
    
   .InstInfo {
@@ -43,11 +44,15 @@
     font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: .5rem;
+    color: #6573dc;
+
   }
   
   .span{
-    height: 30%;
+    /* height: 30%; */
+    margin-top: .5rem;
     font-size: 1rem;
+    font-weight: bold;
   }
  
 
