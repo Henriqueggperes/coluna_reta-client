@@ -18,7 +18,6 @@ import ModalAddress from "../AddressModal";
 
 
 const InstitutionModal = (props: {
-  refreshComp:Function;
   type: string;
   closeModal: Function;
   handleModal: Function;
@@ -75,7 +74,6 @@ const InstitutionModal = (props: {
 
     if (response.status === 200 && props.type == "CREATE") {
       toast.success("Instituição adicionada com sucesso!");
-      props.refreshComp()
       props.closeModal();
     } else if (response.status === 200 && props.type == "EDIT") {
       toast.success("Instituição alterada com sucesso!");

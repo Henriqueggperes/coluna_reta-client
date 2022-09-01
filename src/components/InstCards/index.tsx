@@ -8,7 +8,6 @@ import "./style.css";
 import DeleteModal from "../DeleteModal";
 
 const InstCards = (props: {
-  refreshComp: Function;
   InstData: postInstitutionObj[];
   userRole: string;
   navOption: string;
@@ -72,7 +71,6 @@ const InstCards = (props: {
         ))}
         {isDeleteModalOpen ? (
           <DeleteModal
-            refreshComp={props.refreshComp}
             navOption={props.navOption}
             element={institutionToDelete}
             closeModal={handleModal}

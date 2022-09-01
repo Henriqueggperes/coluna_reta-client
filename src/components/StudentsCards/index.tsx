@@ -9,7 +9,6 @@ import { BiTrash } from "react-icons/bi";
 import DeleteModal from "../DeleteModal";
 
 const StudentsCards = (props: {
-  refreshComp: Function;
   navOption: string;
   searchStudents: studentObj[];
   currentStudents: studentObj[];
@@ -130,7 +129,6 @@ const StudentsCards = (props: {
           ))}
       {isDeleteModalOpen ? (
         <DeleteModal
-          refreshComp={props.refreshComp}
           navOption={props.navOption}
           element={studentToDelete}
           closeModal={handleModal}

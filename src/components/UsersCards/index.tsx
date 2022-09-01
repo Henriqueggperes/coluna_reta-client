@@ -7,7 +7,6 @@ import DeleteModal from "../DeleteModal";
 import "./style.css";
 
 const UsersCard = (props: {
-  refreshComp: Function;
   navOption: string;
   userRole: string;
   userData: userObj[];
@@ -72,7 +71,6 @@ const UsersCard = (props: {
       ))}
       {isDeleteModalOpen ? (
         <DeleteModal
-          refreshComp={props.refreshComp}
           navOption={props.navOption}
           element={userToDelete}
           closeModal={handleModal}

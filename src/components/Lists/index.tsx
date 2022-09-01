@@ -21,7 +21,7 @@ import loginService from "../../services/authService";
 import InstitutionModal from "../InstitutionModal";
 import LoadingModal from "../LoadingModal";
 import Institution from "../Institution";
-import LoadingModal from "../LoadingModal";
+
 
 
 const Lists = (props: { userRole: string; navOption: string }) => {
@@ -225,16 +225,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
       InstData(page);
     }
   };
-  useEffect(() => {
-    getInstitutions();
-    if (props.navOption == "Alunos") {
-      StudentData(1);
-    } else if (props.navOption == "Ger.Usuários") {
-      userData(1);
-    } else if (props.navOption == "Ger.Instituições") {
-      InstData(1);
-    }
-  }, [refresh]);
+  
 
   return (
     <section className="component-container">
@@ -308,7 +299,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
           <section className="list_cards-container">
             {props.navOption == "Alunos" ? (
               <StudentsCards
-                refreshComp={refreshList}
+                
                 navOption={props.navOption}
                 currentStudents={studentsInfo}
                 searchStudents={searchedStudents}
@@ -316,14 +307,14 @@ const Lists = (props: { userRole: string; navOption: string }) => {
               />
             ) : props.navOption == "Ger.Usuários" ? (
               <UsersCard
-                refreshComp={refreshList}
+                
                 navOption={props.navOption}
                 userRole={props.userRole}
                 userData={usersInfo}
               />
             ) : props.navOption == "Ger.Instituições" ? (
               <InstCards
-                refreshComp={refreshList}
+                
                 InstData={InstInfo}
                 navOption={props.navOption}
                 userRole={props.userRole}
@@ -359,7 +350,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
       </section>
       {isModalOpen && props.navOption == "Alunos" ? (
         <StudentModal
-          refreshComp={refreshList}
+          
           type="CREATE"
           studentInfo={undefined}
           closeModal={closeModal}
@@ -367,7 +358,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
 
       ) : isModalOpen && props.navOption == "Ger.Usuários" ? (
         <UsersModal
-          refreshComp={refreshList}
+          
           userInfo={undefined}
           type="CREATE"
           closeModal={closeModal}
@@ -375,7 +366,7 @@ const Lists = (props: { userRole: string; navOption: string }) => {
       ) : isModalOpen && props.navOption == "Ger.Instituições" ? (
         <InstitutionModal
           handleModal={handleModal}
-          refreshComp={refreshList}
+          
           instInfo={InstInfo}
           type="CREATE"
           closeModal={closeModal}
