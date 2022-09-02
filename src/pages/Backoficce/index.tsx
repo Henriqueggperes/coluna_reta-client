@@ -36,11 +36,11 @@ const Backoficce = () => {
    
   const getLoggedUser = async () => {
     const user = await loginService.loggedUser();
-    setUserLogged(user.data.user);
+    setUserLogged(user.data);
   };
-
-  const role = userLogged.role;
-
+  
+  const role = userLogged.role;  
+  
   const [currentOption, setCurrentOption] = useState<string>("");
   const getCurrentOption = (option: string) => {
     setCurrentOption(option);
@@ -52,7 +52,7 @@ const Backoficce = () => {
 
   return (
     <main className="backoficce_main-container">
-      <Header loggedUser={userLogged} />
+      <Header/>
       <section className="backoficce_content-container">
         <Navbar userRole={role} navOptionSelected={getCurrentOption} />
         <section className="backoficce-content">

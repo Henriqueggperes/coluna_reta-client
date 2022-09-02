@@ -1,0 +1,94 @@
+.student-visits-history--container{
+    height: 95%;
+    width: 100%;
+    overflow: auto;
+}
+
+.student-visit--card{
+    margin: 1rem 0 1rem 0;
+    height: 30rem;
+    width: 42rem;
+    background-color: #ffff;
+    border-top: 1px solid #0000003f;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.084), 0px 4px 4px rgba(0, 0, 0, 0.107),
+    0px 4px 4px rgba(0, 0, 0, 0.083);
+    border-radius: .5rem;
+}
+
+.student-visit-card--id{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 6%;
+    width: 10%;
+    color: #2A3577 ;
+    font-weight: bold;
+    border-radius: .5rem;
+    background-color: rgb(210, 210, 210) ;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.084), 0px 4px 4px rgba(0, 0, 0, 0.107),
+    0px 4px 4px rgba(0, 0, 0, 0.083);
+}
+
+.student-visit-card-infos--container{
+    display: flex;
+    height: 94%;
+    width: 100%;
+}
+
+.student-visit--infos{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 40%;
+}
+.student-visit--images{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 60%;
+}
+
+.student-visit--info{
+    display: flex;
+    margin-top: 1rem;
+    padding: 0 0 0 1rem;
+    flex-direction: column;
+    font-weight: bold;
+}
+
+.visit-info--label{
+    color: #2A3577;
+    font-weight: bold;
+}
+
+.studen-visit--image{
+    height: 45%;
+    width: 90%;
+    border: 1px solid;
+}
+
+.register-visit-icon--container{
+    display: flex;
+    justify-content: end;
+    height: 5%;
+    width: 100%;
+}
+
+.register-visit--icon{
+    height: 2.5rem;
+    width: 4rem;
+    color: #008000;
+    cursor: pointer;
+    transition: all 0.4s;
+}
+
+.pagination-visit-comp{
+    height: 5%;
+}
+
+.student-image{
+    height: 100%;
+    width: 100%;
+}

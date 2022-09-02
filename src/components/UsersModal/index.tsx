@@ -4,11 +4,9 @@ import filterArrowIcon from "../../assets/icons/filter_arrow_icon.svg";
 import React, { useEffect, useState } from "react";
 import institutionService from "../../services/institutionService";
 import { institutionObj, userObj } from "../../types/types";
-import { CgChevronLeft } from "react-icons/cg";
-import { CgChevronRight } from "react-icons/cg";
 import { toast } from "react-toastify";
 import userService from "../../services/userService";
-import { userInfo } from "os";
+
 
 const UsersModal = (props: {
   userInfo: userObj | any;
@@ -19,24 +17,19 @@ const UsersModal = (props: {
   
   useEffect(() => {    
     setUser(props.userInfo);
-    console.log(user)
-    if(props.userInfo!=undefined){
-      setSelectedInsts(props.userInfo.institutions)
-    }
   }, []);
  
   const [allInsts, setAllInsts] = useState<institutionObj[]>();
   
   const [dropdownActive, setDropdownActive] = useState<string>("");
   
-  const [page, setPage] = useState<number>(1);
   
   const [user, setUser] = useState<userObj>({
     id: 0,
     name: "",
     email: "",
     role: "",
-    institution_id: [],
+    institutions:[]
   });
 
 
@@ -63,33 +56,39 @@ const UsersModal = (props: {
       response = await userService.postUser({
         ...user,
         id: undefined,
-        institution_id: selectedInsts,
         created_at: undefined,
         updated_at: undefined,
+        institution_id:undefined,
         recoverPasswordToken: undefined,
-        institutions: undefined,
+        institutions: selectedInsts,
       });
       if (response.status == 201) {
+        console.log('CAIU')
         toast.success(response.data)
-      } else {
-        toast.error(response.data.message[0]);
+        console.log(response)
       } 
+      else {  
+          console.log(response)
+          toast.error(response.data.message[0]);
+        }
+        props.closeModal()
     }
-    else if(props.type=='EDIT'){
+    
+    else if(props.type === 'EDIT'){
       response = await userService.patchUser(Number(user.id),{
         ...user,
         id: undefined,
-        institution_id: selectedInsts,
+        institution_id: undefined,
         created_at: undefined,
         updated_at: undefined,
         recoverPasswordToken: undefined,
-        institutions: undefined,
+        institutions: selectedInsts,
         passwordHash: undefined,
       });
       if (response.status == 201) {
-        toast.success(response.data)
+        toast.success('Usuário editado com sucesso!')
       } else {
-        toast.error(response.data.message[0]);
+        toast.error(response.data.message);
       } 
     }
   };
@@ -108,8 +107,6 @@ const UsersModal = (props: {
       setDropdownActive("");
     }
   };
-  
-
   
   return (
     <section className="users-modal--container">
@@ -174,7 +171,7 @@ const UsersModal = (props: {
                 <ul className="institutions-list">
                   {props.userInfo?
                   selectedInsts.map((item:any,)=>(
-                    <li className="inst-id">{item.id? item.id : item}</li>                      
+                    <li className="inst-id">{item}</li>                      
                     )):
                     selectedInsts.map((item:any,)=>(
                     <li className="inst-id">{item}</li>                      
@@ -203,7 +200,7 @@ const UsersModal = (props: {
                     <div className="dropdown-content">
                       {allInsts?.map((inst) => (
                         <span
-                          onClick={() => setInstitutions(inst.id)}
+                          onClick={() => setInstitutions(Number(inst.id))}
                           className="user-institution-span"
                         >
                           {inst.name}

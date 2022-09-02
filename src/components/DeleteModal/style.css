@@ -34,7 +34,6 @@
 }
 
 .delete-modal--heading{
-    margin-top: 1rem;
     margin-bottom: 1rem;
     font-size: 2rem;
     color: #2A3577;
@@ -71,6 +70,10 @@
     width: 45%;
     background-color: rgba(200, 199, 199, 0.51);
     transition: all 0.4s;
+}
+
+.confirm {
+    color: red;
 }
 
 

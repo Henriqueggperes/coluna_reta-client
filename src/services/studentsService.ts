@@ -1,5 +1,10 @@
 import { toast } from "react-toastify";
-import { patchStudentObj, studentObj, sValueObj } from "../types/types";
+import {
+  consultationType,
+  patchStudentObj,
+  studentObj,
+  sValueObj,
+} from "../types/types";
 import api from "./api";
 
 const studentsService = {
@@ -25,12 +30,12 @@ const studentsService = {
         return error.response;
       }),
 
-  searchStudent: (value: sValueObj,page:number) =>
+  searchStudent: (value: sValueObj, page: number) =>
     api
-      .post("student/search", value,{
-        params:{ 
-          page
-        }
+      .post("student/search", value, {
+        params: {
+          page,
+        },
       })
       .then((response) => response)
       .catch((error) => error.response),
@@ -52,6 +57,22 @@ const studentsService = {
       .patch(`student/${id}`, values)
       .then((response) => response)
       .catch((error) => error.response.data),
+
+  getVisitsHistory: (id: number, page: number) =>
+    api
+      .get(`historic/find/${id}`, {
+        params: {
+          page,
+        },
+      })
+      .then((response) => response)
+      .catch((error) => error.response),
+
+  postAppointment: (values: consultationType) =>
+    api
+      .post("historic/make-appointment", values)
+      .then((response) => response)
+      .catch((error) => error.response),
 };
 
 export default studentsService;
