@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import {
-  registerVisitObj
+  registerVisitObj,
   consultationType,
   patchStudentObj,
   studentObj,
