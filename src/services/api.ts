@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: 'https://dev-coluna-reta-wandersondeve.koyeb.app/'
+    baseURL: 'https://colunaretaapi-production.up.railway.app/'
 });
 
 
