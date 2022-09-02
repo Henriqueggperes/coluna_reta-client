@@ -106,11 +106,11 @@
 
 .register-visit-from-inputs--container{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 50%;
+    height: 60%;
     width: 100%;
-    /* border: 1px solid; */
 }
 
 .register-visit-form--inputs{
@@ -122,12 +122,10 @@
     box-sizing: border-box;
     height: 90%;
     width: 95%;
-    /* border: 1px solid; */
 }
 
 .register-visit-input--container{
     display: flex;
-    /* border: 1px solid; */
     flex-direction: column-reverse;
     height: 25%;
     width: 80%;
@@ -155,6 +153,7 @@
 .register-visit--input:valid + .register-visit-input--label {
     top: 0;
     color: #2A3577;
+    font-size: .8rem;
 }
 
 .register-visit--input:focus,
@@ -166,7 +165,7 @@
     display: flex;
     align-items: center;
     padding-left: 2rem;
-    height: 10%;
+    height: 20%;
     width: 100%;
 }
 
