@@ -18,7 +18,7 @@ const StudentHistory = () => {
   const id = params.id;
 
   const [studentHistory, setStudentHistory] = useState<studentHistory[]>([]);
-  
+
   const [metaData, setMetaData] = useState<MetaType>({
     hasNextPage: false,
     hasPreviousPage: false,
@@ -29,12 +29,11 @@ const StudentHistory = () => {
     take: 1,
   });
 
-  const [isVisitModalOpen,setIsVisitModalOpen] = useState<boolean>(false)
-  
-  const handleVisitModal = ()=>{
-    setIsVisitModalOpen(!isVisitModalOpen)
-  }
+  const [isVisitModalOpen, setIsVisitModalOpen] = useState<boolean>(false);
 
+  const handleVisitModal = () => {
+    setIsVisitModalOpen(!isVisitModalOpen);
+  };
 
   const getStudentHistory = async (page: number) => {
     const response = await studentsService.getVisitsHistory(Number(id), page);
@@ -62,7 +61,10 @@ const StudentHistory = () => {
     <>
       <section className="student-visits-history--container">
         <div className="register-visit-icon--container">
-          <AiOutlinePlusSquare onClick={()=>handleVisitModal()} className="register-visit--icon" />
+          <AiOutlinePlusSquare
+            onClick={() => handleVisitModal()}
+            className="register-visit--icon"
+          />
         </div>
         {studentHistory?.map((visit) => (
           <div className="student-visit--card">
@@ -102,7 +104,10 @@ const StudentHistory = () => {
                   </label>
                   <span className="visit-info--span">
                     {visit.consultation.map((consultation) => (
-                      <div>1</div>
+                      <div>
+                         <div>Clinica:{' '}{consultation.clinic}</div>
+                        <div>Data:{' '} {consultation.consultation_date}</div>
+                      </div>
                     ))}
                   </span>
                 </div>
@@ -115,7 +120,6 @@ const StudentHistory = () => {
                   <img className="student-image" src={visit.image_2} alt="" />
                 </div>
               </div>
-
             </section>
           </div>
         ))}
@@ -143,7 +147,11 @@ const StudentHistory = () => {
           activeClassName={"active"}
         />
       </div>
-      {isVisitModalOpen?<RegisterVisitModal closeModal={handleVisitModal}/> :''}
+      {isVisitModalOpen ? (
+        <RegisterVisitModal closeModal={handleVisitModal} />
+      ) : (
+        ""
+      )}
     </>
   );
 };
