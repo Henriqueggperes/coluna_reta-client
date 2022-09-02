@@ -4,8 +4,12 @@ import React, { useState } from "react";
 import studentsService from "../../services/studentsService";
 import { consultationType, studentObj } from "../../types/types";
 import { toast } from "react-toastify";
+import LoadingModal from "../LoadingModal";
 
 const AppointmentModal = (props: { closeModal: any, studentId: number | undefined }) => {
+ 
+  const [isInfoLoading,setIsInfoLoading] = useState<boolean>(false)
+  
   const [appointment, setAppointment] = useState<consultationType>({
     student_id: props.studentId,
     clinic: "",
@@ -22,6 +26,7 @@ const AppointmentModal = (props: { closeModal: any, studentId: number | undefine
   };
 
   const handlePostAppointment = async (event: React.FormEvent<HTMLFormElement>) => {
+   setIsInfoLoading(true)
     event.preventDefault();
     const response = await studentsService.postAppointment(appointment);
     
@@ -32,6 +37,7 @@ const AppointmentModal = (props: { closeModal: any, studentId: number | undefine
       toast.error(response.data.message);
       props.closeModal();
     } 
+    setIsInfoLoading(false)
   };
 
   return (
@@ -78,6 +84,7 @@ const AppointmentModal = (props: { closeModal: any, studentId: number | undefine
             <button className="appointment-form--button">AGENDAR</button>
           </div>
         </form>
+        {isInfoLoading?<LoadingModal/>:''}
       </section>
     </>
   );

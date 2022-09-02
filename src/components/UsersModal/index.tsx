@@ -69,7 +69,7 @@ const UsersModal = (props: {
       } 
       else {  
           console.log(response)
-          toast.error(response.data.message[0]);
+          toast.error(response.data.message);
         }
         props.closeModal()
     }

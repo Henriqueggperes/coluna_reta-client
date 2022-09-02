@@ -70,7 +70,7 @@ const StudentModal = (props: {
         updated_at: undefined,
         institution_id: Number(selectedInst)
       });
-      if (response.data.data) {
+      if (response.status == 200) {
         toast.success("Estudante editado com sucesso!");
         props.closeModal();
       } else if (response.data.error) {
