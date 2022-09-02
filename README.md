@@ -86,5 +86,3 @@ Inicie o servidor
 | :---: | :---: | :---: |:---: |
 
 
-
-[Voltar ao 🔝](#coluna_reta_api)
