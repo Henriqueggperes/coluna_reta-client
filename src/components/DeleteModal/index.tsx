@@ -4,14 +4,18 @@ import studentsService from "../../services/studentsService";
 import { toast } from "react-toastify";
 import userService from "../../services/userService";
 import institutionService from "../../services/institutionService";
+import { useState } from "react";
+import LoadingModal from "../LoadingModal";
 
 const DeleteModal = (props: {
   navOption: string;
   element: studentObj | userObj | institutionObj | undefined;
   closeModal: Function;
 }) => {
+  const [isInfoLoading,setIsInfoLoading] = useState<boolean>(false)
+  
   const deleteElement = async (id: number) => {    
-    
+    setIsInfoLoading(true)
     let response;   
     
     if(props.navOption=='Alunos'){
@@ -43,6 +47,7 @@ const DeleteModal = (props: {
         toast.error(response.data.message);
       }
     }
+    setIsInfoLoading(false)
   };
 
   const handleDelete = (id: any) => {
@@ -86,6 +91,7 @@ const DeleteModal = (props: {
           </button>
         </div>
       </div>
+      {isInfoLoading?<LoadingModal></LoadingModal>:''}
     </section>
   );
 };

@@ -180,3 +180,12 @@ export interface modalProps {
   title: string; 
   btnName: string; 
 }
+export interface registerVisitObj{
+  student_id: number;
+  forwarding: string;
+  cobb_angle: string;
+  return_date: string;
+  image_1: string;
+  image_2: string;
+}
+

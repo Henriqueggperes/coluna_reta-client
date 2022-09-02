@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import UserIcon from "../../assets/icons/userCard.png";
 import { userObj } from "../../types/types";
 import DeleteModal from "../DeleteModal";
+import LoadingModal from "../LoadingModal";
 import "./style.css";
 
 const UsersCard = (props: {
@@ -11,6 +12,7 @@ const UsersCard = (props: {
   userRole: string;
   userData: userObj[];
 }) => {
+  const [isInfoLoading,setIsInfoLoading] = useState<boolean>(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>();
   const [userToDelete, setUserToDelete] = useState<userObj>();
 
@@ -78,6 +80,7 @@ const UsersCard = (props: {
       ) : (
         ""
       )}
+      
     </>
   );
 };

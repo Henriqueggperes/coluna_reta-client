@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 import {
+  registerVisitObj
   consultationType,
   patchStudentObj,
   studentObj,
@@ -56,7 +57,11 @@ const studentsService = {
     api
       .patch(`student/${id}`, values)
       .then((response) => response)
-      .catch((error) => error.response.data),
+      .catch((error) => error.response.data),  
+
+  registerVisit: (visit:registerVisitObj)=> api.post('historic/register-visit',visit)
+  .then((response)=>response)
+  .catch((error)=>error.response), 
 
   getVisitsHistory: (id: number, page: number) =>
     api
