@@ -7,8 +7,12 @@ import userService from "../../services/userService";
 import { registerPassword } from "../../types/types";
 import { toast } from "react-toastify";
 import { IoInformationCircleOutline } from "react-icons/io5";
+import LoadingModal from "../../components/LoadingModal";
 
 const RecoverPassword = () => {
+ 
+  const [isInfoLoading,setIsInfoLoading] = useState<boolean>(false)
+
   const params = useParams();
 
   const navigate = useNavigate();
@@ -27,6 +31,7 @@ const RecoverPassword = () => {
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    setIsInfoLoading(true)
     event.preventDefault();
     const response = await userService.registerPassword(regPassword);
    if(response.status != 200){
@@ -35,9 +40,10 @@ const RecoverPassword = () => {
      })
     }
     else{
-       toast.success('Senha registrada com sucesso!')
-       navigate('/')
+      toast.success('Senha registrada com sucesso!')
+      navigate('/')
     }
+    setIsInfoLoading(false)
   };
 
   return (
@@ -125,6 +131,7 @@ const RecoverPassword = () => {
           </div>
         </div>
       </section>
+      {isInfoLoading? <LoadingModal/> : ''}
     </main>
   );
 };
