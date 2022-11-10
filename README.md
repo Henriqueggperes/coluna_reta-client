@@ -82,5 +82,7 @@ Inicie o servidor
 
 ## Autor(es) 👨🏼‍💻👨🏼‍💻👨🏼‍💻👨🏼‍💻
 
- |[<img src="https://avatars.githubusercontent.com/u/55964670?v=4" width=115><br><sub>Keven Ferreira</sub>](https://github.com/Kevenfz) | [<img src="https://avatars.githubusercontent.com/u/97991367?v=4" width=115><br><sub>Henrique Gomes</sub>](https://github.com/Henriqueggperes)|[<img src="https://avatars.githubusercontent.com/u/81826043?s=96&v=4" width=115><br><sub>Wanderson Santos</sub>](https://github.com/wandersonDeve) | [<img src="https://avatars.githubusercontent.com/u/82534304?v=4" width=115><br><sub>Gustavo Martins</sub>](https://github.com/gumartins77) | 
+ |[<img src="https://avatars.githubusercontent.com/u/88009922?v=4" width=115><br><sub>Amaro Fransisco</sub>](https://github.com/Amaro13) | [<img src="https://avatars.githubusercontent.com/u/97991367?v=4" width=115><br><sub>Henrique Gomes</sub>](https://github.com/Henriqueggperes)|[<img src="https://avatars.githubusercontent.com/u/81826043?s=96&v=4" width=115><br><sub>Wanderson Santos</sub>](https://github.com/wandersonDeve) | [<img src="https://avatars.githubusercontent.com/u/81837448?v=4" width=115><br><sub>Marcelo Santos</sub>](https://github.com/DJMarshallSantos) |
+| [<img src="https://avatars.githubusercontent.com/u/95504029?v=4" width=115><br><sub>Daniel Vinhas</sub>](https://github.com/vinhas93) | 
+| [<img src="https://avatars.githubusercontent.com/u/60695991?v=4" width=115><br><sub>Paulo Gabriel</sub>](https://github.com/PauloGLemos) | 
 | :---: | :---: | :---: |:---: |
